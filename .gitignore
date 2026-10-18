@@ -10,6 +10,10 @@ dist/
 Thumbs.db
 *.zip
 coverage/
+__pycache__/
+*.py[cod]
+.venv/
+.gradio/
 
 # Copied from shared/ by the frontend asset preparation step.
 /apps/portal/public/agent-masthead.css

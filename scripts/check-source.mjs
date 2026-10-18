@@ -9,17 +9,23 @@ const roots = new Set(['apps', 'shared', 'materials-ui', 'scripts', 'docs']);
 const rootFiles = new Set(['package.json', 'README.md', '.gitignore', '.gitattributes']);
 const extensions = new Set(['.ts','.tsx','.js','.mjs','.cjs','.css','.html','.json','.png','.jpg','.jpeg','.svg','.webp','.ico','.woff','.woff2','.gif','.md','.txt']);
 const binary = new Set(['.png','.jpg','.jpeg','.webp','.ico','.woff','.woff2','.gif']);
+const uiPython = new Set([
+  'materials-ui/app.py', 'materials-ui/preview.py',
+  ...['__init__', 'assets', 'contracts', 'events', 'examples', 'layout', 'preview_handlers'].map(name => `materials-ui/materials_ui/${name}.py`),
+  'materials-ui/tests/test_ui.py', 'materials-ui/tests/ui_contract.py',
+]);
 const failures = [];
 for (const name of files) {
   const parts = name.split('/');
   const ext = path.extname(name).toLowerCase();
   if ((!roots.has(parts[0]) && !rootFiles.has(name)) || parts.some(p => /^(?:backend|node_modules|dist|\.git|logs?|data|config)$/i.test(p))) failures.push(`${name}: outside frontend publication scope`);
-  if (!extensions.has(ext) && !rootFiles.has(name) && path.basename(name) !== '.env.example') failures.push(`${name}: unexpected file type`);
+  if (!extensions.has(ext) && !rootFiles.has(name) && path.basename(name) !== '.env.example' && !uiPython.has(name) && name !== 'materials-ui/fixtures/preview-materials.csv') failures.push(`${name}: unexpected file type`);
   if (parts.some(p => p.startsWith('.env') && p !== '.env.example')) failures.push(`${name}: real environment file`);
   const absolute = path.resolve(root, name);
   if (!absolute.startsWith(root + path.sep) || fs.lstatSync(absolute).isSymbolicLink()) { failures.push(`${name}: invalid publication path`); continue; }
   if (binary.has(ext)) continue;
   const text = fs.readFileSync(absolute, 'utf8');
+  if (ext === '.py' && /^\s*(?:from|import)\s+(?:materials_screening|langchain|langgraph|sqlite3|sqlalchemy|pymongo|psycopg2|dotenv|requests|httpx|openai)(?:[.\s]|$)/m.test(text)) failures.push(`${name}: business/service dependency is not allowed in the UI package`);
   const patterns = [
     /-----BEGIN (?:RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----/,
     /\b(?:ghp_|gho_|ghu_|ghs_|github_pat_)[A-Za-z0-9_]{15,}/,
@@ -31,4 +37,4 @@ for (const name of files) {
   if (name.endsWith('.env.example') && text.split(/\r?\n/).some(line => /^\s*[A-Z][A-Z0-9_]*\s*=\s*\S/.test(line))) failures.push(`${name}: example values must remain empty`);
 }
 if (failures.length) { console.error(failures.join('\n')); process.exit(1); }
-console.log(`Frontend publication check passed: ${files.length} files; no backend, credentials, server configuration or build dependencies in the upload list.`);
+console.log(`Frontend publication check passed: ${files.length} files; no backend business implementations, credentials, server configuration or installed dependencies in the upload list.`);

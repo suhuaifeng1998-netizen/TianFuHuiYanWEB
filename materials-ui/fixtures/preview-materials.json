@@ -1,0 +1,17 @@
+{
+  "notice": "Synthetic UI preview only, not measured material data",
+  "records": [
+    {
+      "demo_id": "preview-A",
+      "band_gap_ev": 1.8,
+      "density": 3.2,
+      "group": "A"
+    },
+    {
+      "demo_id": "preview-B",
+      "band_gap_ev": 2.4,
+      "density": 4.1,
+      "group": "B"
+    }
+  ]
+}

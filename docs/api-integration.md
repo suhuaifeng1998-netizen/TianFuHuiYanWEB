@@ -92,9 +92,11 @@ WebSocket 路径为 `/ws/sessions/{id}`。浏览器接收的 JSON 消息中，`t
 
 ## 材料筛选
 
-本次未导出 Gradio 的组件定义、队列协议、文件上传或业务回调，也未实现新的材料 API 客户端。`materials-ui` 仅包含外观资源，不能据此调用完整材料筛选流程。
+`materials-ui` 提供独立 Gradio 界面开发包，不新增 HTTP 业务网关。界面通过 `UiCallbacks` 接收 16 个原业务处理函数，保留原控件、输入输出顺序、事件链和取消关系。详见 [材料回调接入说明](../materials-ui/docs/integration.md)。
 
-门户默认链接 `/agent/materials/`；若材料工作台位于其他公开地址，配置门户的 `VITE_MATERIALS_ENTRY`。无需为了保存这些外观资源而把 Gradio 后端加入本仓库。
+`preview.py` 接入固定样例处理函数，可在没有模型、数据库和检索服务时修改界面。真实运行时改由使用方传入原处理函数，不能用预览响应代替业务逻辑。
+
+门户的 `VITE_MATERIALS_ENTRY` 指向运行该界面的公开入口。Python 界面包独立启动，不由根目录的 React 静态构建命令生成。
 
 ## 对接时的检查点
 

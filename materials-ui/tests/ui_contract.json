@@ -1,0 +1,3889 @@
+{
+  "components": [
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "html",
+      "props": {
+        "_retryable": false,
+        "_undoable": false,
+        "likeable": false,
+        "streamable": false,
+        "value": "<shared-banner>",
+        "html_template": "${value}",
+        "css_template": "",
+        "js_on_load": "element.addEventListener('click', function() { trigger('click') });",
+        "apply_default_css": true,
+        "show_label": false,
+        "visible": true,
+        "elem_id": "agent-banner",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "container": false,
+        "padding": false,
+        "autoscroll": false,
+        "buttons": [],
+        "props": {},
+        "name": "html",
+        "_selectable": false,
+        "component_class_name": "HTML"
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_id": "app-layout",
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "column",
+      "props": {
+        "scale": 1,
+        "min_width": 256,
+        "variant": "default",
+        "visible": true,
+        "elem_id": "left-sidebar",
+        "elem_classes": [],
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "column"
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "＋ 新建对话",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "new-chat",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 0,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "最近对话",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_id": "recent-heading",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "从一个问题开始，\n\n你的探索会保存在这里。",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_id": "recent-empty",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "radio",
+      "props": {
+        "choices": [],
+        "type": "value",
+        "show_label": false,
+        "container": false,
+        "min_width": 160,
+        "visible": true,
+        "elem_id": "recent-chats",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "rtl": false,
+        "buttons": [],
+        "name": "radio",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "文献详情",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": false,
+        "elem_id": "literature-toggle",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": Infinity,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "group",
+      "props": {
+        "visible": false,
+        "elem_classes": [],
+        "preserved_by_key": [],
+        "name": "group"
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "html",
+      "props": {
+        "_retryable": false,
+        "_undoable": false,
+        "likeable": false,
+        "streamable": false,
+        "value": "",
+        "html_template": "${value}",
+        "css_template": "",
+        "js_on_load": "element.addEventListener('click', function() { trigger('click') });",
+        "apply_default_css": true,
+        "show_label": false,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "container": false,
+        "padding": false,
+        "autoscroll": false,
+        "buttons": [],
+        "props": {},
+        "name": "html",
+        "_selectable": false,
+        "component_class_name": "HTML"
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": false,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "column",
+      "props": {
+        "scale": 5,
+        "min_width": 0,
+        "variant": "default",
+        "visible": true,
+        "elem_id": "chat-shell",
+        "elem_classes": [],
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "column"
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_id": "examples-toolbar",
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "html",
+      "props": {
+        "_retryable": false,
+        "_undoable": false,
+        "likeable": false,
+        "streamable": false,
+        "value": "<section class=\"mat-page-heading\"><h1>材料筛选</h1><p>条件筛选 · 性质比较 · 文献佐证</p></section>",
+        "html_template": "${value}",
+        "css_template": "",
+        "js_on_load": "element.addEventListener('click', function() { trigger('click') });",
+        "apply_default_css": true,
+        "show_label": false,
+        "visible": true,
+        "elem_id": "workspace-title",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "container": false,
+        "padding": false,
+        "autoscroll": false,
+        "buttons": [],
+        "props": {},
+        "name": "html",
+        "_selectable": false,
+        "component_class_name": "HTML"
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "筛选示例",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "examples-toggle",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 0,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "html",
+      "props": {
+        "_retryable": false,
+        "_undoable": false,
+        "likeable": false,
+        "streamable": false,
+        "value": "<span hidden data-open=\"false\"></span>",
+        "html_template": "${value}",
+        "css_template": "",
+        "js_on_load": "element.addEventListener('click', function() { trigger('click') });",
+        "apply_default_css": true,
+        "show_label": false,
+        "visible": true,
+        "elem_id": "literature-visibility-marker",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "container": false,
+        "padding": false,
+        "autoscroll": false,
+        "buttons": [],
+        "props": {},
+        "name": "html",
+        "_selectable": false,
+        "component_class_name": "HTML"
+      }
+    },
+    {
+      "type": "chatbot",
+      "props": {
+        "_undoable": false,
+        "_retryable": false,
+        "likeable": false,
+        "value": [],
+        "label": "",
+        "show_label": false,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_id": "multi-chat",
+        "elem_classes": [],
+        "autoscroll": true,
+        "preserved_by_key": [
+          "value"
+        ],
+        "resizable": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "rtl": false,
+        "buttons": [
+          "share",
+          "copy",
+          "copy_all"
+        ],
+        "avatar_images": [
+          null,
+          null
+        ],
+        "sanitize_html": true,
+        "render_markdown": true,
+        "feedback_options": [
+          "Like",
+          "Dislike"
+        ],
+        "line_breaks": true,
+        "layout": "bubble",
+        "placeholder": "<div class=\"materials-welcome\"><span class=\"materials-welcome-mark\" aria-hidden=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 4h10l5 8-5 8H7l-5-8Z\"/><path d=\"m7 4 5 8 5-8M2 12h20m-15 8 5-8 5 8\"/></svg></span><h2>从筛选条件，到候选材料</h2><p>从成分与性质出发，查询候选材料、比较关键指标，<br>再结合文献与数据核对研究依据。</p><div class=\"materials-capabilities\"><span>条件筛选</span><span>性质比较</span><span>文献佐证</span></div></div>",
+        "allow_file_downloads": true,
+        "group_consecutive_messages": true,
+        "allow_tags": true,
+        "like_user_message": false,
+        "name": "chatbot",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "accordion",
+      "props": {
+        "label": "数据分析工具（可选）",
+        "open": false,
+        "visible": false,
+        "elem_id": "data-result-panel",
+        "elem_classes": [],
+        "preserved_by_key": [],
+        "name": "accordion"
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "### 当前数据集",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "上传数据后将在这里显示自动 EDA。",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "accordion",
+      "props": {
+        "label": "查看字段和数据预览",
+        "open": false,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [],
+        "name": "accordion"
+      }
+    },
+    {
+      "type": "dataframe",
+      "props": {
+        "value": {
+          "headers": [
+            "字段",
+            "类型",
+            "有效值",
+            "缺失值",
+            "唯一值",
+            "提示"
+          ],
+          "data": [],
+          "metadata": null
+        },
+        "headers": [
+          "字段",
+          "类型",
+          "有效值",
+          "缺失值",
+          "唯一值",
+          "提示"
+        ],
+        "row_count": [
+          3,
+          "dynamic"
+        ],
+        "col_count": [
+          6,
+          "dynamic"
+        ],
+        "column_count": [
+          6,
+          "dynamic"
+        ],
+        "datatype": [
+          "str",
+          "str",
+          "number",
+          "number",
+          "number",
+          "str"
+        ],
+        "type": "pandas",
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "show_label": true,
+        "max_height": 500,
+        "min_width": 160,
+        "interactive": false,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "wrap": true,
+        "line_breaks": true,
+        "column_widths": [],
+        "show_row_numbers": false,
+        "show_search": "none",
+        "static_columns": [],
+        "name": "dataframe",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "json",
+      "props": {
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "open": false,
+        "show_indices": false,
+        "max_height": 500,
+        "buttons": [
+          "copy"
+        ],
+        "name": "json",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "accordion",
+      "props": {
+        "label": "高级分析设置",
+        "open": false,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [],
+        "name": "accordion"
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [],
+        "value": [],
+        "type": "value",
+        "multiselect": true,
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "数值字段",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [],
+        "type": "value",
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "X / 响应字段",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [],
+        "type": "value",
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "Y 字段",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [],
+        "type": "value",
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "分组字段（可选）",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 3,
+        "min_width": 480,
+        "preserved_by_key": [],
+        "name": "form"
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [],
+        "value": [],
+        "type": "value",
+        "multiselect": true,
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "参与比较的组",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [
+          [
+            "student_t",
+            "student_t"
+          ],
+          [
+            "welch_t",
+            "welch_t"
+          ],
+          [
+            "paired_t",
+            "paired_t"
+          ],
+          [
+            "mann_whitney",
+            "mann_whitney"
+          ],
+          [
+            "anova",
+            "anova"
+          ],
+          [
+            "kruskal_wallis",
+            "kruskal_wallis"
+          ]
+        ],
+        "value": "welch_t",
+        "type": "value",
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "统计检验",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [
+          [
+            "pearson",
+            "pearson"
+          ],
+          [
+            "spearman",
+            "spearman"
+          ]
+        ],
+        "value": "pearson",
+        "type": "value",
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "相关方法",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [
+          [
+            "histogram",
+            "histogram"
+          ],
+          [
+            "boxplot",
+            "boxplot"
+          ],
+          [
+            "scatter",
+            "scatter"
+          ],
+          [
+            "line",
+            "line"
+          ],
+          [
+            "bar",
+            "bar"
+          ],
+          [
+            "heatmap",
+            "heatmap"
+          ]
+        ],
+        "value": "scatter",
+        "type": "value",
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "图表类型",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 3,
+        "min_width": 480,
+        "preserved_by_key": [],
+        "name": "form"
+      }
+    },
+    {
+      "type": "radio",
+      "props": {
+        "choices": [
+          [
+            "CSV",
+            "CSV"
+          ],
+          [
+            "JSON",
+            "JSON"
+          ]
+        ],
+        "value": "CSV",
+        "type": "value",
+        "label": "导出格式",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "rtl": false,
+        "buttons": [],
+        "name": "radio",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "dropdown",
+      "props": {
+        "choices": [],
+        "type": "value",
+        "allow_custom_value": false,
+        "filterable": true,
+        "label": "去重键字段",
+        "show_label": true,
+        "container": true,
+        "scale": 3,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "name": "dropdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "按键去重并新建数据集",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 2,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 3,
+        "min_width": 160,
+        "preserved_by_key": [],
+        "name": "form"
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "一键 EDA",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "描述统计",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "相关性",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "显著性检验",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "生成图表",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "生成报告",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "导出数据",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "尚未执行高级操作。",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "image",
+      "props": {
+        "streamable": false,
+        "format": "webp",
+        "image_mode": "RGB",
+        "sources": [
+          "upload",
+          "webcam",
+          "clipboard"
+        ],
+        "type": "filepath",
+        "label": "图表预览",
+        "show_label": true,
+        "buttons": [
+          "download",
+          "share",
+          "fullscreen"
+        ],
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "streaming": false,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "webcam_options": {
+          "mirror": true,
+          "constraints": null
+        },
+        "watermark": {
+          "watermark": null,
+          "position": "bottom-right"
+        },
+        "name": "image",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "file",
+      "props": {
+        "file_count": "single",
+        "type": "filepath",
+        "label": "报告或数据下载",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "allow_reordering": false,
+        "buttons": [],
+        "name": "file",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 0,
+        "min_width": 0,
+        "preserved_by_key": [],
+        "name": "form"
+      }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 0,
+        "min_width": 0,
+        "preserved_by_key": [],
+        "name": "form"
+      }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 0,
+        "min_width": 0,
+        "preserved_by_key": [],
+        "name": "form"
+      }
+    },
+    {
+      "type": "accordion",
+      "props": {
+        "label": "跨 Agent 数据导入",
+        "open": false,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [],
+        "name": "accordion"
+      }
+    },
+    {
+      "type": "radio",
+      "props": {
+        "choices": [
+          [
+            "materials_database",
+            "materials_database"
+          ],
+          [
+            "literature",
+            "literature"
+          ]
+        ],
+        "value": "materials_database",
+        "type": "value",
+        "label": "来源",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "rtl": false,
+        "buttons": [],
+        "name": "radio",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "textbox",
+      "props": {
+        "type": "text",
+        "lines": 1,
+        "label": "query_id / document_id（留空使用最近结果）",
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": true,
+        "autofocus": false,
+        "autoscroll": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "rtl": false,
+        "buttons": [],
+        "submit_btn": false,
+        "stop_btn": false,
+        "name": "textbox",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "导入并执行只读 EDA",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 0,
+        "min_width": 0,
+        "preserved_by_key": [],
+        "name": "form"
+      }
+    },
+    {
+      "type": "group",
+      "props": {
+        "visible": false,
+        "elem_id": "literature-view",
+        "elem_classes": [],
+        "preserved_by_key": [],
+        "name": "group"
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_id": "literature-view-heading",
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "### 文献详情",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "返回对话",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "literature-close",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 0,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "dataframe",
+      "props": {
+        "value": {
+          "headers": [
+            "#",
+            "相关性",
+            "年份",
+            "论文题目",
+            "DOI"
+          ],
+          "data": [],
+          "metadata": null
+        },
+        "headers": [
+          "#",
+          "相关性",
+          "年份",
+          "论文题目",
+          "DOI"
+        ],
+        "row_count": [
+          3,
+          "dynamic"
+        ],
+        "col_count": [
+          5,
+          "dynamic"
+        ],
+        "column_count": [
+          5,
+          "dynamic"
+        ],
+        "datatype": [
+          "number",
+          "str",
+          "str",
+          "str",
+          "str"
+        ],
+        "type": "pandas",
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "show_label": true,
+        "max_height": 500,
+        "min_width": 160,
+        "interactive": false,
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "wrap": true,
+        "line_breaks": true,
+        "column_widths": [],
+        "show_row_numbers": false,
+        "show_search": "none",
+        "static_columns": [],
+        "name": "dataframe",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "检索完成后，可在这里分页查看论文详情。",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "← 上一页",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "第 0 / 0 页",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "下一页 →",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "column",
+      "props": {
+        "scale": 1,
+        "min_width": 0,
+        "variant": "default",
+        "visible": true,
+        "elem_id": "composer-shell",
+        "elem_classes": [],
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "column"
+      }
+    },
+    {
+      "type": "textbox",
+      "props": {
+        "type": "text",
+        "lines": 2,
+        "max_lines": 6,
+        "placeholder": "描述你的筛选目标，或继续追问…",
+        "label": "材料筛选问题",
+        "show_label": false,
+        "container": false,
+        "min_width": 160,
+        "visible": true,
+        "elem_id": "material-question",
+        "autofocus": false,
+        "autoscroll": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "rtl": false,
+        "buttons": [],
+        "submit_btn": false,
+        "stop_btn": false,
+        "name": "textbox",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [
+          "attachment-status"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_id": "composer",
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "uploadbutton",
+      "props": {
+        "label": "添加文件",
+        "variant": "secondary",
+        "visible": true,
+        "size": "lg",
+        "interactive": true,
+        "elem_id": "pdf-upload",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "type": "filepath",
+        "file_count": "multiple",
+        "file_types": [
+          ".pdf",
+          ".csv",
+          ".json",
+          ".xlsx"
+        ],
+        "name": "uploadbutton",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "清除",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "clear-upload",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 0,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "html",
+      "props": {
+        "_retryable": false,
+        "_undoable": false,
+        "likeable": false,
+        "streamable": false,
+        "value": "文件可选",
+        "html_template": "${value}",
+        "css_template": "",
+        "js_on_load": "element.addEventListener('click', function() { trigger('click') });",
+        "apply_default_css": true,
+        "show_label": false,
+        "visible": true,
+        "elem_id": "material-input-hint",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "container": false,
+        "padding": false,
+        "autoscroll": false,
+        "buttons": [],
+        "props": {},
+        "name": "html",
+        "_selectable": false,
+        "component_class_name": "HTML"
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "发送",
+        "variant": "primary",
+        "size": "lg",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "send-button",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 0,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "停止",
+        "variant": "stop",
+        "size": "lg",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "stop-button",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 0,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "column",
+      "props": {
+        "scale": 1,
+        "min_width": 300,
+        "variant": "default",
+        "visible": false,
+        "elem_id": "right-sidebar",
+        "elem_classes": [],
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "column"
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "variant": "default",
+        "visible": true,
+        "elem_id": "examples-heading",
+        "elem_classes": [],
+        "equal_height": false,
+        "show_progress": false,
+        "preserved_by_key": [],
+        "name": "row"
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "### 筛选示例",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "收起",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "examples-close",
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "scale": 0,
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "选择一个示例，补充条件后发送。",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [
+          "examples-hint"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "**数据库**",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "条件筛选",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-database-filter",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "排序与数量",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-database-sort",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "材料详情",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-database-detail",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "多材料比较",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-database-compare",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "**数据分析**",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "数据质量",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-data-quality",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "描述统计",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-data-describe",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "分组统计",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-data-groups",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "相关性分析",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-data-correlation",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "**文献与知识**",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "文献检索",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-literature-search",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "论文预览",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-literature-preview",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "markdown",
+      "props": {
+        "value": "**综合任务演示**",
+        "show_label": false,
+        "rtl": false,
+        "latex_delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ],
+        "visible": true,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "sanitize_html": true,
+        "line_breaks": false,
+        "header_links": false,
+        "container": false,
+        "padding": false,
+        "name": "markdown",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "① 初筛与文献检索",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-literature-complete",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "② 四篇全文预览",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-complete-preview",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "button",
+      "props": {
+        "value": "③ 确认分析与结论",
+        "variant": "secondary",
+        "size": "sm",
+        "link_target": "_self",
+        "visible": true,
+        "interactive": true,
+        "elem_id": "example-complete-conclusion",
+        "elem_classes": [
+          "quick-chip",
+          "example-question"
+        ],
+        "preserved_by_key": [
+          "value"
+        ],
+        "name": "button",
+        "_selectable": false
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "api_name": "dispatch_shell",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": true,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        12,
+        85,
+        29,
+        88,
+        0,
+        15,
+        16,
+        17,
+        18
+      ],
+      "outputs": [
+        29,
+        22,
+        0,
+        85,
+        88,
+        23,
+        86,
+        78,
+        79,
+        82,
+        74,
+        34,
+        35,
+        32,
+        30,
+        37,
+        39,
+        40,
+        41,
+        51,
+        3,
+        11,
+        28
+      ],
+      "targets": [
+        [
+          91,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "dispatch_shell_1",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": true,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        12,
+        85,
+        29,
+        88,
+        0,
+        15,
+        16,
+        17,
+        18
+      ],
+      "outputs": [
+        29,
+        22,
+        0,
+        85,
+        88,
+        23,
+        86,
+        78,
+        79,
+        82,
+        74,
+        34,
+        35,
+        32,
+        30,
+        37,
+        39,
+        40,
+        41,
+        51,
+        3,
+        11,
+        28
+      ],
+      "targets": [
+        [
+          85,
+          "submit"
+        ]
+      ]
+    },
+    {
+      "api_name": "_recent_chat_choices",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": 0,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        10,
+        9
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "_recent_chat_choices_1",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": 1,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        10,
+        9
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "_stop_feedback",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        29
+      ],
+      "outputs": [
+        29
+      ],
+      "targets": [
+        [
+          92,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "unnamed",
+      "backend_fn": false,
+      "queue": false,
+      "cancels": [
+        0,
+        1
+      ],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "full",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": true
+      },
+      "api_visibility": "private",
+      "inputs": [],
+      "outputs": [],
+      "targets": [
+        [
+          92,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "_data_group_choices",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "always_last",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        41
+      ],
+      "outputs": [
+        43
+      ],
+      "targets": [
+        [
+          41,
+          "change"
+        ]
+      ]
+    },
+    {
+      "api_name": "_answer_data_chat_option",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": true,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        29,
+        0
+      ],
+      "outputs": [
+        29,
+        0
+      ],
+      "targets": [
+        [
+          29,
+          "option_select"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        37,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        46,
+        49
+      ],
+      "outputs": [
+        63,
+        0,
+        64,
+        65
+      ],
+      "targets": [
+        [
+          55,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_1",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        37,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        46,
+        49
+      ],
+      "outputs": [
+        63,
+        0,
+        64,
+        65
+      ],
+      "targets": [
+        [
+          56,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_2",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        37,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        46,
+        49
+      ],
+      "outputs": [
+        63,
+        0,
+        64,
+        65
+      ],
+      "targets": [
+        [
+          57,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_3",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        37,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        46,
+        49
+      ],
+      "outputs": [
+        63,
+        0,
+        64,
+        65
+      ],
+      "targets": [
+        [
+          58,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_4",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        37,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        46,
+        49
+      ],
+      "outputs": [
+        63,
+        0,
+        64,
+        65
+      ],
+      "targets": [
+        [
+          60,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_5",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        37,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        46,
+        49
+      ],
+      "outputs": [
+        63,
+        0,
+        64,
+        65
+      ],
+      "targets": [
+        [
+          61,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_6",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        37,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        46,
+        49
+      ],
+      "outputs": [
+        63,
+        0,
+        64,
+        65
+      ],
+      "targets": [
+        [
+          62,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "_run_deduplicate_action",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0,
+        51
+      ],
+      "outputs": [
+        63,
+        0,
+        34,
+        35,
+        32,
+        30,
+        37,
+        39,
+        40,
+        41,
+        51
+      ],
+      "targets": [
+        [
+          52,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "_import_cross_agent_dataset",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        70,
+        71,
+        0
+      ],
+      "outputs": [
+        63,
+        0,
+        34,
+        35,
+        32,
+        30,
+        37,
+        39,
+        40,
+        41,
+        51
+      ],
+      "targets": [
+        [
+          72,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "restore_saved",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        10,
+        18
+      ],
+      "outputs": [
+        29,
+        22,
+        0,
+        85,
+        88,
+        23,
+        86,
+        78,
+        79,
+        82,
+        74,
+        34,
+        35,
+        32,
+        30,
+        37,
+        39,
+        40,
+        41,
+        51,
+        3,
+        11,
+        28,
+        12
+      ],
+      "targets": [
+        [
+          10,
+          "input"
+        ]
+      ]
+    },
+    {
+      "api_name": "_recent_chat_choices_2",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": 17,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        10,
+        9
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "_initialize_safe",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        13,
+        14
+      ],
+      "outputs": [
+        21,
+        22
+      ],
+      "targets": [
+        [
+          -1,
+          "load"
+        ]
+      ]
+    },
+    {
+      "api_name": "restore_on_load",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": 19,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        19,
+        18
+      ],
+      "outputs": [
+        29,
+        22,
+        0,
+        85,
+        88,
+        23,
+        86,
+        78,
+        79,
+        82,
+        74,
+        34,
+        35,
+        32,
+        30,
+        37,
+        39,
+        40,
+        41,
+        51,
+        3,
+        11,
+        28,
+        12
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "_recent_chat_choices_3",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": 20,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        10,
+        9
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        18
+      ],
+      "outputs": [
+        29,
+        22,
+        0,
+        85,
+        88,
+        23,
+        86,
+        78,
+        79,
+        82,
+        74,
+        34,
+        35,
+        32,
+        30,
+        37,
+        39,
+        40,
+        41,
+        51,
+        3,
+        11,
+        28
+      ],
+      "targets": [
+        [
+          7,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "_recent_chat_choices_4",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": 22,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        10,
+        9
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_1",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": 22,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [],
+      "outputs": [
+        2
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "_attachment_markdown",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        88,
+        0
+      ],
+      "outputs": [
+        86
+      ],
+      "targets": [
+        [
+          88,
+          "upload"
+        ]
+      ]
+    },
+    {
+      "api_name": "_clear_attachments",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        88,
+        0,
+        86
+      ],
+      "targets": [
+        [
+          89,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_2",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        78,
+        79,
+        82,
+        0
+      ],
+      "targets": [
+        [
+          81,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_3",
+      "backend_fn": true,
+      "queue": true,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        78,
+        79,
+        82,
+        0
+      ],
+      "targets": [
+        [
+          83,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_4",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        3,
+        0
+      ],
+      "outputs": [
+        3,
+        74,
+        29,
+        11,
+        28
+      ],
+      "targets": [
+        [
+          11,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_5",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        0
+      ],
+      "outputs": [
+        3,
+        74,
+        29,
+        11,
+        28
+      ],
+      "targets": [
+        [
+          77,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_6",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        1
+      ],
+      "outputs": [
+        1,
+        93,
+        27
+      ],
+      "targets": [
+        [
+          27,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_7",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [],
+      "outputs": [
+        1,
+        93,
+        27
+      ],
+      "targets": [
+        [
+          96,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_7",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          99,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_8",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          100,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_9",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          101,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_10",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          102,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_11",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          104,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_12",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          105,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_13",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          106,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_14",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          107,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_15",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          109,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_16",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          110,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_17",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          112,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_18",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          113,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "partial_19",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        2
+      ],
+      "outputs": [
+        85,
+        2
+      ],
+      "targets": [
+        [
+          114,
+          "click"
+        ]
+      ]
+    }
+  ]
+}

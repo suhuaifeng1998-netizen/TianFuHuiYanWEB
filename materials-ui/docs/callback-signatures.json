@@ -1,0 +1,190 @@
+{
+  "_initial_state": {
+    "parameters": [],
+    "annotations": {},
+    "generator": false
+  },
+  "_initialize_safe": {
+    "parameters": [
+      "provider",
+      "repository"
+    ],
+    "annotations": {
+      "provider": "str",
+      "repository": "str"
+    },
+    "generator": false
+  },
+  "_attachment_markdown": {
+    "parameters": [
+      "files",
+      "state"
+    ],
+    "annotations": {
+      "files": "list[Any] | None",
+      "state": "dict[str, Any] | None"
+    },
+    "generator": false
+  },
+  "_turn_literature_page": {
+    "parameters": [
+      "state",
+      "delta"
+    ],
+    "annotations": {
+      "state": "dict[str, Any] | None",
+      "delta": "int"
+    },
+    "generator": false
+  },
+  "_clear_attachments": {
+    "parameters": [
+      "state"
+    ],
+    "annotations": {
+      "state": "dict[str, Any] | None"
+    },
+    "generator": false
+  },
+  "_data_group_choices": {
+    "parameters": [
+      "state",
+      "group_column"
+    ],
+    "annotations": {
+      "state": "dict[str, Any] | None",
+      "group_column": "str | None"
+    },
+    "generator": false
+  },
+  "_answer_data_chat_option": {
+    "parameters": [
+      "history",
+      "state",
+      "event"
+    ],
+    "annotations": {
+      "history": "list[dict[str, Any]] | None",
+      "state": "dict[str, Any] | None",
+      "event": "gr.SelectData"
+    },
+    "generator": false
+  },
+  "_run_data_action": {
+    "parameters": [
+      "action",
+      "state",
+      "columns",
+      "x",
+      "y",
+      "group_by",
+      "groups",
+      "statistical_method",
+      "plot_type",
+      "correlation_method",
+      "export_format"
+    ],
+    "annotations": {
+      "action": "str",
+      "state": "dict[str, Any] | None",
+      "columns": "list[str] | None",
+      "x": "str | None",
+      "y": "str | None",
+      "group_by": "str | None",
+      "groups": "list[Any] | None",
+      "statistical_method": "str",
+      "plot_type": "str",
+      "correlation_method": "str",
+      "export_format": "str"
+    },
+    "generator": false
+  },
+  "_run_deduplicate_action": {
+    "parameters": [
+      "state",
+      "key_column"
+    ],
+    "annotations": {
+      "state": "dict[str, Any] | None",
+      "key_column": "str | None"
+    },
+    "generator": false
+  },
+  "_import_cross_agent_dataset": {
+    "parameters": [
+      "source_kind",
+      "identifier",
+      "state"
+    ],
+    "annotations": {
+      "source_kind": "str",
+      "identifier": "str",
+      "state": "dict[str, Any] | None"
+    },
+    "generator": false
+  },
+  "_dispatch_ui": {
+    "parameters": [
+      "mode",
+      "message",
+      "history",
+      "files",
+      "state",
+      "material",
+      "year_from",
+      "limit",
+      "expert_mode"
+    ],
+    "annotations": {
+      "mode": "str",
+      "message": "str",
+      "history": "list[dict[str, Any]] | None",
+      "files": "list[Any] | None",
+      "state": "dict[str, Any] | None",
+      "material": "str",
+      "year_from": "float",
+      "limit": "float",
+      "expert_mode": "bool"
+    },
+    "generator": true
+  },
+  "_new_conversation_ui": {
+    "parameters": [
+      "expert_mode"
+    ],
+    "annotations": {
+      "expert_mode": "bool"
+    },
+    "generator": false
+  },
+  "_recent_chat_choices": {
+    "parameters": [
+      "state"
+    ],
+    "annotations": {},
+    "generator": false
+  },
+  "_restore_recent_conversation_ui": {
+    "parameters": [
+      "conversation_id",
+      "expert"
+    ],
+    "annotations": {},
+    "generator": false
+  },
+  "_literature_view_updates": {
+    "parameters": [
+      "opened",
+      "state"
+    ],
+    "annotations": {},
+    "generator": false
+  },
+  "_stop_feedback": {
+    "parameters": [
+      "history"
+    ],
+    "annotations": {},
+    "generator": false
+  }
+}

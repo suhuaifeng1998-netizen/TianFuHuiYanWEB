@@ -1,8 +1,8 @@
 # 天府·慧研 Web 前端
 
-从当前线上版本整理的纯前端源码，包含平台门户、医学知识问答、智能实验机械臂，以及材料筛选页面的外观资源。两个 React 应用可分别开发和构建；完整问答、机械臂和材料业务仍依赖现有服务接口。
+从当前线上版本整理的网页与界面层源码，包含平台门户、医学知识问答、智能实验机械臂，以及独立 Gradio 材料界面开发包。两个 React 应用可分别开发和构建；完整问答、机械臂和材料业务仍依赖现有服务接口。
 
-材料筛选采用方案 A：仅提取 HTML 片段、CSS 和浏览器主题脚本，未将 Gradio 工作台迁移为独立 React 应用。详见 [材料页说明](materials-ui/README.md)。
+材料筛选继续使用 Gradio，包含 Python 布局、原事件链、回调契约和固定数据预览。后端业务实现仍由使用方提供，不随仓库上传。详见 [材料页说明](materials-ui/README.md)。
 
 ## 目录
 
@@ -11,9 +11,15 @@ apps/
   portal/          平台首页、对话、科学数据中心、医学知识问答
   robot/           智能实验机械臂 React 应用
 materials-ui/
-  fragments/       材料页 banner 和 head HTML 片段
+  materials_ui/    Python 界面定义、事件绑定、回调契约及预览处理
+  preview.py       独立预览入口
+  requirements.txt Gradio 界面运行依赖
+  fragments/       banner 和 head HTML 片段
   styles/          从线上界面提取的外观样式
   scripts/         浏览器主题脚本
+  assets/          独立运行所需的 banner CSS 与 Logo
+  fixtures/        明确标记的虚构预览样例
+  tests/           界面契约及预览回归
 shared/            banner 样式、主题脚本和 Logo 公共资源
 scripts/           本地安装、构建、预览和源码范围检查工具
 docs/              交付范围与接口对接说明
@@ -40,6 +46,19 @@ npm run dev:robot
 
 未连接 API 时，页面仍可加载外观，服务状态和业务控件按现有逻辑显示未连接或不可用。本仓库不提供模型、设备模拟器、知识库或 mock 后端。
 
+## 材料 Gradio 界面预览
+
+材料包可以单独复制使用，不需要 Node.js。先在 `materials-ui` 创建 Python 虚拟环境并安装 `requirements.txt`，然后运行 `python preview.py`；默认打开 `http://127.0.0.1:7865/`。Windows 和 Linux/macOS 的完整命令见 [材料界面 README](materials-ui/README.md)。
+
+预览使用虚构数据，不运行模型、检索或统计计算。接入原业务回调后可继续使用原业务流程，方法见 [接入文档](materials-ui/docs/integration.md)。
+
+在已激活对应 Python 环境时，也可从仓库根目录运行：
+
+```sh
+npm run preview:materials
+npm run check:materials
+```
+
 ## 接口和页面入口
 
 在相应应用目录创建未提交的 `.env.local`，按需要设置变量；可参考各应用的 `.env.example`。
@@ -55,7 +74,7 @@ npm run dev:robot
 
 开发时可保持 `VITE_API_BASE` 为空，通过 `VITE_DEV_PROXY_TARGET` 指向可用的接口服务；也可将 `VITE_API_BASE` 设为公开 API 根地址，由接口服务允许对应的跨域请求。机械臂还需要 WebSocket 和视频流。详细路径和流式响应要求见 [接口对接说明](docs/api-integration.md)。
 
-同时运行两个开发应用时，可将门户的 `VITE_ROBOT_ENTRY` 指向机械臂开发地址。材料页入口须指向已有 Gradio 服务；此仓库没有可独立运行的完整材料页。
+同时运行两个开发应用时，可将门户的 `VITE_ROBOT_ENTRY` 指向机械臂开发地址。材料页可独立启动本包预览；真实业务入口需接入已有 Gradio 处理函数。门户入口通过 `VITE_MATERIALS_ENTRY` 指向相应界面地址。
 
 ## 检查、构建和预览
 
@@ -65,13 +84,13 @@ npm run build
 npm run preview
 ```
 
-`build` 分别构建两个应用并合并至根目录 `dist/`：门户位于根路径，机械臂位于 `/agent/robot/`。`preview` 默认使用端口 `4173`，用于查看合并后的静态产物。构建产物不会生成完整材料工作台。
+`build` 分别构建两个应用并合并至根目录 `dist/`：门户位于根路径，机械臂位于 `/agent/robot/`。`preview` 默认使用端口 `4173`，用于查看合并后的静态产物。材料界面使用单独的 Python/Gradio 运行入口，不打进 React 静态目录。
 
 预览只提供静态页面，不会启动 API，也不会使用开发代理。需要完整交互时，应先配置可访问的公开 API。实际托管时，门户的 `/chat`、`/data` 和 `/agent/medical/` 等前端路由需要返回门户入口，机械臂路径需要返回对应应用入口。
 
 ## 上传范围
 
-保留前端源码、图片、依赖声明和锁文件、Vite/TypeScript 构建配置、浏览器脚本及开发说明。后端代码、Python 服务、模型权重、数据库、知识库原始数据、用户记录、密钥和服务器配置均不在交付范围内。`node_modules/`、`dist/` 和本地 `.env.local` 不提交。
+保留前端源码、Python/Gradio 界面定义及固定数据预览、图片、依赖声明、构建配置和开发说明。后端业务实现、模型权重、数据库、知识库原始数据、用户记录、密钥和服务器配置不在交付范围内。`node_modules/`、`dist/` 和本地 `.env.local` 不提交。
 
 公共资源和各应用现有样式按线上快照保留，未借此次整理重构页面或改写业务逻辑。范围及材料页限制详见 [前端交付范围](docs/frontend-scope.md)。
 
