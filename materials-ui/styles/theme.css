@@ -1,0 +1,117 @@
+/* Shared AI4S white/blue palette; materials workflow bindings stay unchanged. */
+:root {
+  color-scheme: light;
+  --mat-page: #ffffff;
+  --mat-surface: #ffffff;
+  --mat-panel: #f8fafc;
+  --mat-hover: #eff6ff;
+  --mat-text: #0f172a;
+  --mat-secondary: #475569;
+  --mat-muted: #64748b;
+  --mat-border: #e2e8f0;
+  --mat-input-border: #94a3b8;
+  --mat-accent: #2563eb;
+  --mat-accent-hover: #1d4ed8;
+  --mat-accent-soft: #eff6ff;
+  --mat-accent-text: #1d4ed8;
+  --mat-on-accent: #ffffff;
+  --mat-code: #f1f5f9;
+  --mat-focus: #2563eb;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --mat-page: #0d1420;
+  --mat-surface: #141f2f;
+  --mat-panel: #1b293b;
+  --mat-hover: #24364d;
+  --mat-text: #edf3fc;
+  --mat-secondary: #c3d0e1;
+  --mat-muted: #a1b3ca;
+  --mat-border: #3b4d64;
+  --mat-input-border: #647a95;
+  --mat-accent: #93c5fd;
+  --mat-accent-hover: #bfdbfe;
+  --mat-accent-soft: #172d50;
+  --mat-accent-text: #bfdbfe;
+  --mat-on-accent: #0b1c36;
+  --mat-code: #0e1724;
+  --mat-focus: #9dd6ff;
+}
+body, .gradio-container {
+  background: var(--mat-page) !important;
+  color: var(--mat-text) !important;
+  --body-background-fill: var(--mat-page) !important;
+  --body-text-color: var(--mat-text) !important;
+  --body-text-color-subdued: var(--mat-muted) !important;
+  --background-fill-primary: var(--mat-surface) !important;
+  --background-fill-secondary: var(--mat-panel) !important;
+  --block-background-fill: var(--mat-surface) !important;
+  --block-border-color: var(--mat-border) !important;
+  --block-info-text-color: var(--mat-muted) !important;
+  --block-label-background-fill: transparent !important;
+  --block-label-text-color: var(--mat-secondary) !important;
+  --block-title-text-color: var(--mat-text) !important;
+  --block-title-background-fill: transparent !important;
+  --input-background-fill: var(--mat-surface) !important;
+  --input-background-fill-focus: var(--mat-surface) !important;
+  --input-background-fill-hover: var(--mat-surface) !important;
+  --input-border-color: var(--mat-input-border) !important;
+  --input-border-color-focus: var(--mat-accent) !important;
+  --input-border-color-hover: var(--mat-input-border) !important;
+  --input-placeholder-color: var(--mat-muted) !important;
+  --button-primary-background-fill: var(--mat-accent) !important;
+  --button-primary-background-fill-hover: var(--mat-accent-hover) !important;
+  --button-primary-border-color: var(--mat-accent) !important;
+  --button-primary-border-color-hover: var(--mat-accent-hover) !important;
+  --button-primary-text-color: var(--mat-on-accent) !important;
+  --button-primary-text-color-hover: var(--mat-on-accent) !important;
+  --button-secondary-background-fill: var(--mat-surface) !important;
+  --button-secondary-background-fill-hover: var(--mat-hover) !important;
+  --button-secondary-border-color: var(--mat-border) !important;
+  --button-secondary-border-color-hover: var(--mat-input-border) !important;
+  --button-secondary-text-color: var(--mat-secondary) !important;
+  --button-secondary-text-color-hover: var(--mat-text) !important;
+  --border-color-primary: var(--mat-border) !important;
+  --border-color-accent: var(--mat-accent) !important;
+  --color-accent: var(--mat-accent) !important;
+  --color-accent-soft: var(--mat-accent-soft) !important;
+  --link-text-color: var(--mat-accent-text) !important;
+  --table-border-color: var(--mat-border) !important;
+  --table-even-background-fill: var(--mat-panel) !important;
+  --table-odd-background-fill: var(--mat-surface) !important;
+}
+.gradio-container { min-height: 100dvh; font-size: 15px !important; }
+#multi-header { background: var(--mat-surface); border-color: var(--mat-border); }
+#multi-header h1 { color: var(--mat-text); font-size: 18px; }
+#left-sidebar, #right-sidebar { background: var(--mat-panel) !important; border: 1px solid var(--mat-border) !important; }
+#left-sidebar h3, #right-sidebar strong { color: var(--mat-muted) !important; font-size: 13px !important; font-weight: 600 !important; }
+#right-sidebar h3 { color: var(--mat-text); }
+.init-status { background: var(--mat-surface) !important; color: var(--mat-secondary) !important; font-size: 14px !important; line-height: 1.7 !important; }
+#new-chat { background: var(--mat-accent-soft) !important; color: var(--mat-accent-text) !important; border-color: var(--mat-border) !important; }
+#new-chat:hover { background: var(--mat-hover) !important; }
+.bubble-wrap .user.message { background: var(--mat-accent-soft) !important; color: var(--mat-text) !important; }
+.bubble-wrap .user.message * { color: var(--mat-text) !important; }
+.bubble-wrap .bot.message { color: var(--mat-text) !important; }
+.gradio-container .prose { color: var(--mat-text) !important; }
+.gradio-container .prose a { color: var(--mat-accent-text) !important; text-decoration: underline; }
+.gradio-container .prose pre, .gradio-container .prose code { background: var(--mat-code) !important; color: var(--mat-text) !important; border-color: var(--mat-border) !important; }
+.gradio-container .prose th { background: var(--mat-panel) !important; color: var(--mat-text) !important; }
+.gradio-container .prose td, .gradio-container .prose th { border-color: var(--mat-border) !important; }
+.gradio-container .prose blockquote { color: var(--mat-secondary) !important; border-color: var(--mat-accent) !important; }
+#composer { background: var(--mat-surface) !important; border-color: var(--mat-input-border) !important; box-shadow: 0 3px 16px #00000012 !important; }
+#composer:focus-within { border-color: var(--mat-accent) !important; }
+#composer textarea { color: var(--mat-text) !important; font-size: 16px !important; }
+.gradio-container input, .gradio-container textarea { color: var(--mat-text) !important; caret-color: var(--mat-accent); }
+.gradio-container input::placeholder, .gradio-container textarea::placeholder { color: var(--mat-muted) !important; opacity: 1; }
+.gradio-container label, .gradio-container .label { color: var(--mat-secondary) !important; }
+.attachment-status { background: var(--mat-panel) !important; color: var(--mat-secondary) !important; font-size: 14px !important; }
+.quick-chip { background: var(--mat-surface) !important; color: var(--mat-secondary) !important; border-color: var(--mat-border) !important; font-size: 14px !important; }
+.quick-chip:hover { background: var(--mat-hover) !important; color: var(--mat-text) !important; }
+button.primary, #send-button { background: var(--mat-accent) !important; color: var(--mat-on-accent) !important; border-color: var(--mat-accent) !important; }
+button.primary:hover, #send-button:hover { background: var(--mat-accent-hover) !important; }
+.advanced-box { color: var(--mat-secondary) !important; }
+.trace-card { background: var(--mat-surface); color: var(--mat-secondary); border-color: var(--mat-border); font-size: 14px; }
+.trace-step b { color: var(--mat-text); }
+.gradio-container button:focus-visible, .gradio-container a:focus-visible,
+.gradio-container input:focus-visible, .gradio-container textarea:focus-visible { outline: 2px solid var(--mat-focus) !important; outline-offset: 3px; }
+::selection { background: var(--mat-accent); color: var(--mat-on-accent); }

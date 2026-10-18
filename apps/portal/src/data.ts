@@ -1,0 +1,9 @@
+export interface Dataset { name: string; subtitle: string; type: string; description: string; metrics: { value: string; label: string }[]; note: string; source: string; color: string; }
+export const datasets: Dataset[] = [
+  { name: '放射影像问答数据集', subtitle: '读懂影像中的临床问题', type: '放射影像问答', description: '由临床人员围绕放射影像提出问题，涵盖器官识别、影像表现与异常理解，连接医学视觉与临床语言。', metrics: [{value:'315',label:'张医学影像'},{value:'3,515',label:'个问题'}], note:'原始论文统计 · 以实际评测版本为准', source:'https://www.nature.com/articles/sdata2018251', color:'teal' },
+  { name: '病理图像问答数据集', subtitle: '探索显微镜下的医学世界', type: '病理图像问答', description: '基于病理图像构建的视觉问答数据，覆盖组织、结构、位置和病理特征，评估模型对病理图像的理解。', metrics: [{value:'4,998',label:'张病理图片'},{value:'32,799',label:'对问答'}], note:'公开数据集规模', source:'https://pathvqachallenge.grand-challenge.org/Data_Info/', color:'purple' },
+  { name: '医学考试问答数据集', subtitle: '从医学知识到临床推理', type: '医学考试问答', description: '来源于医学执照考试的多项选择题，包含临床情境与医学知识，面向医学知识理解和推理能力研究。', metrics: [{value:'12,723',label:'道医学试题'},{value:'EN',label:'英文 USMLE 版'}], note:'英文子集规模 · 非全部语言版本总量', source:'https://github.com/jind11/MedQA', color:'blue' },
+  { name: '双语医学视觉问答数据集', subtitle: '让医学视觉与知识相遇', type: '双语视觉问答', description: '覆盖 CT、MRI 与 X 光的中英双语视觉问答数据集，结合器官、异常与医学知识，支持多模态理解研究。', metrics: [{value:'642',label:'张医学图片'},{value:'14,028',label:'对双语问答'}], note:'原始论文统计 · 中英双语合计', source:'https://www.med-vqa.com/slake/', color:'teal' },
+  { name: '生物医学文献问答数据集', subtitle: '从科学摘要中寻找答案', type: '生物医学文本问答', description: '根据生物医学论文摘要回答研究问题，答案为 yes、no 或 maybe，用于证据理解与医学文本推理。', metrics: [{value:'1,000',label:'条专家标注问答'},{value:'3',label:'类答案'}], note:'另有约 6.12 万未标注及 21.13 万自动生成问答', source:'https://pubmedqa.github.io/', color:'amber' },
+  { name: '肺炎胸片分类数据集', subtitle: '聚焦胸部影像与肺炎识别', type: '医学影像分类', description: '基于儿童胸部 X 光的轻量医学影像数据集，区分正常与肺炎，用于研究模型的影像识别能力。', metrics: [{value:'5,856',label:'张胸部 X 光'},{value:'2',label:'个类别'}], note:'训练 4,708 · 验证 524 · 测试 624', source:'https://medmnist.com/', color:'rose' },
+];

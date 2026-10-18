@@ -1,0 +1,90 @@
+/* Plan A: original conversation workflow, medical QA typography and controls. */
+html,body{height:100%;margin:0;overflow:hidden!important}
+body,.gradio-container{font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:16px;line-height:1.65;font-weight:400;font-synthesis:none}
+.gradio-container{width:100%!important;min-width:0!important;max-width:none!important;height:100dvh!important;min-height:0!important;padding:0!important;overflow:hidden!important;background:var(--mat-page)!important;color:var(--mat-text)!important}
+.gradio-container>.main,.gradio-container main.contain,.gradio-container main.contain>.column{height:100%!important;min-height:0!important;max-width:none!important;padding:0!important;overflow:hidden!important}
+.gradio-container main.contain>.column{gap:0!important}
+#app-layout{display:flex!important;flex:1 1 0!important;align-items:stretch!important;flex-wrap:nowrap!important;gap:0!important;width:100%!important;max-width:none!important;height:calc(100dvh - 88px)!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+#left-sidebar{display:flex!important;flex-direction:column!important;flex:0 0 200px!important;width:200px!important;min-width:200px!important;max-width:200px!important;height:100%!important;min-height:0!important;margin:0!important;padding:22px 14px 16px!important;gap:12px!important;border:0!important;border-right:1px solid var(--mat-border)!important;border-radius:0!important;background:var(--mat-panel)!important;overflow:hidden!important}
+#new-chat,#literature-toggle,#examples-toggle,#examples-close,#send-button,#stop-button,#pdf-upload,#clear-upload,#literature-close{font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:12px!important;font-weight:400!important;line-height:1.65!important;min-height:39.8px!important;height:auto!important;min-width:0!important;max-width:none!important;border:1px solid var(--mat-border)!important;border-radius:7px!important;padding:9px 13px!important;box-shadow:none!important;white-space:nowrap!important}
+#new-chat{width:100%!important;justify-content:flex-start!important;flex:0 0 auto!important;margin:0!important;background:var(--mat-accent-soft)!important;color:var(--mat-accent-text)!important}
+#recent-heading{flex:0 0 auto!important;min-height:0!important;padding:0 5px!important;margin:2px 0 0!important;background:transparent!important;color:var(--mat-secondary)!important;font-size:12px!important;font-weight:600!important;line-height:1.65!important;overflow:visible!important}
+#recent-heading p{margin:0!important}
+#recent-empty{padding:0 5px!important;margin:0!important;font-size:12px!important;font-weight:400!important;line-height:1.9!important;color:var(--mat-muted)!important;background:transparent!important}
+#recent-chats{flex:1 1 0!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;scrollbar-color:var(--mat-border) transparent}
+#recent-chats .wrap{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:5px!important}
+#recent-chats label{display:block!important;width:100%!important;min-width:0!important;max-width:none!important;margin:0!important;padding:10px 11px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:var(--mat-secondary)!important;font-family:inherit!important;font-size:13px!important;font-weight:400!important;line-height:1.8!important;box-shadow:none!important;overflow:hidden!important}
+#recent-chats label>span{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
+#recent-chats label:hover{background:var(--mat-hover)!important}
+#recent-chats label:has(input:checked){background:var(--mat-accent-soft)!important;color:var(--mat-accent-text)!important}
+#recent-chats input{position:absolute!important;opacity:0!important;width:1px!important;height:1px!important}
+#recent-chats label:focus-within{outline:2px solid var(--mat-focus);outline-offset:-2px}
+#literature-toggle{flex:0 0 auto!important;width:100%!important;margin:0!important;background:var(--mat-surface)!important;color:var(--mat-accent-text)!important}
+#literature-toggle:disabled{color:var(--mat-muted)!important;background:var(--mat-panel)!important}
+#chat-shell{display:flex!important;flex-direction:column!important;flex:1 1 0!important;width:0!important;min-width:0!important;max-width:none!important;height:100%!important;min-height:0!important;margin:0!important;padding:20px 28px 18px!important;gap:0!important;overflow:hidden!important;background:var(--mat-page)!important}
+#examples-toolbar{display:flex!important;flex:0 0 auto!important;align-items:center!important;flex-wrap:nowrap!important;gap:18px!important;min-height:0!important;margin:0 0 16px!important;padding:0!important;overflow:visible!important}
+#workspace-title{flex:1 1 auto!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;overflow:visible!important}
+#workspace-title .html-container{padding:0!important}
+.mat-page-heading h1{font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:34px!important;font-weight:700!important;line-height:1.4!important;letter-spacing:-1px;margin:8px 0!important;color:var(--mat-text)!important}
+.mat-page-heading p{font-family:inherit!important;font-size:14px!important;font-weight:400!important;line-height:1.65!important;margin:0!important;color:var(--mat-secondary)!important}
+#examples-toggle,#examples-close{flex:0 0 auto!important;width:auto!important;background:var(--mat-panel)!important;color:var(--mat-secondary)!important}
+#multi-chat{flex:1 1 0!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0 0 16px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;overflow:hidden!important}
+#multi-chat .bubble-wrap{height:100%!important;min-height:0!important;max-height:100%!important;padding:12px 4px 18px!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;scrollbar-color:var(--mat-border) transparent}
+#multi-chat .message,#multi-chat .message p,#multi-chat .prose{font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:15px!important;font-weight:400!important;line-height:1.95!important}
+#multi-chat .user.message{background:var(--mat-accent-soft)!important;color:var(--mat-text)!important;border-radius:12px!important;border:0!important;box-shadow:none!important}
+#multi-chat .bot.message{background:transparent!important;color:var(--mat-text)!important;border:0!important;box-shadow:none!important}
+#multi-chat .message h1,#multi-chat .message h2,#multi-chat .message h3,#multi-chat .message strong{font-weight:700!important}
+.materials-welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 18px;max-width:580px;margin:auto;text-align:center;color:var(--mat-text)}
+.materials-welcome-mark{display:grid;place-items:center;width:64px;height:64px;margin-bottom:10px;border:1px solid var(--mat-border);border-radius:20px;background:var(--mat-accent-soft);color:var(--mat-accent-text)}
+.materials-welcome-mark svg{width:32px;height:32px}
+.materials-welcome h2{font-family:inherit!important;font-size:21px!important;font-weight:700!important;line-height:1.65!important;letter-spacing:-.4px;margin:11px 0 12px!important;color:var(--mat-text)!important}
+.materials-welcome p{font-family:inherit!important;font-size:12px!important;font-weight:400!important;line-height:1.9!important;max-width:460px;margin:0!important;color:var(--mat-muted)!important}
+.materials-capabilities{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+.materials-capabilities span{border:0!important;background:transparent!important;padding:0!important;font-size:12px!important;font-weight:400!important;color:var(--mat-muted)!important}
+#composer-shell{display:flex!important;flex-direction:column!important;flex:0 0 auto!important;min-width:0!important;margin:0!important;padding:12px 16px 12px!important;gap:0!important;border:1px solid var(--mat-border)!important;border-radius:14px!important;background:var(--mat-surface)!important;box-shadow:0 5px 18px #142d4705}
+#composer-shell:focus-within{border-color:var(--mat-accent)!important}
+#material-question{min-width:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#material-question textarea{display:block!important;width:100%!important;height:92px;min-height:92px!important;max-height:180px!important;resize:vertical!important;margin:0!important;padding:16px 0 8px!important;border:0!important;background:transparent!important;box-shadow:none!important;font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:15px!important;font-weight:400!important;line-height:1.8!important;color:var(--mat-text)!important;outline:none!important}
+#material-question textarea::placeholder{color:var(--mat-muted)!important}
+.attachment-status{flex:0 0 auto!important;min-height:0!important;max-height:48px;overflow-y:auto;margin:0 0 8px!important;padding:0!important;border:0!important;background:transparent!important;color:var(--mat-secondary)!important;font-family:inherit!important;font-size:12px!important;font-weight:400!important;line-height:1.65!important}
+.attachment-status:not(:has(p)){display:none!important}.attachment-status p{margin:0!important}
+#composer{display:flex!important;flex:0 0 auto!important;align-items:center!important;flex-wrap:nowrap!important;gap:8px!important;margin:0!important;padding:6px 0 0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#pdf-upload,#clear-upload,#stop-button{flex:0 0 auto!important;width:auto!important;background:var(--mat-panel)!important;color:var(--mat-secondary)!important}
+#composer-shell:not(:has(.attachment-status p)) #clear-upload{display:none!important}
+#material-input-hint{flex:1 1 auto!important;min-width:0!important;width:auto!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;color:var(--mat-muted)!important;font-family:inherit!important;font-size:12px!important;font-weight:400!important;line-height:1.65!important}
+#material-input-hint .html-container{padding:0!important}
+#send-button{flex:0 0 auto!important;width:auto!important;margin-left:auto!important;background:var(--mat-accent)!important;color:var(--mat-on-accent)!important;border-color:transparent!important}
+#right-sidebar{display:flex!important;flex-direction:column!important;flex:0 0 280px!important;width:280px!important;min-width:280px!important;max-width:280px!important;height:100%!important;min-height:0!important;max-height:100%!important;margin:0!important;padding:22px 18px!important;gap:11px!important;border:0!important;border-left:1px solid var(--mat-border)!important;border-radius:0!important;background:var(--mat-surface)!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;scrollbar-color:var(--mat-border) transparent}
+#right-sidebar.hide{display:none!important}
+#examples-heading{display:flex!important;flex:0 0 auto!important;align-items:center!important;flex-wrap:nowrap!important;gap:8px!important;min-height:0!important}
+#examples-heading>.block{min-width:0!important;overflow:visible!important}
+#examples-heading h3{font-family:inherit!important;font-size:18px!important;font-weight:700!important;line-height:1.65!important;margin:0!important;color:var(--mat-text)!important}
+.examples-hint{font-family:inherit!important;font-size:12px!important;font-weight:400!important;line-height:1.9!important;color:var(--mat-muted)!important;margin:0 0 4px!important;padding:0!important}
+.examples-hint p{margin:0!important}
+#right-sidebar .prose strong{font-size:12px!important;font-weight:600!important;color:var(--mat-secondary)!important}
+#right-sidebar .quick-chip{display:block!important;flex:0 0 auto!important;width:100%!important;min-height:0!important;height:auto!important;padding:12px!important;border:1px solid var(--mat-border)!important;border-radius:8px!important;background:var(--mat-surface)!important;color:var(--mat-text)!important;font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:14px!important;font-weight:550!important;line-height:1.75!important;text-align:left!important;white-space:normal!important;box-shadow:none!important}
+#right-sidebar .quick-chip:hover{background:var(--mat-accent-soft)!important;border-color:var(--mat-accent)!important}
+#literature-visibility-marker{display:none!important}
+#chat-shell:not(:has(#literature-visibility-marker [data-open="true"])) #literature-view{display:none!important}
+#chat-shell:has(#literature-visibility-marker [data-open="true"]) #multi-chat{display:none!important}
+#chat-shell:has(#literature-visibility-marker [data-open="true"]) #literature-view{display:flex!important}
+#literature-view{flex:1 1 0!important;flex-direction:column!important;min-height:0!important;height:auto!important;max-height:none!important;margin:0 0 16px!important;padding:18px!important;border:1px solid var(--mat-border)!important;border-radius:14px!important;background:var(--mat-surface)!important;overflow-y:auto!important}
+#data-result-panel{flex:0 0 auto!important;max-height:32%!important;overflow:auto!important;border-color:var(--mat-border)!important;background:var(--mat-surface)!important}
+.gradio-container button{box-shadow:none!important}
+@media(max-width:1100px){#chat-shell{padding-left:22px!important;padding-right:22px!important}#right-sidebar{position:absolute!important;top:88px;right:16px;bottom:16px;z-index:45;width:280px!important;min-width:0!important;max-width:calc(100% - 32px)!important;height:auto!important;max-height:calc(100dvh - 104px)!important;border:1px solid var(--mat-border)!important;border-radius:14px!important;box-shadow:0 12px 32px #142d471f!important}}
+@media(max-width:800px){#app-layout{height:calc(100dvh - 84px)!important}#left-sidebar{flex-basis:160px!important;width:160px!important;min-width:160px!important;max-width:160px!important;padding:18px 10px 12px!important}#chat-shell{padding:14px 18px!important}.mat-page-heading h1{font-size:30px!important}#right-sidebar{top:84px;max-height:calc(100dvh - 100px)!important}#material-input-hint{display:none!important}}
+@media(max-width:600px){#left-sidebar{flex-basis:116px!important;width:116px!important;min-width:116px!important;max-width:116px!important;padding:14px 7px!important}#recent-chats label{padding:8px 6px!important;font-size:12px!important}#new-chat,#literature-toggle{padding:8px 5px!important}#chat-shell{padding:12px!important}#examples-toolbar{align-items:flex-start!important;gap:8px!important;margin-bottom:10px!important}#examples-toggle{padding:8px!important}#composer-shell{padding:9px 10px!important}#composer{gap:6px!important;flex-wrap:wrap!important}#pdf-upload,#clear-upload,#send-button,#stop-button{padding:8px 9px!important}.materials-welcome{padding:20px 8px}}
+@media(prefers-reduced-motion:reduce){.gradio-container *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.gradio-container :is(button,input,textarea,select):where(:not(#agent-banner *)){font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important}
+
+#multi-chat .bubble-wrap{background:transparent!important}
+#multi-chat .agent-signature{font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:12px!important;font-weight:400!important;line-height:1.65!important;color:var(--mat-muted)!important}
+
+#multi-chat .prose table{display:block;overflow:auto;border-collapse:collapse;width:100%;margin:14px 0}
+#multi-chat .prose th{background:var(--mat-panel)}
+@media(max-width:1000px){.mat-page-heading h1{font-size:30px!important}}
+@media(max-width:480px){.mat-page-heading h1{font-size:28px!important}.mat-page-heading p{font-size:12px!important}#material-question textarea{font-size:14px!important;min-height:100px!important;height:100px}.materials-welcome h2{font-size:19px!important}#new-chat,#literature-toggle,#examples-toggle,#examples-close,#send-button,#stop-button,#pdf-upload,#clear-upload,#literature-close{padding:8px 10px!important;min-height:37.8px!important}}
+
+/* Framework wrappers do not alter the shared medical banner. */
+#agent-banner,#agent-banner .html-container,#agent-banner .prose{display:contents!important}

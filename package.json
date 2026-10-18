@@ -1,0 +1,15 @@
+{
+  "name": "tianfu-huiyan-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20.19.0" },
+  "scripts": {
+    "setup": "node scripts/manage-apps.mjs setup",
+    "dev": "node scripts/manage-apps.mjs dev portal",
+    "dev:robot": "node scripts/manage-apps.mjs dev robot",
+    "build": "node scripts/manage-apps.mjs build",
+    "preview": "node scripts/manage-apps.mjs preview",
+    "check:source": "node scripts/check-source.mjs"
+  }
+}

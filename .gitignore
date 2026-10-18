@@ -1,0 +1,19 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.DS_Store
+Thumbs.db
+*.zip
+coverage/
+
+# Copied from shared/ by the frontend asset preparation step.
+/apps/portal/public/agent-masthead.css
+/apps/portal/public/agent-theme.js
+/apps/portal/public/tianfu-logo.jpg
+/apps/robot/public/tianfu-logo.jpg
+/apps/robot/public/assets/tianfu-logo.jpg
