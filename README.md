@@ -27,14 +27,15 @@ docs/              交付范围与接口对接说明
 
 ## 本地开发
 
-准备 Node.js 20.19 或更高版本及 npm，建议使用 Node.js 22 或更高版本。在仓库根目录执行：
+准备 Node.js 22 或更高版本及 npm。在仓库根目录执行以下命令，可连接现有线上服务：
 
 ```sh
 npm run setup
+npm run connect:online -- --target http://221.239.50.147:7860
 npm run dev
 ```
 
-门户默认地址为 `http://localhost:5173/`，医学知识问答位于 `/agent/medical/`。首页、对话和数据中心分别位于 `/`、`/chat`、`/data`。
+门户地址为 `http://127.0.0.1:5173/`，医学知识问答位于 `/agent/medical/`。首页、对话和数据中心分别位于 `/`、`/chat`、`/data`；材料线上工作台通过本地 `/agent/materials/` 访问。
 
 在另一个终端启动机械臂应用：
 
@@ -42,7 +43,9 @@ npm run dev
 npm run dev:robot
 ```
 
-机械臂开发端口为 `5174`。门户与机械臂使用各自的依赖清单和锁文件，`setup` 会分别执行 `npm ci`。
+机械臂开发地址为 `http://127.0.0.1:5174/`。门户与机械臂使用各自的依赖清单和锁文件，`setup` 会分别执行 `npm ci`。
+
+两个服务运行后，在第三个终端执行 `npm run check:connection`；使用 `npm run check:connection -- --full` 可检查真实医学 SSE、材料上传/下载与队列、机械臂 WebSocket 和视频。完整步骤、来源校验及生产部署区别见 [外部开发者接入指南](docs/external-development.md)，实测结果见 [验证记录](docs/external-verification.md)。
 
 未连接 API 时，页面仍可加载外观，服务状态和业务控件按现有逻辑显示未连接或不可用。本仓库不提供模型、设备模拟器、知识库或 mock 后端。
 
@@ -74,7 +77,7 @@ npm run check:materials
 
 开发时可保持 `VITE_API_BASE` 为空，通过 `VITE_DEV_PROXY_TARGET` 指向可用的接口服务；也可将 `VITE_API_BASE` 设为公开 API 根地址，由接口服务允许对应的跨域请求。机械臂还需要 WebSocket 和视频流。详细路径和流式响应要求见 [接口对接说明](docs/api-integration.md)。
 
-同时运行两个开发应用时，可将门户的 `VITE_ROBOT_ENTRY` 指向机械臂开发地址。材料页可独立启动本包预览；真实业务入口需接入已有 Gradio 处理函数。门户入口通过 `VITE_MATERIALS_ENTRY` 指向相应界面地址。
+`connect:online` 会将门户的 `VITE_ROBOT_ENTRY` 指向本地机械臂页面，将 `VITE_MATERIALS_ENTRY` 设为本地代理路径。材料的 `7865` 独立预览仍使用固定样例；通过 `5173/agent/materials/` 访问的是线上完整工作台，两者用途不同。
 
 ## 检查、构建和预览
 

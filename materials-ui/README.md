@@ -4,6 +4,8 @@
 
 业务处理通过 `UiCallbacks` 注入。模型、检索、材料数据库、统计分析实现、生产会话存储、密钥和服务器配置不在包内。
 
+如果只需从 GitHub 下载后连接现有线上材料业务，使用仓库根目录的 [外部开发接入流程](../docs/external-development.md)，从 `127.0.0.1:5173/agent/materials/` 打开线上工作台。以下 `preview.py` 则用于本地修改界面，二者不要混用。
+
 ## 启动本地预览
 
 需要 Python 3.10 或更新版本。本包固定使用与当前材料界面一致的 Gradio 6.17.3 / gradio_client 2.5.0，已在 Python 3.13 下验证。

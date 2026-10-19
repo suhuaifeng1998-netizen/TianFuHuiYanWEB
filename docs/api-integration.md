@@ -2,6 +2,8 @@
 
 本说明记录当前前端消费的接口，便于对接已有服务。仓库只包含浏览器侧请求代码和类型，不包含接口实现。
 
+从 GitHub 下载后连接现有线上服务，请先按 [外部开发者接入指南](external-development.md) 执行 `connect:online`，启动两个开发服务器。该流程已验证医学 SSE、材料 Gradio 队列/文件，以及机械臂 WebSocket/视频；见 [验证记录](external-verification.md)。
+
 ## 公开地址配置
 
 两个应用各自在 `.env.local` 中读取配置，并提供 `.env.example` 作为模板。
@@ -14,6 +16,8 @@
 | `VITE_MATERIALS_ENTRY` | 仅门户使用，覆盖材料页入口，默认 `/agent/materials/` |
 
 开发代理模式下，保持 `VITE_API_BASE` 为空，设置 `VITE_DEV_PROXY_TARGET` 为可访问的接口服务根地址。直接访问跨域 API 时，设置 `VITE_API_BASE` 为公开接口地址，并由接口服务处理对应的跨域访问。
+
+仓库的开发代理在改写 Host 时同步处理 HTTP/WebSocket Origin，拒绝其他页面来源使用本地代理。门户还代理 `/agent/materials`，并将 Gradio HTML、配置中的工作台根地址保持在本机。该逻辑只在开发服务器中运行，不会编译为浏览器业务代码，也不会自动为任意生产域名开启 CORS。
 
 不要把密钥放入任何 `VITE_` 变量。这些值会公开在浏览器可下载的 JavaScript 中。模型服务或第三方平台所需的私密凭据应留在接口服务内部。
 
@@ -97,6 +101,8 @@ WebSocket 路径为 `/ws/sessions/{id}`。浏览器接收的 JSON 消息中，`t
 `preview.py` 接入固定样例处理函数，可在没有模型、数据库和检索服务时修改界面。真实运行时改由使用方传入原处理函数，不能用预览响应代替业务逻辑。
 
 门户的 `VITE_MATERIALS_ENTRY` 指向运行该界面的公开入口。Python 界面包独立启动，不由根目录的 React 静态构建命令生成。
+
+线上接入模式下，该变量为 `/agent/materials/`，门户开发代理转发完整线上 Gradio 页面、资源、上传、队列和下载。无需把原业务函数放进本地开发包；本地 `preview.py` 仍然是固定数据预览。
 
 ## 对接时的检查点
 

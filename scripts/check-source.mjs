@@ -7,7 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const files = [...new Set(execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { cwd: root }).toString('utf8').split('\0').filter(Boolean))];
 const roots = new Set(['apps', 'shared', 'materials-ui', 'scripts', 'docs']);
 const rootFiles = new Set(['package.json', 'README.md', '.gitignore', '.gitattributes']);
-const extensions = new Set(['.ts','.tsx','.js','.mjs','.cjs','.css','.html','.json','.png','.jpg','.jpeg','.svg','.webp','.ico','.woff','.woff2','.gif','.md','.txt']);
+const extensions = new Set(['.ts','.tsx','.mts','.js','.mjs','.cjs','.css','.html','.json','.png','.jpg','.jpeg','.svg','.webp','.ico','.woff','.woff2','.gif','.md','.txt']);
 const binary = new Set(['.png','.jpg','.jpeg','.webp','.ico','.woff','.woff2','.gif']);
 const uiPython = new Set([
   'materials-ui/app.py', 'materials-ui/preview.py',
