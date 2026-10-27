@@ -2,7 +2,7 @@
 
 本说明记录当前前端消费的接口，便于对接已有服务。仓库只包含浏览器侧请求代码和类型，不包含接口实现。
 
-从 GitHub 下载后连接现有线上服务，请先按 [外部开发者接入指南](external-development.md) 执行 `connect:online`，启动两个开发服务器。该流程已验证医学 SSE、材料 Gradio 队列/文件，以及机械臂 WebSocket/视频；见 [验证记录](external-verification.md)。
+从 GitHub 下载后连接现有线上服务，请先按 [外部开发者接入指南](external-development.md) 执行 `connect:online`，启动两个开发服务器。该流程验证医学 SSE、材料 Gradio 队列/文件，以及机械臂 WebSocket/模型资源；见 [验证记录](external-verification.md)。
 
 ## 公开地址配置
 
@@ -41,7 +41,8 @@
 | 方法与路径 | 用途 |
 | --- | --- |
 | `GET /api/medical/status` | 读取服务状态及知识库概况，包括可选的地区专题列表 |
-| `GET /api/medical/questions` | 读取推荐问题；可带 `exclude` 和 `regional_topic` 查询参数 |
+| `GET /api/medical/questions` | 读取推荐问题；当前前端传 `sichuan_only=true`，可带 `exclude` 和 `regional_topic`；返回的 `featured_questions` 可含 `short_title`、`scenario_id`，点击场景先填入输入框 |
+| `POST /api/medical/session/check` | 提交 `{ session_id, answer_ids }`，从 `available_answer_ids` 判断历史回答能否继续追问；失效记录仍可阅读或重新提问 |
 | `POST /api/medical/followups` | 以 `{ session_id, answer_id, exclude }` 请求已有回答的追问建议 |
 | `POST /api/medical/ask` | 以 `{ session_id, question, parent_answer_id }` 请求医学回答流；起始问题的 `parent_answer_id` 为 `null` |
 
@@ -76,15 +77,19 @@
 | `POST /api/sessions/{id}/commands/speech` | 发送音频二进制；使用音频 MIME 类型和 `X-Audio-Duration-Ms` 请求头 |
 | `POST /api/sessions/{id}/confirm` | 确认当前待执行动作，可带 `fingerprint` |
 | `POST /api/sessions/{id}/cancel` | 取消当前动作 |
-| `POST /api/sessions/{id}/stop` | 请求停止 |
+| `POST /api/sessions/{id}/stop` | 请求停止，当前界面支持进入 `paused` 状态 |
+| `POST /api/sessions/{id}/resume` | 从暂停状态继续 |
 | `POST /api/sessions/{id}/estop` | 请求急停 |
-| `POST /api/sessions/{id}/reset-estop` | 请求重置仿真急停状态 |
+| `POST /api/sessions/{id}/reset` | 请求复位至初始姿态；前端按静止、连接和使能条件开放入口 |
 | `POST /api/sessions/{id}/robot/enabled` | 请求使能或去使能 |
-| `GET /api/sessions/{id}/robot/telemetry` | 获取机械臂遥测 |
-| `GET /api/sessions/{id}/robot/camera` | 读取视角状态 |
-| `PUT /api/sessions/{id}/robot/camera` | 调整视角 |
+| `GET /api/sessions/{id}/robot/telemetry` | 获取机械臂遥测，含六段 `render_link_poses`、`render_joint_positions_deg` 和可选的 `render_flange_pose` |
 | `POST /api/sessions/{id}/robot/trajectory/clear` | 清除轨迹显示 |
-| `GET /api/sessions/{id}/robot/stream.mjpeg` | 视频流，带 `attempt`、`mode` 查询参数 |
+| `GET /robot-assets/e05/elfin_base.STL` | 数字孪生底座模型 |
+| `GET /robot-assets/e05/elfin_link1.STL` 至 `elfin_link6.STL` | 数字孪生六个连杆模型 |
+
+`RobotTwinView.tsx` 使用 Three.js 加载七个模型并根据遥测渲染。`render_link_poses` 每项包含以米为单位的三维 `position_m` 和 `quaternion_xyzw` 四元数；相机旋转、平移、缩放、预设视角均在浏览器处理。STL 请求同样经过 `apiUrl`，本地开发代理覆盖 `/robot-assets`。旧版相机与 MJPEG 接口不再由当前主页面调用。
+
+线上后端已为原 PUT 接口兼容 POST；当前同步的前端仍按线上源码使用 PUT 切换模式和同步手势语音活动，保留既有行为。
 
 WebSocket 路径为 `/ws/sessions/{id}`。浏览器接收的 JSON 消息中，`type: "telemetry"` 按遥测处理，其他消息按会话快照处理。跨域 API 地址还需要对应的 WebSocket 连通性；HTTPS 页面应使用可访问的 HTTPS/WSS 资源。
 
@@ -92,7 +97,7 @@ WebSocket 路径为 `/ws/sessions/{id}`。浏览器接收的 JSON 消息中，`t
 
 手势操作以 `POST /api/sessions/{id}/commands/gesture` 提交摄像头画面 data URL 和采集时间，并使用 `/gesture/reset` 和 `/gesture/voice-activity` 同步状态。语音和手势采集需要浏览器授予相应权限；摄像头、麦克风功能需要 HTTPS 或浏览器认可的本地安全上下文。
 
-仅部署静态前端不会创建机械臂会话、产生视频或连接设备，以上功能均由已有接口服务提供。
+仅部署静态前端不会创建机械臂会话或连接设备。浏览器可执行 3D 渲染，但仍需要现有接口提供 STL 模型和实时姿态。
 
 ## 材料筛选
 
@@ -108,7 +113,7 @@ WebSocket 路径为 `/ws/sessions/{id}`。浏览器接收的 JSON 消息中，`t
 
 - 页面和静态资源可访问，门户前端路由与 `/agent/robot/` 指向各自应用。
 - API 返回前端期望的数据字段和错误信息，SSE 流可以持续读取并正确结束。
-- 机械臂 WebSocket、MJPEG 流及运行时会话请求可达。
+- 机械臂 WebSocket、STL 模型、六段渲染姿态及运行时会话请求可达。
 - 配置地址使用公开入口，不包含凭据；跨域访问规则由已有服务处理。
 
 以上是对接要求，不表示仓库自带服务或已在任意托管环境完成业务验收。

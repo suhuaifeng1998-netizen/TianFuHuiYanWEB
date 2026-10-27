@@ -15,7 +15,7 @@ function isLocalRequest(req) {
   return origin === `http://${req.headers.host}` || origin === `https://${req.headers.host}`;
 }
 
-const apiPath = /^\/(?:api(?:\/|\?|$)|health(?:\?|$)|ws(?:\/|\?|$)|agent\/materials(?:\/|\?|$))/;
+const apiPath = /^\/(?:api(?:\/|\?|$)|health(?:\?|$)|ws(?:\/|\?|$)|robot-assets(?:\/|\?|$)|agent\/materials(?:\/|\?|$))/;
 
 // Run before the proxy, so another website cannot use this loopback proxy.
 export function devOriginGuard(target) {
@@ -105,5 +105,6 @@ export function createDevProxy(target, materials = false) {
     '^/api(?:/|\\?|$)': options(),
     '^/health(?:\\?|$)': options(),
     '^/ws(?:/|\\?|$)': options(),
+    '^/robot-assets(?:/|\\?|$)': options(),
   };
 }

@@ -29,8 +29,11 @@ await check('medical status', async () => {
   if (data.state !== 'ready') throw new Error(`service state: ${data.state}`);
 });
 await check('medical questions', async () => {
-  const data = await (await request(portal, '/api/medical/questions')).json();
+  const data = await (await request(portal, '/api/medical/questions?sichuan_only=true')).json();
   if (!data.questions?.length) throw new Error('question list is empty');
+  if (!data.featured_questions?.some(question => question.scenario_id && question.short_title)) {
+    throw new Error('Sichuan scenario examples are missing');
+  }
 });
 await check('medical POST passes origin validation', async () => {
   const response = await fetch(portal + '/api/medical/ask', { method: 'POST',
@@ -78,22 +81,38 @@ if (full) {
     if (!/event:\s*complete/.test(result) || /event:\s*error/.test(result)) throw new Error('Gradio queue did not complete');
   });
   await check('medical real answer SSE', async () => {
+    const sessionId = 'developer_check_' + Date.now();
     const response = await request(portal, '/api/medical/ask', { method: 'POST',
       headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-        session_id: 'developer_check_' + Date.now(), question: '血压是什么？', parent_answer_id: null,
+        session_id: sessionId, question: '血压是什么？', parent_answer_id: null,
       }) });
     if (!response.headers.get('content-type')?.includes('text/event-stream')) throw new Error('SSE content type missing');
     const text = await response.text();
     if (!/event:\s*done/.test(text) || !/event:\s*delta/.test(text) || /event:\s*error/.test(text)) {
       throw new Error('answer stream did not complete successfully');
     }
+    const meta = text.split(/\r?\n\r?\n/).find(event => /^event:\s*meta\s*$/m.test(event));
+    const answerId = meta && JSON.parse(meta.match(/^data:\s*(.+)$/m)?.[1] || '{}').answer_id;
+    if (!answerId) throw new Error('answer ID missing from SSE metadata');
+    const available = await (await request(portal, '/api/medical/session/check', { method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId, answer_ids: [answerId, 'missing_developer_answer'] }),
+    })).json();
+    if (!available.available_answer_ids?.includes(answerId) || available.available_answer_ids.includes('missing_developer_answer')) {
+      throw new Error('history session availability check is incorrect');
+    }
   });
-  await check('robot isolated session, WebSocket, telemetry and MJPEG (no commands)', async () => {
+  await check('robot isolated session, WebSocket, render poses and 3D models (no commands)', async () => {
     const session = await (await request(robot, '/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' } })).json();
     const id = session.session_id || session.id;
     if (!id) throw new Error('session ID missing');
     await request(robot, `/api/sessions/${encodeURIComponent(id)}`);
-    await request(robot, `/api/sessions/${encodeURIComponent(id)}/robot/telemetry`);
+    const telemetry = await (await request(robot, `/api/sessions/${encodeURIComponent(id)}/robot/telemetry`)).json();
+    if (telemetry.render_link_poses?.length !== 6 || telemetry.render_link_poses.some(pose =>
+      pose.position_m?.length !== 3 || pose.quaternion_xyzw?.length !== 4 ||
+      ![...pose.position_m, ...pose.quaternion_xyzw].every(Number.isFinite))) {
+      throw new Error('six valid 3D link poses are required');
+    }
     await new Promise((resolve, reject) => {
       const url = new URL(`/ws/sessions/${encodeURIComponent(id)}`, robot);
       url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -105,13 +124,14 @@ if (full) {
       };
       socket.onerror = () => { clearTimeout(timer); socket.close(); reject(new Error('WebSocket connection failed')); };
     });
-    const stream = await request(robot, `/api/sessions/${encodeURIComponent(id)}/robot/stream.mjpeg`);
-    try {
-      if (!stream.headers.get('content-type')?.includes('multipart/')) throw new Error('video stream type missing');
-      const reader = stream.body.getReader();
-      const first = await reader.read(); await reader.cancel();
-      if (!first.value?.length) throw new Error('video stream is empty');
-    } finally { if (!stream.body.locked) await stream.body.cancel(); }
+    for (const name of ['base', 'link1', 'link2', 'link3', 'link4', 'link5', 'link6']) {
+      const response = await request(robot, `/robot-assets/e05/elfin_${name}.STL`);
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+      if (bytes.byteLength < 84 || 84 + view.getUint32(80, true) * 50 !== bytes.byteLength) {
+        throw new Error(`invalid binary STL model: ${name}`);
+      }
+    }
   });
 }
 if (failed) process.exitCode = 1;

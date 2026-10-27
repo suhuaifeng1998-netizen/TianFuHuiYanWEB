@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>设备自检 · AI4S</title>
+  <style>
+    :root{font-family:system-ui,'Microsoft YaHei',sans-serif;color:#223c31;background:#f4f7f3;font-size:16px}*{box-sizing:border-box}body{margin:0}main{max-width:860px;margin:36px auto;padding:0 20px}h1{font-size:28px;margin-bottom:10px}p{line-height:1.8;color:#53665b}.intro{margin-bottom:22px}.panel{background:white;border:1px solid #dce6dc;border-radius:16px;padding:22px;margin:16px 0}h2{font-size:19px;margin:0 0 14px}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}button,a{font:inherit}button{cursor:pointer;border:1px solid #bed2c2;border-radius:8px;padding:10px 16px;background:#edf4eb;color:#264f3c}button.primary{background:#2d6d53;color:white}button:disabled{opacity:.5;cursor:wait}button:focus-visible,a:focus-visible{outline:3px solid #77ac94;outline-offset:3px}video{display:block;max-width:100%;width:480px;aspect-ratio:4/3;background:#14291f;border-radius:10px;margin-top:14px;object-fit:contain;transform:scaleX(-1)}video[hidden]{display:none}.status{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;font-size:14px}.meter{height:20px;background:#e9eee7;border-radius:8px;overflow:hidden;max-width:480px}.meter>div{height:100%;width:0;background:#55a579;transition:width .1s}textarea{width:100%;min-height:250px;border:1px solid #d7e0d5;border-radius:8px;padding:12px;background:#fafcf9;color:#314d3e;font:13px/1.7 Consolas,monospace;resize:vertical}a{color:#286e53}.hint{font-size:14px}#summary{font-size:14px;line-height:1.8;white-space:pre-wrap}.notice{border-left:4px solid #cfaa55;padding-left:12px}footer{padding:15px 0 30px;font-size:14px}
+  </style>
+</head>
+<body>
+<main>
+  <h1>摄像头与麦克风自检</h1>
+  <p class="intro">先关闭机械臂页面的摄像头和录音，再测试。本页仅在当前电脑预览画面、检测音量，不上传音视频，不连接机械臂控制接口。每项测试 30 秒后自动停止。</p>
+  <div class="panel"><h2>浏览器环境</h2><div id="summary"></div><p id="originHint" class="hint notice" hidden>请通过 SSH 转发，在 http://localhost:17866/assets/device-check.html 打开本页。</p></div>
+  <section class="panel"><h2>1. 摄像头</h2><p class="hint">点击测试并允许摄像头；确认下方是否显示你所在位置的实时画面。</p><div class="buttons"><button id="cameraStart" class="primary">测试摄像头</button><button id="cameraStop">停止摄像头</button></div><div id="cameraStatus" class="status" role="status">尚未测试</div><video id="preview" autoplay muted playsinline hidden></video></section>
+  <section class="panel"><h2>2. 麦克风</h2><p class="hint">点击测试并允许麦克风，然后说几句话，观察音量条是否变化。</p><div class="buttons"><button id="micStart" class="primary">测试麦克风</button><button id="micStop">停止麦克风</button></div><div class="meter"><div id="level"></div></div><div id="micStatus" class="status" role="status">尚未测试</div></section>
+  <section class="panel"><h2>诊断结果</h2><p class="hint">可以复制下面的文字发给我。结果仅包含浏览器、设备名称、媒体状态和错误信息，不包含画面或录音。</p><textarea id="report" aria-label="诊断结果" readonly></textarea><div class="buttons"><button id="copy">复制诊断结果</button><span id="copyStatus" role="status"></span></div></section>
+  <footer><a href="/agent/robot/">返回机械臂 Agent</a></footer>
+</main>
+<script>
+  const $ = id => document.getElementById(id);
+  const state = {
+    environment: {origin:location.origin, secureContext:window.isSecureContext, getUserMedia:!!navigator.mediaDevices?.getUserMedia, mediaRecorder:typeof MediaRecorder!=='undefined', browser:navigator.userAgent},
+    camera:{status:'not_tested'}, microphone:{status:'not_tested'}
+  };
+  let cameraStream, micStream, audioContext, cameraTimer, micTimer, cameraAutoStop, micAutoStop;
+  let cameraRun=0, micRun=0;
+  const update=()=>{$('report').value=JSON.stringify(state,null,2);};
+  const failure=e=>({name:e?.name||'Error',message:e?.message||String(e)});
+  const trackInfo=track=>{const s=track.getSettings();return {device:track.label,state:track.readyState,enabled:track.enabled,muted:track.muted,width:s.width,height:s.height,frameRate:s.frameRate,sampleRate:s.sampleRate,channelCount:s.channelCount};};
+  $('summary').textContent=`当前地址：${location.origin}\n安全上下文：${window.isSecureContext?'是':'否'}\n摄像头/麦克风接口：${state.environment.getUserMedia?'可用':'不可用'}\n录音接口：${state.environment.mediaRecorder?'可用':'不可用'}`;
+  $('originHint').hidden=window.isSecureContext;
+  if(typeof MediaRecorder!=='undefined')state.environment.audioFormats=['audio/webm;codecs=opus','audio/webm','audio/mp4'].filter(x=>MediaRecorder.isTypeSupported(x));
+  update();
+  function stopCamera(reason='已停止摄像头'){
+    cameraRun++;
+    clearInterval(cameraTimer);clearTimeout(cameraAutoStop);
+    cameraStream?.getTracks().forEach(t=>t.stop());cameraStream=null;
+    $('preview').srcObject=null;$('preview').hidden=true;
+    $('cameraStart').disabled=false;
+    if(state.camera.status==='running'||state.camera.status==='requesting'){
+      state.camera.status='stopped';$('cameraStatus').textContent=reason;update();
+    }
+  }
+  async function stopMic(reason='已停止麦克风'){
+    micRun++;
+    clearInterval(micTimer);clearTimeout(micAutoStop);
+    micStream?.getTracks().forEach(t=>t.stop());micStream=null;
+    const current=audioContext;audioContext=null;
+    if(current&&current.state!=='closed')await current.close().catch(()=>{});
+    $('level').style.width='0';$('micStart').disabled=false;
+    if(state.microphone.status==='running'||state.microphone.status==='requesting'){
+      state.microphone.status='stopped';$('micStatus').textContent=reason;update();
+    }
+  }
+  $('cameraStart').onclick=async()=>{
+    stopCamera();const run=cameraRun;
+    state.camera={status:'requesting'};$('cameraStart').disabled=true;
+    $('cameraStatus').textContent='等待浏览器授权或设备响应…';update();
+    try{
+      if(!navigator.mediaDevices?.getUserMedia)throw new Error('当前页面没有可用的 getUserMedia 接口，请检查是否使用 localhost 地址。');
+      const stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});
+      if(run!==cameraRun){stream.getTracks().forEach(t=>t.stop());return;}
+      cameraStream=stream;const track=stream.getVideoTracks()[0];
+      const video=$('preview');video.hidden=false;video.srcObject=stream;
+      state.camera={status:'running',track:trackInfo(track)};update();
+      cameraAutoStop=setTimeout(()=>stopCamera('30 秒测试结束，摄像头已关闭。'),30000);
+      cameraTimer=setInterval(()=>{
+        state.camera.track=trackInfo(track);
+        state.camera.preview={width:video.videoWidth,height:video.videoHeight,readyState:video.readyState,paused:video.paused,time:Number(video.currentTime.toFixed(2))};
+        $('cameraStatus').textContent=`设备：${track.label}\n视频流：${track.readyState}，静默：${track.muted}\n预览：${video.videoWidth} × ${video.videoHeight}，播放状态：${video.paused?'暂停':'播放中'}`;
+        update();
+      },1000);
+      await video.play();
+    }catch(e){
+      if(run!==cameraRun)return;
+      stopCamera();state.camera={status:'error',error:failure(e)};
+      $('cameraStatus').textContent=`${state.camera.error.name}: ${state.camera.error.message}`;update();
+    }
+  };
+  $('micStart').onclick=async()=>{
+    await stopMic();const run=micRun;
+    state.microphone={status:'requesting'};$('micStart').disabled=true;
+    $('micStatus').textContent='等待浏览器授权或设备响应…';update();
+    try{
+      if(!navigator.mediaDevices?.getUserMedia)throw new Error('当前页面没有可用的 getUserMedia 接口，请检查是否使用 localhost 地址。');
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+      if(run!==micRun){stream.getTracks().forEach(t=>t.stop());return;}
+      micStream=stream;const track=stream.getAudioTracks()[0];
+      const AudioCtx=window.AudioContext||window.webkitAudioContext;
+      if(!AudioCtx)throw new Error('浏览器不支持音量检测接口。');
+      audioContext=new AudioCtx();await audioContext.resume();
+      if(run!==micRun)return;
+      const analyser=audioContext.createAnalyser();analyser.fftSize=2048;
+      audioContext.createMediaStreamSource(stream).connect(analyser);
+      const samples=new Float32Array(analyser.fftSize);
+      state.microphone={status:'running',track:trackInfo(track),maximumRms:0};
+      micAutoStop=setTimeout(()=>void stopMic('30 秒测试结束，麦克风已关闭。'),30000);
+      micTimer=setInterval(()=>{
+        analyser.getFloatTimeDomainData(samples);
+        const rms=Math.sqrt(samples.reduce((sum,x)=>sum+x*x,0)/samples.length);
+        state.microphone.track=trackInfo(track);
+        state.microphone.audioContext=audioContext?.state;
+        state.microphone.rms=Number(rms.toFixed(6));
+        state.microphone.maximumRms=Math.max(state.microphone.maximumRms,state.microphone.rms);
+        $('level').style.width=Math.min(100,rms*500)+'%';
+        $('micStatus').textContent=`设备：${track.label}\n麦克风：${track.readyState}，静默：${track.muted}\n当前音量：${state.microphone.rms}；本次最高：${state.microphone.maximumRms}`;
+        update();
+      },200);
+    }catch(e){
+      if(run!==micRun)return;
+      await stopMic();state.microphone={status:'error',error:failure(e)};
+      $('micStatus').textContent=`${state.microphone.error.name}: ${state.microphone.error.message}`;update();
+    }
+  };
+  $('cameraStop').onclick=()=>stopCamera();$('micStop').onclick=()=>void stopMic();
+  $('copy').onclick=async()=>{
+    let ok=false;
+    try{await navigator.clipboard.writeText($('report').value);ok=true;}catch{
+      $('report').focus();$('report').select();try{ok=document.execCommand('copy');}catch{}
+    }
+    $('copyStatus').textContent=ok?'已复制':'请手动选中并复制下方结果';
+  };
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){stopCamera();void stopMic();}});
+  window.addEventListener('pagehide',()=>{stopCamera();void stopMic();});
+</script>
+</body>
+</html>

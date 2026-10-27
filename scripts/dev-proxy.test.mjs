@@ -51,6 +51,9 @@ for (const app of ['portal', 'robot']) {
         const chunks = []; for await (const chunk of req) chunks.push(chunk);
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ type: req.headers['content-type'], body: Buffer.concat(chunks).toString() }));
+      } else if (req.url === '/robot-assets/e05/elfin_base.STL') {
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.end(Buffer.from([0, 83, 84, 76, 255, 128, 1]));
       } else if (req.url === '/api/medical/ask' || req.url.includes('/queue/data')) {
         res.writeHead(200, { 'Content-Type': 'text/event-stream' });
         res.write('event: delta\ndata: {"content":"fixture"}\n\n');
@@ -94,6 +97,13 @@ for (const app of ['portal', 'robot']) {
         const response = await request('/api/sessions', { method: 'POST', headers: { Origin: 'https://other.example' } });
         assert.equal(response.status, 403);
         assert.match(await response.text(), /当前本地开发页面/);
+      });
+      await t.test('3D model bytes are proxied with the same origin guard', async () => {
+        const route = '/robot-assets/e05/elfin_base.STL';
+        const response = await request(route);
+        assert.equal(response.status, 200);
+        assert.deepEqual(Buffer.from(await response.arrayBuffer()), Buffer.from([0, 83, 84, 76, 255, 128, 1]));
+        assert.equal((await request(route, { headers: { Origin: 'https://other.example' } })).status, 403);
       });
       await t.test('WebSocket upgrades rewrite Origin after local origin validation', async () => {
         assert.match(await websocketUpgrade(local, local), /101 Switching Protocols/);

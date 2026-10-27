@@ -2,6 +2,8 @@
 
 从当前线上版本整理的网页与界面层源码，包含平台门户、医学知识问答、智能实验机械臂，以及独立 Gradio 材料界面开发包。两个 React 应用可分别开发和构建；完整问答、机械臂和材料业务仍依赖现有服务接口。
 
+医学问答与机械臂前端已同步 2026-10-27 线上版本：医学页包含四川场景和历史会话检查，机械臂采用 Three.js 本地数字孪生，保留线上暂停/继续、复位及方向键映射。同步范围与开发配置差异见 [本次同步记录](docs/online-sync-20261027.md)。
+
 材料筛选继续使用 Gradio，已同步 2026-10-27 线上界面的 114 个组件、40 处事件绑定，包含 Python 布局、页面取消、回调契约和固定数据预览。后端业务实现仍由使用方提供，不随仓库上传。详见 [材料页说明](materials-ui/README.md)。
 
 ## 目录
@@ -45,7 +47,7 @@ npm run dev:robot
 
 机械臂开发地址为 `http://127.0.0.1:5174/`。门户与机械臂使用各自的依赖清单和锁文件，`setup` 会分别执行 `npm ci`。
 
-两个服务运行后，在第三个终端执行 `npm run check:connection`；使用 `npm run check:connection -- --full` 可检查真实医学 SSE、材料上传/下载与队列、机械臂 WebSocket 和视频。完整步骤、来源校验及生产部署区别见 [外部开发者接入指南](docs/external-development.md)，实测结果见 [验证记录](docs/external-verification.md)。
+两个服务运行后，在第三个终端执行 `npm run check:connection`；使用 `npm run check:connection -- --full` 可检查真实医学 SSE 与会话有效性、材料上传/下载与队列、机械臂 WebSocket、渲染姿态和 3D 模型。完整步骤、来源校验及生产部署区别见 [外部开发者接入指南](docs/external-development.md)，实测结果见 [验证记录](docs/external-verification.md)。
 
 未连接 API 时，页面仍可加载外观，服务状态和业务控件按现有逻辑显示未连接或不可用。本仓库不提供模型、设备模拟器、知识库或 mock 后端。
 
@@ -75,7 +77,7 @@ npm run check:materials
 
 这些变量用于公开地址配置，不能存放 API 密钥、口令或令牌。`VITE_` 变量会进入浏览器代码，修改后需重启开发服务或重新构建。
 
-开发时可保持 `VITE_API_BASE` 为空，通过 `VITE_DEV_PROXY_TARGET` 指向可用的接口服务；也可将 `VITE_API_BASE` 设为公开 API 根地址，由接口服务允许对应的跨域请求。机械臂还需要 WebSocket 和视频流。详细路径和流式响应要求见 [接口对接说明](docs/api-integration.md)。
+开发时可保持 `VITE_API_BASE` 为空，通过 `VITE_DEV_PROXY_TARGET` 指向可用的接口服务；也可将 `VITE_API_BASE` 设为公开 API 根地址，由接口服务允许对应的跨域请求。机械臂还需要 WebSocket 遥测及 `/robot-assets/e05/` 模型资源。详细路径和流式响应要求见 [接口对接说明](docs/api-integration.md)。
 
 `connect:online` 会将门户的 `VITE_ROBOT_ENTRY` 指向本地机械臂页面，将 `VITE_MATERIALS_ENTRY` 设为本地代理路径。材料的 `7865` 独立预览仍使用固定样例；通过 `5173/agent/materials/` 访问的是线上完整工作台，两者用途不同。
 
