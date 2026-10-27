@@ -61,17 +61,19 @@ if (full) {
     const file = await request(portal, base + '/file=' + encodeURIComponent(uploaded[0]));
     if (await file.text() !== fixture) throw new Error('downloaded fixture differs from upload');
     const config = await (await request(portal, '/agent/materials/config')).json();
-    const dependency = config.dependencies.find(item => item.api_name === '_recent_chat_choices');
+    const dependency = ['recent_after_dispatch', '_recent_chat_choices']
+      .map(name => config.dependencies.find(item => item.api_name === name)).find(Boolean);
     if (!dependency || dependency.inputs.some(id => config.components.find(item => item.id === id)?.type !== 'state')) {
       throw new Error('Gradio history callback contract changed; review the connection check');
     }
-    const event = await (await request(portal, base + '/call/_recent_chat_choices', { method: 'POST',
+    const callPath = base + '/call/' + encodeURIComponent(dependency.api_name);
+    const event = await (await request(portal, callPath, { method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // Raw Gradio calls retain placeholders for hidden State inputs.
       body: JSON.stringify({ data: dependency.inputs.map(() => null) }),
     })).json();
     if (!event.event_id) throw new Error('Gradio queue event ID missing');
-    const stream = await request(portal, base + '/call/_recent_chat_choices/' + encodeURIComponent(event.event_id));
+    const stream = await request(portal, callPath + '/' + encodeURIComponent(event.event_id));
     const result = await stream.text();
     if (!/event:\s*complete/.test(result) || /event:\s*error/.test(result)) throw new Error('Gradio queue did not complete');
   });

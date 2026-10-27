@@ -131,3 +131,47 @@ button.primary { background: #202123 !important; border-color: #202123 !importan
   #right-sidebar .quick-chip { min-height: 44px !important; }
   #composer { flex-wrap: wrap !important; }
 }
+
+/* Final layout is loaded by the portal appearance stylesheet. */
+
+/* Compact examples only; retain the portal masthead, composer and theme. */
+#app-layout #right-sidebar {
+  position: fixed !important; inset: 112px 24px auto auto !important;
+  width: min(320px, calc(100vw - 32px)) !important;
+  min-width: 0 !important; max-width: 320px !important;
+  height: fit-content !important; max-height: calc(100dvh - 136px) !important;
+  margin: 0 !important; padding: 18px !important; gap: 8px !important;
+  flex: 0 0 auto !important; z-index: 100;
+  overflow-x: hidden !important; overflow-y: auto !important;
+  border: 1px solid var(--border-color-primary, #e2e8f0) !important;
+  border-radius: 20px !important;
+  background: var(--block-background-fill, #fff) !important;
+  box-shadow: 0 12px 40px rgba(32, 48, 72, .14) !important;
+}
+#app-layout #right-sidebar > * { flex-shrink: 0 !important; }
+#app-layout #examples-heading { align-items: center !important; gap: 8px !important; }
+#app-layout #right-sidebar h3 { margin: 0 !important; font-size: 16px !important; }
+#app-layout #examples-close {
+  flex: 0 0 44px !important; min-width: 44px !important;
+  min-height: 30px !important; border-radius: 10px !important;
+}
+#app-layout #right-sidebar strong { margin: 8px 2px 2px !important; font-size: 12px; }
+#app-layout #right-sidebar .quick-chip {
+  min-height: 36px !important; height: auto !important; padding: 8px 12px !important;
+  border-radius: 10px !important; justify-content: flex-start !important;
+  text-align: left !important; font-size: 13px !important;
+}
+#app-layout #right-sidebar .examples-hint { margin: 0 !important; line-height: 1.6; }
+#app-layout #multi-chat .message-buttons,
+#app-layout #multi-chat .message-actions,
+#app-layout #multi-chat .message-button-row,
+#app-layout #multi-chat .icon-button-wrapper.top-panel { display: none !important; }
+@media (max-width: 600px) {
+  #app-layout #right-sidebar { inset: 100px 12px auto auto !important;
+    max-height: calc(100dvh - 116px) !important; padding: 14px !important; }
+}
+
+#left-sidebar #recent-chats .recent-chat-row button {
+  box-shadow: none !important; background: transparent !important;
+  border: 0 !important;
+}

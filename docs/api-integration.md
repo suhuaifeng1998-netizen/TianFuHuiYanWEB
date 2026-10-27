@@ -96,7 +96,7 @@ WebSocket 路径为 `/ws/sessions/{id}`。浏览器接收的 JSON 消息中，`t
 
 ## 材料筛选
 
-`materials-ui` 提供独立 Gradio 界面开发包，不新增 HTTP 业务网关。界面通过 `UiCallbacks` 接收 16 个原业务处理函数，保留原控件、输入输出顺序、事件链和取消关系。详见 [材料回调接入说明](../materials-ui/docs/integration.md)。
+`materials-ui` 提供独立 Gradio 界面开发包，不新增 HTTP 业务网关。界面通过 `UiCallbacks` 接收 16 个原业务处理函数，保留原控件、输入输出顺序、事件链和取消关系。当前基线为 2026-10-27 的 114 个组件、40 处事件绑定，包含附件暂存、页面取消和 HTML 最近列表。详见 [材料回调接入说明](../materials-ui/docs/integration.md)。
 
 `preview.py` 接入固定样例处理函数，可在没有模型、数据库和检索服务时修改界面。真实运行时改由使用方传入原处理函数，不能用预览响应代替业务逻辑。
 

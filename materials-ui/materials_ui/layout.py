@@ -1,10 +1,11 @@
-"""Current material workbench layout; business handlers are injected."""
+"""Current online layout; business handlers are injected separately."""
 from dataclasses import dataclass
 from typing import Any
 import gradio as gr
 from .assets import banner_html
 from .contracts import UiCallbacks, UiDefaults
 from .examples import EXAMPLE_CATEGORIES
+from .interaction import _PageRequestGate, RECENT_CHAT_JS, RECENT_CHAT_CSS
 
 MODE_AUTO = '自动判断'
 
@@ -19,23 +20,32 @@ def build_layout(callbacks: UiCallbacks, defaults: UiDefaults) -> UiLayout:
     demo = gr.Blocks(title=defaults.title)
     with demo:
         session_state = gr.State(value=_initial_state())
+        pending_files = gr.State(value=[])
+        request_running = gr.State(value=False)
+        page_version = gr.Number(value=0, precision=0, visible=False)
+        request_gate = gr.State(
+            value=_PageRequestGate(), delete_callback=lambda gate: gate.cancel(),
+        )
         examples_visible = gr.State(value=False)
         example_cursors = gr.State(value={})
+        page_conversation_ids = gr.State(value=[])
         literature_open = gr.State(value=False)
         quick_buttons: list[tuple[gr.Button, str]] = []
         gr.HTML(AGENT_BANNER_HTML, elem_id="agent-banner")
         with gr.Row(elem_id="app-layout"):
             with gr.Column(scale=1, min_width=256, elem_id="left-sidebar"):
                 new_button = gr.Button(
-                    "＋ 新建对话", size="sm", scale=0, elem_id="new-chat"
+                    "＋ 新建对话", size="sm", scale=0, interactive=True,
+                    elem_id="new-chat"
                 )
                 gr.Markdown("最近对话", elem_id="recent-heading")
                 recent_empty = gr.Markdown(
-                    "从一个问题开始，\n\n你的探索会保存在这里。", elem_id="recent-empty"
+                    "这里只显示当前页面的对话。\n\n刷新会清空列表，已保存快照保留。",
+                    elem_id="recent-empty",
                 )
-                recent_chats = gr.Radio(
-                    choices=[], value=None, show_label=False, container=False,
-                    elem_id="recent-chats",
+                recent_chats = gr.HTML(
+                    value="", js_on_load=RECENT_CHAT_JS, css_template=RECENT_CHAT_CSS,
+                    show_label=False, container=False, elem_id="recent-chats",
                 )
                 literature_toggle = gr.Button(
                     "文献详情", size="sm", interactive=False,
@@ -49,7 +59,6 @@ def build_layout(callbacks: UiCallbacks, defaults: UiDefaults) -> UiLayout:
                 year_from = gr.State(2020)
                 limit = gr.State(15)
                 expert_mode = gr.State(False)
-                restore_id = gr.State(defaults.restore_id)
                 with gr.Group(visible=False):
                     init_status = gr.Markdown("")
                     trace = gr.HTML("")
@@ -71,6 +80,8 @@ def build_layout(callbacks: UiCallbacks, defaults: UiDefaults) -> UiLayout:
                     show_label=False,
                     height=None,
                     layout="bubble",
+                    buttons=[],
+                    feedback_options=[],
                     elem_id="multi-chat",
                     placeholder=(
                         '<div class="materials-welcome"><span class="materials-welcome-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10l5 8-5 8H7l-5-8Z"/><path d="m7 4 5 8 5-8M2 12h20m-15 8 5-8 5 8"/></svg></span><h2>从筛选条件，到候选材料</h2><p>从成分与性质出发，查询候选材料、比较关键指标，<br>再结合文献与数据核对研究依据。</p><div class="materials-capabilities"><span>条件筛选</span><span>性质比较</span><span>文献佐证</span></div></div>'
@@ -227,10 +238,16 @@ def build_layout(callbacks: UiCallbacks, defaults: UiDefaults) -> UiLayout:
                         )
                         clear_files_button = gr.Button("清除", size="sm", scale=0, elem_id="clear-upload")
                         gr.HTML("文件可选", elem_id="material-input-hint")
-                        send_button = gr.Button("发送", variant="primary", scale=0, elem_id="send-button")
-                        stop_button = gr.Button("停止", variant="stop", scale=0, elem_id="stop-button")
+                        send_button = gr.Button(
+                            "发送", variant="primary", scale=0, elem_id="send-button",
+                            interactive=False,
+                        )
+                        stop_button = gr.Button(
+                            "停止", variant="stop", scale=0, elem_id="stop-button",
+                            visible=False, interactive=False,
+                        )
             with gr.Column(
-                scale=1, min_width=300, visible=False, elem_id="right-sidebar"
+                scale=0, min_width=0, visible=False, elem_id="right-sidebar"
             ) as examples_panel:
                 with gr.Row(elem_id="examples-heading"):
                     gr.Markdown("### 筛选示例")
@@ -238,7 +255,7 @@ def build_layout(callbacks: UiCallbacks, defaults: UiDefaults) -> UiLayout:
                         "收起", size="sm", scale=0, elem_id="examples-close"
                     )
                 gr.Markdown(
-                    "选择一个示例，补充条件后发送。",
+                    "点击填入问题，再次点击切换；填入后手动发送。",
                     elem_classes=["examples-hint"],
                 )
                 for category in EXAMPLE_CATEGORIES:
@@ -311,13 +328,17 @@ def build_layout(callbacks: UiCallbacks, defaults: UiDefaults) -> UiLayout:
         'mode': mode,
         'new_button': new_button,
         'next_page': next_page,
+        'page_conversation_ids': page_conversation_ids,
+        'page_version': page_version,
+        'pending_files': pending_files,
         'previous_page': previous_page,
         'provider': provider,
         'quick_buttons': quick_buttons,
         'recent_chats': recent_chats,
         'recent_empty': recent_empty,
         'repository': repository,
-        'restore_id': restore_id,
+        'request_gate': request_gate,
+        'request_running': request_running,
         'send_button': send_button,
         'session_state': session_state,
         'stop_button': stop_button,

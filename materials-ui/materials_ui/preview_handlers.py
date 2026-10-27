@@ -5,6 +5,7 @@ examples. No database, model, private service, environment key or user document
 content is read here.
 """
 from copy import deepcopy
+from html import escape
 from pathlib import Path
 import time
 import gradio as gr
@@ -24,7 +25,7 @@ class PreviewHandlers:
         return UiCallbacks.from_namespace(self)
 
     def _initial_state(self):
-        return {"preview": True, "master_conversation_id": "preview-materials", "artifact_names": [],
+        return {"preview": True, "master_conversation_id": None, "artifact_names": [],
                 "preview_page": 0, "preview_literature": False, "preview_data": False}
 
     def _initialize_safe(self, provider, repository):
@@ -38,6 +39,18 @@ class PreviewHandlers:
     def _clear_attachments(self, state):
         current = deepcopy(state or self._initial_state());current["artifact_names"] = []
         return None, current, ""
+
+    def _queue_attachments(self, files, pending, state):
+        queued = list(dict.fromkeys([*(pending or []), *(files or [])]))
+        return queued, self._attachment_markdown(queued, state)
+
+    def _dispatch_composer_ui(self, mode, message, history, pending, state, material, year_from, limit, expert_mode):
+        for result in self._dispatch_ui(mode, message, history, pending, state, material, year_from, limit, expert_mode):
+            values = list(result)
+            current = deepcopy(values[2])
+            current["master_conversation_id"] = "preview-literature" if current["preview_literature"] else "preview-materials"
+            values[2] = current
+            yield (*values, [])
 
     def _literature_page(self, state):
         if not state.get("preview_literature"):
@@ -89,9 +102,25 @@ class PreviewHandlers:
                 answer["options"] = [{"label": "预览描述统计", "value": "describe"}]
             yield self._payload([*messages, answer], current)
 
-    def _recent_chat_choices(self, state=None):
+    def _recent_chat_choices(self, state=None, page_conversation_ids=None, gate=None):
         selected = (state or {}).get("master_conversation_id")
-        return gr.update(choices=CHOICES, value=selected if selected in dict((v,k) for k,v in CHOICES) else None), gr.update(visible=False)
+        known = {value: label for label, value in CHOICES}
+        ids = [item for item in (page_conversation_ids or []) if item in known]
+        if selected in known and selected not in ids:
+            ids.append(selected)
+        if gate is not None:
+            ids = gate.visible(ids)
+        rows = []
+        for identifier in ids:
+            ident = escape(identifier, quote=True)
+            label = escape(known[identifier])
+            selected_class = " is-selected" if identifier == selected else ""
+            rows.append(
+                f'<div class="recent-chat-row{selected_class}">'
+                f'<button class="recent-chat-title" data-chat-action="select" data-conversation-id="{ident}">{label}</button>'
+                f'<button class="recent-chat-remove" data-chat-action="remove" data-conversation-id="{ident}" aria-label="移除此演示会话">×</button></div>'
+            )
+        return gr.update(value="".join(rows)), gr.update(visible=not bool(ids)), ids
 
     def _new_conversation_ui(self, expert_mode):
         state = self._initial_state();state["master_conversation_id"] = None
@@ -116,7 +145,7 @@ class PreviewHandlers:
 
     def _literature_view_updates(self, opened, state):
         opened = bool(opened and (state or {}).get("preview_literature"))
-        return opened, gr.update(visible=opened), gr.skip(), gr.update(value="收起文献详情" if opened else "文献详情", interactive=bool((state or {}).get("preview_literature"))), f'<span hidden data-open="{str(opened).lower()}"></span>'
+        return opened, gr.update(visible=opened), gr.update(visible=not opened), gr.update(value="收起文献详情" if opened else "文献详情", interactive=bool((state or {}).get("preview_literature"))), f'<span hidden data-open="{str(opened).lower()}"></span>'
 
     def _data_group_choices(self, state, group_column):
         return gr.update(choices=["A", "B"] if (state or {}).get("preview_data") and group_column else [], value=[])

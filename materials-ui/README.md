@@ -1,6 +1,6 @@
 # 材料筛选 Gradio 界面开发包
 
-此目录包含可独立启动的 Gradio 界面定义、原有事件绑定、样式、示例问题、预览入口和交接资料。界面代码来自当前材料项目，继续使用 Gradio，不转换为 React。
+此目录包含可独立启动的 Gradio 界面定义、原有事件绑定、样式、示例问题、预览入口和交接资料。界面代码同步于 2026-10-27 当前线上版本，继续使用 Gradio，不转换为 React。
 
 业务处理通过 `UiCallbacks` 注入。模型、检索、材料数据库、统计分析实现、生产会话存储、密钥和服务器配置不在包内。
 
@@ -30,7 +30,7 @@ python3 -m venv .venv
 
 打开 `http://127.0.0.1:7865/`。端口冲突时可加 `--port 7866`。预览只绑定本机，不生成公网分享链接，不需要 Node.js 或现有业务服务。
 
-预览使用明确标记的虚构数据，上传文件只展示文件名，不解析真实文档。它演示界面行为，不提供真实材料筛选、文献检索或统计结果；两个预置历史会话是固定样例，不保存新的业务会话。
+预览使用明确标记的虚构数据，上传文件只展示文件名，不解析真实文档。它演示界面行为，不提供真实材料筛选、文献检索或统计结果；历史预览使用两类固定样例，仅在本页产生相应预览后列出，不保存真实业务会话。
 
 ## 目录与修改位置
 
@@ -41,11 +41,12 @@ requirements.txt             界面依赖版本
 materials_ui/
   layout.py                  Gradio 布局、控件与隐藏状态
   events.py                  发送、停止、恢复、上传、分页等事件链
+  interaction.py             页面代次、请求取消与最近条目浏览器事件
   contracts.py               16 个必需回调及界面默认值
   assets.py                  样式、主题和本地 Logo 加载
   examples.py                示例问题及会话独立的切换游标
   preview_handlers.py        只返回固定样例的预览回调
-styles/                      基础、主题和布局 CSS
+styles/                      基础、主题、布局、workspace 与 presentation CSS
 assets/                      本包独立运行所需的 banner CSS 与 Logo
 fragments/                   当前 banner/head HTML 参考片段
 scripts/theme.js             浏览器主题与菜单交互
@@ -54,13 +55,13 @@ tests/                       界面契约快照及预览回归
 docs/                        修改指南、回调签名及业务接入说明
 ```
 
-- 改字体、颜色、间距：编辑 `styles/` 和 `assets/agent-masthead.css`。
+- 改字体、颜色、间距：编辑 `styles/`；公共 banner 样式位于 `assets/agent-masthead.css`，由 head 内联加载。
 - 改组件排列、文案、默认显隐：编辑 `materials_ui/layout.py`。
 - 改示例按钮及轮换问题：编辑 `materials_ui/examples.py`。
 - 改按钮联动和流程：编辑 `materials_ui/events.py`，同步维护回调契约。
 - 接真实服务：使用自己的处理函数构造 `UiCallbacks`，详见 [接入说明](docs/integration.md)。
 
-`assets.py` 将 Logo 和样式嵌入预览，复制整个 `materials-ui` 目录即可使用，不依赖仓库外层的 `shared/` 或原网站资源路径。`fragments/head.html` 是线上参考片段，独立预览实际使用 `assets.py` 生成的 head。
+`assets.py` 将 Logo 和样式嵌入预览，复制整个 `materials-ui` 目录即可使用，不依赖仓库外层的 `shared/` 或原网站资源路径。CSS 按线上组合顺序加载；head 保留线上模板，将其中的公共 banner 样式引用替换成相同内容的内联样式。
 
 ## 快速检查
 
@@ -69,11 +70,11 @@ docs/                        修改指南、回调签名及业务接入说明
 .venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-`tests/ui_contract.json` 记录本次提取的组件属性、事件输入输出、初始化链及取消关系，用于避免修改界面时意外丢失功能。该检查不需要业务服务。
+`tests/ui_contract.json` 记录本次提取的组件属性、事件输入输出、初始化链及取消关系，用于避免修改界面时意外丢失功能。18 项回归不需要业务服务。
 
 预览操作：输入“预览材料”查看流式回答；输入“预览文献”展开文献详情并翻页；上传 `fixtures/preview-materials.csv` 或输入“预览数据”检查高级面板、图表和下载。输入“演示错误”可查看错误反馈。
 
-本包保留 115 个组件、46 条回调和 16 个外部业务回调接口。原业务功能通过原回调继续提供；不要用 `preview_handlers.py` 替代生产业务处理。
+本包保留 114 个组件、40 条事件绑定和 16 个外部业务回调接口。原业务功能通过原回调继续提供；不要用 `preview_handlers.py` 替代生产业务处理。
 
 交接步骤见 [修改指南](docs/handoff.md)，生产接入见 [回调接口说明](docs/integration.md)。
 

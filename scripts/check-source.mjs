@@ -11,7 +11,7 @@ const extensions = new Set(['.ts','.tsx','.mts','.js','.mjs','.cjs','.css','.htm
 const binary = new Set(['.png','.jpg','.jpeg','.webp','.ico','.woff','.woff2','.gif']);
 const uiPython = new Set([
   'materials-ui/app.py', 'materials-ui/preview.py',
-  ...['__init__', 'assets', 'contracts', 'events', 'examples', 'layout', 'preview_handlers'].map(name => `materials-ui/materials_ui/${name}.py`),
+  ...['__init__', 'assets', 'contracts', 'events', 'examples', 'interaction', 'layout', 'preview_handlers'].map(name => `materials-ui/materials_ui/${name}.py`),
   'materials-ui/tests/test_ui.py', 'materials-ui/tests/ui_contract.py',
 ]);
 const failures = [];

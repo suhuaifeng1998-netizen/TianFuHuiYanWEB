@@ -1,0 +1,281 @@
+/* Answer and observed execution presentation. Load after the portal layout. */
+#app-layout #multi-chat .user.message {
+  box-sizing: border-box !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+#app-layout #multi-chat .message-row.user-row { max-width: 88% !important; }
+#app-layout #multi-chat .user.message p {
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  text-wrap: pretty;
+}
+#app-layout #multi-chat .message-row.bot-row {
+  width: 100% !important;
+  min-width: 0 !important;
+  align-items: flex-start !important;
+}
+#app-layout #multi-chat .bot.message {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 6px 0 20px !important;
+  padding: 20px 22px !important;
+  border: 1px solid var(--mat-border) !important;
+  border-radius: 16px !important;
+  background: var(--mat-surface) !important;
+  color: var(--mat-text) !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  line-break: strict;
+  box-shadow: 0 2px 12px #142d4703 !important;
+}
+#app-layout #multi-chat .bot.message :is(.message-content, .markdown, .prose) {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+#app-layout #multi-chat .bot.message .prose {
+  font-size: 16px !important;
+  line-height: 1.85 !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+#app-layout #multi-chat .bot.message .prose :is(p, li) {
+  max-width: none !important;
+  font-size: inherit !important;
+  line-height: 1.85 !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  text-wrap: pretty;
+}
+#app-layout #multi-chat .bot.message .prose p { margin: .65em 0 !important; }
+#app-layout #multi-chat .bot.message .prose > :first-child { margin-top: 0 !important; }
+#app-layout #multi-chat .bot.message .prose > :last-child { margin-bottom: 0 !important; }
+#app-layout #multi-chat .bot.message .prose :is(h1, h2, h3, h4) {
+  color: var(--mat-text) !important;
+  font-weight: 650 !important;
+  letter-spacing: -.02em;
+  line-height: 1.5 !important;
+  text-wrap: pretty;
+}
+#app-layout #multi-chat .bot.message .prose h1 { font-size: 23px !important; margin: 1.25em 0 .6em !important; }
+#app-layout #multi-chat .bot.message .prose h2 { font-size: 20px !important; margin: 1.15em 0 .55em !important; }
+#app-layout #multi-chat .bot.message .prose h3 { font-size: 17px !important; margin: 1em 0 .5em !important; }
+#app-layout #multi-chat .bot.message .prose :is(ul, ol) { margin: .65em 0 !important; padding-left: 1.55em !important; }
+#app-layout #multi-chat .bot.message .prose li { margin: .3em 0 !important; padding-left: .2em; }
+#app-layout #multi-chat .bot.message .prose li > p { margin: .3em 0 !important; }
+#app-layout #multi-chat .bot.message .prose hr { margin: 22px 0 !important; border-color: var(--mat-border) !important; }
+#app-layout #multi-chat .bot.message .prose blockquote {
+  margin: 16px 0 !important;
+  padding: 10px 16px !important;
+  border-left: 3px solid var(--mat-accent) !important;
+  border-radius: 0 8px 8px 0;
+  background: var(--mat-panel) !important;
+  color: var(--mat-secondary) !important;
+}
+#app-layout #multi-chat .bot.message .prose table {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 16px 0 !important;
+  overflow-x: auto !important;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--mat-border) !important;
+  border-radius: 10px;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  font-variant-numeric: tabular-nums;
+  scrollbar-width: thin;
+}
+#app-layout #multi-chat .bot.message .prose :is(th, td) {
+  padding: 10px 13px !important;
+  min-width: 5em;
+  border: 0 !important;
+  border-bottom: 1px solid var(--mat-border) !important;
+  color: var(--mat-text) !important;
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  text-align: left;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+#app-layout #multi-chat .bot.message .prose th { background: var(--mat-panel) !important; font-weight: 600 !important; }
+#app-layout #multi-chat .bot.message .prose tbody tr:nth-child(even) { background: color-mix(in srgb, var(--mat-panel) 55%, var(--mat-surface)); }
+#app-layout #multi-chat .bot.message .prose tbody tr:last-child td { border-bottom: 0 !important; }
+#app-layout #multi-chat .bot.message .prose code {
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: .88em !important;
+  overflow-wrap: anywhere;
+}
+#app-layout #multi-chat .bot.message .prose pre {
+  box-sizing: border-box !important;
+  width: 100%;
+  max-width: 100% !important;
+  padding: 16px !important;
+  border: 1px solid var(--mat-border);
+  border-radius: 10px;
+  overflow-x: auto !important;
+  white-space: pre !important;
+}
+#app-layout #multi-chat .bot.message .prose pre code { padding: 0; white-space: pre !important; overflow-wrap: normal; }
+#app-layout #multi-chat .agent-signature {
+  width: 100%;
+  max-width: none;
+  margin: 20px 0 0 !important;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--mat-border);
+  color: var(--mat-muted) !important;
+  font-size: 12px !important;
+  line-height: 1.75 !important;
+  text-wrap: pretty;
+}
+
+/* The timeline contains real workflow events only; animation shows activity. */
+#app-layout #multi-chat .bot.message:has(.agent-progress-card) {
+  border-color: transparent !important;
+  padding: 14px 2px 20px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#app-layout #multi-chat .agent-progress-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 760px;
+  margin: 0;
+  color: var(--mat-secondary);
+}
+#app-layout #multi-chat .agent-progress-card.is-terminal {
+  padding: 12px 15px;
+  border: 1px solid var(--mat-border);
+  border-radius: 12px;
+  background: var(--mat-panel);
+}
+#app-layout #multi-chat .agent-progress-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0 0 14px;
+  cursor: pointer;
+  list-style: none;
+}
+#app-layout #multi-chat .agent-progress-heading::-webkit-details-marker { display: none; }
+#app-layout #multi-chat .agent-progress-card:not([open]) .agent-progress-heading { margin-bottom: 0; }
+#app-layout #multi-chat .agent-progress-heading:focus-visible { outline: 2px solid var(--mat-focus); outline-offset: 5px; border-radius: 5px; }
+#app-layout #multi-chat .agent-progress-chevron { margin-left: 2px; color: var(--mat-muted); line-height: 1; transition: transform .16s ease; }
+#app-layout #multi-chat .agent-progress-card[open] .agent-progress-chevron { transform: rotate(180deg); }
+#app-layout #multi-chat .agent-progress-spark {
+  display: inline-grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  color: var(--mat-accent-text);
+  background: var(--mat-accent-soft);
+  border-radius: 8px;
+  font-size: 19px;
+  line-height: 1;
+}
+#app-layout #multi-chat .agent-progress-title {
+  color: var(--mat-text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.75;
+}
+#app-layout #multi-chat .agent-progress-caption {
+  margin-left: auto;
+  color: var(--mat-muted);
+  font-size: 11px;
+  line-height: 1.75;
+}
+#app-layout #multi-chat .prose .agent-progress-steps {
+  list-style: none !important;
+  margin: 0 0 0 12px !important;
+  padding: 0 !important;
+}
+#app-layout #multi-chat .prose .agent-progress-step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin: 0 !important;
+  padding: 0 0 17px 0 !important;
+  font-size: 13px !important;
+}
+#app-layout #multi-chat .agent-progress-step:not(:last-child)::before {
+  position: absolute;
+  top: 16px;
+  bottom: 0;
+  left: 4px;
+  content: "";
+  width: 1px;
+  background: var(--mat-border);
+}
+#app-layout #multi-chat .agent-progress-step:last-child { padding-bottom: 0 !important; }
+#app-layout #multi-chat .agent-progress-marker {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 10px;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  margin-top: 7px;
+  border: 2px solid var(--mat-border);
+  border-radius: 50%;
+  background: var(--mat-surface);
+  font-size: 8px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 10px;
+}
+#app-layout #multi-chat .is-running > .agent-progress-marker {
+  border-color: var(--mat-accent);
+  background: var(--mat-accent);
+  box-shadow: 0 0 0 4px var(--mat-accent-soft);
+  animation: materials-progress-pulse 1.8s ease-in-out infinite;
+}
+#app-layout #multi-chat .is-completed > .agent-progress-marker {
+  flex-basis: 14px;
+  width: 14px;
+  height: 14px;
+  margin-left: -2px;
+  margin-right: -2px;
+  margin-top: 5px;
+  border: 1px solid var(--mat-accent);
+  color: var(--mat-accent-text);
+  background: var(--mat-accent-soft);
+  line-height: 12px;
+}
+#app-layout #multi-chat :is(.is-failed, .is-partial) > .agent-progress-marker {
+  flex-basis: 14px;
+  width: 14px;
+  height: 14px;
+  margin: 5px -2px 0;
+  border-color: #d39b52;
+  color: #b97722;
+  background: var(--mat-surface);
+}
+#app-layout #multi-chat .agent-progress-step-copy { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 2px; }
+#app-layout #multi-chat .agent-progress-agent { color: var(--mat-text); font-size: 13px; font-weight: 550; line-height: 1.75; }
+#app-layout #multi-chat .agent-progress-detail { color: var(--mat-muted); font-size: 12px; font-weight: 400; line-height: 1.75; }
+#app-layout #multi-chat .agent-progress-state { flex: 0 0 auto; margin-left: 10px; color: var(--mat-muted); font-size: 11px; line-height: 2; }
+#app-layout #multi-chat .is-running > .agent-progress-state { color: var(--mat-accent-text); }
+@keyframes materials-progress-pulse { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+@media (max-width: 600px) {
+  #app-layout #multi-chat .bot.message { padding: 15px 13px !important; border-radius: 12px !important; }
+  #app-layout #multi-chat .bot.message .prose { font-size: 14px !important; }
+  #app-layout #multi-chat .bot.message .prose :is(th, td) { padding: 8px 10px !important; font-size: 12px !important; }
+  #app-layout #multi-chat .agent-progress-heading { gap: 7px; }
+  #app-layout #multi-chat .agent-progress-caption { display: none; }
+  #app-layout #multi-chat .agent-progress-state { margin-left: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #app-layout #multi-chat .agent-progress-marker { animation: none !important; }
+}

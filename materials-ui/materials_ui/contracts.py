@@ -3,11 +3,12 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Callable, Mapping
 
-REQUIRED_CALLBACKS = ('_answer_data_chat_option', '_attachment_markdown', '_clear_attachments', '_data_group_choices', '_dispatch_ui', '_import_cross_agent_dataset', '_initial_state', '_initialize_safe', '_literature_view_updates', '_new_conversation_ui', '_recent_chat_choices', '_restore_recent_conversation_ui', '_run_data_action', '_run_deduplicate_action', '_stop_feedback', '_turn_literature_page')
+REQUIRED_CALLBACKS = ('_answer_data_chat_option', '_clear_attachments', '_data_group_choices', '_dispatch_composer_ui', '_import_cross_agent_dataset', '_initial_state', '_initialize_safe', '_literature_view_updates', '_new_conversation_ui', '_queue_attachments', '_recent_chat_choices', '_restore_recent_conversation_ui', '_run_data_action', '_run_deduplicate_action', '_stop_feedback', '_turn_literature_page')
 
 @dataclass(frozen=True)
 class UiDefaults:
     title: str = "材料筛选 Agent · 天府·慧研"
+    # Kept for callers of the previous package. Current UI opens a fresh page.
     restore_id: str = ""
 
 class UiCallbacks:

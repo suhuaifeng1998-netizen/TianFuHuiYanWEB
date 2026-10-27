@@ -2,38 +2,39 @@
 
 ## 开始接手
 
-1. 按上级 README 创建虚拟环境并安装 `requirements.txt`。
-2. 运行 `python preview.py`，查看左侧历史、中间对话、底部输入及按需展开的示例。
-3. 运行 `python -m unittest discover -s tests -v`，确认修改前的契约状态。
-4. 按下表选择文件，无需模型、数据库或检索实现。
+1. 按上级 README 安装 Python 虚拟环境和固定版本依赖。
+2. 运行 `python preview.py`，使用固定数据预览；不需要模型或数据库。
+3. 运行 `python -m unittest discover -s tests -v`，确认 18 项回归通过。
+4. 真正连接现有线上业务时，按仓库的外部开发接入文档运行本地代理；该入口与固定数据预览不同。
 
-| 修改目标 | 文件 | 注意事项 |
+## 修改位置
+
+| 目标 | 文件 | 要点 |
 | --- | --- | --- |
-| 品牌、字体、主题、尺寸 | `styles/`、`assets/agent-masthead.css`、`fragments/banner.html` | 保留已有 `elem_id`，避免破坏 CSS 选择器 |
-| 布局、组件和默认显隐 | `materials_ui/layout.py` | 历史、文献、数据面板的默认状态属于既有行为 |
-| 示例及按钮分组 | `materials_ui/examples.py` | 只填入问题、不自动发送；游标存入每个会话的 State |
-| 发送、停止、新建、恢复与上传联动 | `materials_ui/events.py` | 保留 `.then()` 顺序和 `cancels` 对象引用 |
-| 真实业务接入 | `materials_ui/contracts.py`、`docs/callback-signatures.json` | 保留参数顺序及返回值位置 |
-| 预览样例 | `materials_ui/preview_handlers.py`、`fixtures/` | 使用虚构数据，不加入真实用户记录或业务计算 |
+| 字体、主题、间距、banner | `styles/`、`fragments/banner.html` | CSS 由 `assets.py` 按线上顺序加载；保留组件 ID |
+| 布局、文案、默认显隐 | `materials_ui/layout.py` | 包含 114 个组件，隐藏状态也参与事件契约 |
+| 示例问题和轮换 | `materials_ui/examples.py` | 当前 7 个示例按钮，只填入问题、不自动发送 |
+| 发送、停止、恢复、上传及面板联动 | `materials_ui/events.py` | 保留输入输出顺序、页面代次和 `.then()` |
+| 页面隔离、取消、最近条目事件 | `materials_ui/interaction.py` | Gradio 内部队列接口与 6.17.3 配套，不独立升级依赖 |
+| 真实业务函数 | `contracts.py`、`docs/callback-signatures.json` | 通过 16 个回调注入，包内没有其实现 |
+| 固定预览 | `preview_handlers.py`、`fixtures/` | 不加入真实用户数据、业务计算或私密配置 |
 
-## 修改流程
+`styles/` 保存材料页按线上顺序拼接的样式；`assets/agent-masthead.css` 是线上额外加载的公共 banner 样式。独立预览通过 `assets.py` 将该文件内联到 head，修改 banner 时也要检查它。
 
-外观调整通常只改 CSS、文案或 HTML。组件行为调整应同时阅读 `events.py` 的输入输出列表。新增控件参与业务时，先与服务维护者确定回调契约，避免界面与处理函数各改一半。
+## 必须保留的行为
 
-`tests/ui_contract.json` 是当前原界面的结构基线。单纯改配色不应改变它。确需改布局、文案或事件时，检查差异并确认后更新预期，不要为使测试通过而直接删除检查。
+- 首次打开/刷新从本页空列表开始；新建清空当前显示，已在本页产生的记录可继续选择。
+- 最近列表 HTML 的选择和移除都校验页面可见 ID；移除不删除生产快照。
+- 附件先排入待发送列表，清除后不会继续参与下一次发送。
+- 输入和附件决定发送是否可用；运行时显示停止，停止保留已生成部分。
+- 停止、新建、恢复后，旧请求不能把结果写到新页面。
+- 文献详情和聊天正确切换，分页及返回正常。
+- 数据字段、分组、图表、报告、下载和跨 Agent 导入的回调位置不变。
 
-## 交付走查
+## 修改后验证
 
-- 初始化后历史可选；新建清空显示；恢复不会重新发送问题。
-- 发送与回车使用同一处理链；流式结果刷新；停止保留已完成内容。
-- PDF 与表格的附件文案、清除和错误提示可见。
-- 文献详情可展开、分页并返回对话。
-- 数据字段、分组、操作按钮、图表和下载可展示。
-- 示例按需展开，点击示例只填入问题。
-- 桌面、窄屏及不同主题下，banner 和底部输入框可用。
+`tests/ui_contract.json` 是本次线上结构基线。纯样式调整不应改变事件图；确需改组件或事件时，先审查差异，再更新基线。
 
-固定预览用于走查界面状态。真实查询、历史持久化、全文任务和分析产物应在接入原回调的测试环境验收，方法见 `integration.md`。
+界面回归覆盖取消所属事件、页面隔离、迟到结果、代次传递、附件和下载。需要恢复真实业务时，按 [integration.md](integration.md) 在测试环境注入原回调，再验收查询、文献和分析结果。
 
-## 维护边界
-
-本包不读取生产环境文件，不包含模型、数据库客户端或部署脚本。Gradio 运行时会启动界面服务，并负责临时上传与结果文件传输；真实业务处理仍由使用方提供。
+复制整个 `materials-ui` 目录即可单独预览。不要遗漏 styles、fragments、assets、fixtures；不要把生产业务模块、用户记录、环境文件或启动配置放进本包。

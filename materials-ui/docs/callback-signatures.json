@@ -1,49 +1,28 @@
 {
-  "_initial_state": {
-    "parameters": [],
-    "annotations": {},
-    "generator": false
-  },
-  "_initialize_safe": {
+  "_answer_data_chat_option": {
     "parameters": [
-      "provider",
-      "repository"
-    ],
-    "annotations": {
-      "provider": "str",
-      "repository": "str"
-    },
-    "generator": false
-  },
-  "_attachment_markdown": {
-    "parameters": [
-      "files",
-      "state"
-    ],
-    "annotations": {
-      "files": "list[Any] | None",
-      "state": "dict[str, Any] | None"
-    },
-    "generator": false
-  },
-  "_turn_literature_page": {
-    "parameters": [
+      "history",
       "state",
-      "delta"
+      "event"
     ],
+    "keyword_only": [],
     "annotations": {
+      "history": "list[dict[str, Any]] | None",
       "state": "dict[str, Any] | None",
-      "delta": "int"
+      "event": "gr.SelectData"
     },
+    "defaults": [],
     "generator": false
   },
   "_clear_attachments": {
     "parameters": [
       "state"
     ],
+    "keyword_only": [],
     "annotations": {
       "state": "dict[str, Any] | None"
     },
+    "defaults": [],
     "generator": false
   },
   "_data_group_choices": {
@@ -51,23 +30,137 @@
       "state",
       "group_column"
     ],
+    "keyword_only": [],
     "annotations": {
       "state": "dict[str, Any] | None",
       "group_column": "str | None"
     },
+    "defaults": [],
     "generator": false
   },
-  "_answer_data_chat_option": {
+  "_dispatch_composer_ui": {
     "parameters": [
+      "mode",
+      "message",
       "history",
+      "pending",
       "state",
-      "event"
+      "material",
+      "year_from",
+      "limit",
+      "expert_mode"
     ],
+    "keyword_only": [],
     "annotations": {
+      "mode": "str",
+      "message": "str",
       "history": "list[dict[str, Any]] | None",
+      "pending": "list[Any] | None",
       "state": "dict[str, Any] | None",
-      "event": "gr.SelectData"
+      "material": "str",
+      "year_from": "float",
+      "limit": "float",
+      "expert_mode": "bool"
     },
+    "defaults": [],
+    "generator": true
+  },
+  "_import_cross_agent_dataset": {
+    "parameters": [
+      "source_kind",
+      "identifier",
+      "state"
+    ],
+    "keyword_only": [],
+    "annotations": {
+      "source_kind": "str",
+      "identifier": "str",
+      "state": "dict[str, Any] | None"
+    },
+    "defaults": [],
+    "generator": false
+  },
+  "_initial_state": {
+    "parameters": [],
+    "keyword_only": [],
+    "annotations": {},
+    "defaults": [],
+    "generator": false
+  },
+  "_initialize_safe": {
+    "parameters": [
+      "provider",
+      "repository"
+    ],
+    "keyword_only": [],
+    "annotations": {
+      "provider": "str",
+      "repository": "str"
+    },
+    "defaults": [],
+    "generator": false
+  },
+  "_literature_view_updates": {
+    "parameters": [
+      "opened",
+      "state"
+    ],
+    "keyword_only": [],
+    "annotations": {},
+    "defaults": [],
+    "generator": false
+  },
+  "_new_conversation_ui": {
+    "parameters": [
+      "expert_mode"
+    ],
+    "keyword_only": [],
+    "annotations": {
+      "expert_mode": "bool"
+    },
+    "defaults": [],
+    "generator": false
+  },
+  "_queue_attachments": {
+    "parameters": [
+      "files",
+      "pending",
+      "state"
+    ],
+    "keyword_only": [],
+    "annotations": {
+      "files": "list[Any] | None",
+      "pending": "list[Any] | None",
+      "state": "dict[str, Any] | None"
+    },
+    "defaults": [],
+    "generator": false
+  },
+  "_recent_chat_choices": {
+    "parameters": [
+      "state",
+      "page_conversation_ids",
+      "gate"
+    ],
+    "keyword_only": [],
+    "annotations": {},
+    "defaults": [
+      "None",
+      "None",
+      "None"
+    ],
+    "generator": false
+  },
+  "_restore_recent_conversation_ui": {
+    "parameters": [
+      "conversation_id",
+      "expert"
+    ],
+    "keyword_only": [],
+    "annotations": {},
+    "defaults": [
+      "False"
+    ],
     "generator": false
   },
   "_run_data_action": {
@@ -84,6 +177,7 @@
       "correlation_method",
       "export_format"
     ],
+    "keyword_only": [],
     "annotations": {
       "action": "str",
       "state": "dict[str, Any] | None",
@@ -97,6 +191,7 @@
       "correlation_method": "str",
       "export_format": "str"
     },
+    "defaults": [],
     "generator": false
   },
   "_run_deduplicate_action": {
@@ -104,87 +199,34 @@
       "state",
       "key_column"
     ],
+    "keyword_only": [],
     "annotations": {
       "state": "dict[str, Any] | None",
       "key_column": "str | None"
     },
-    "generator": false
-  },
-  "_import_cross_agent_dataset": {
-    "parameters": [
-      "source_kind",
-      "identifier",
-      "state"
-    ],
-    "annotations": {
-      "source_kind": "str",
-      "identifier": "str",
-      "state": "dict[str, Any] | None"
-    },
-    "generator": false
-  },
-  "_dispatch_ui": {
-    "parameters": [
-      "mode",
-      "message",
-      "history",
-      "files",
-      "state",
-      "material",
-      "year_from",
-      "limit",
-      "expert_mode"
-    ],
-    "annotations": {
-      "mode": "str",
-      "message": "str",
-      "history": "list[dict[str, Any]] | None",
-      "files": "list[Any] | None",
-      "state": "dict[str, Any] | None",
-      "material": "str",
-      "year_from": "float",
-      "limit": "float",
-      "expert_mode": "bool"
-    },
-    "generator": true
-  },
-  "_new_conversation_ui": {
-    "parameters": [
-      "expert_mode"
-    ],
-    "annotations": {
-      "expert_mode": "bool"
-    },
-    "generator": false
-  },
-  "_recent_chat_choices": {
-    "parameters": [
-      "state"
-    ],
-    "annotations": {},
-    "generator": false
-  },
-  "_restore_recent_conversation_ui": {
-    "parameters": [
-      "conversation_id",
-      "expert"
-    ],
-    "annotations": {},
-    "generator": false
-  },
-  "_literature_view_updates": {
-    "parameters": [
-      "opened",
-      "state"
-    ],
-    "annotations": {},
+    "defaults": [],
     "generator": false
   },
   "_stop_feedback": {
     "parameters": [
       "history"
     ],
+    "keyword_only": [],
     "annotations": {},
+    "defaults": [],
+    "generator": false
+  },
+  "_turn_literature_page": {
+    "parameters": [
+      "state",
+      "delta"
+    ],
+    "keyword_only": [],
+    "annotations": {
+      "state": "dict[str, Any] | None",
+      "delta": "int"
+    },
+    "defaults": [],
     "generator": false
   }
 }

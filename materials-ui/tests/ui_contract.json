@@ -3,7 +3,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -11,7 +11,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -19,7 +19,34 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "number",
+      "props": {
+        "value": 0,
+        "show_label": true,
+        "container": true,
+        "min_width": 160,
+        "visible": false,
+        "elem_classes": [],
+        "preserved_by_key": [
+          "value"
+        ],
+        "buttons": [],
+        "precision": 0,
+        "step": 1,
+        "name": "number",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -27,7 +54,31 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": null,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": null,
+        "name": "state",
+        "_selectable": false
+      }
+    },
+    {
+      "type": "state",
+      "props": {
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -138,7 +189,7 @@
     {
       "type": "markdown",
       "props": {
-        "value": "从一个问题开始，\n\n你的探索会保存在这里。",
+        "value": "这里只显示当前页面的对话。\n\n刷新会清空列表，已保存快照保留。",
         "show_label": false,
         "rtl": false,
         "latex_delimiters": [
@@ -164,23 +215,32 @@
       }
     },
     {
-      "type": "radio",
+      "type": "html",
       "props": {
-        "choices": [],
-        "type": "value",
+        "_retryable": false,
+        "_undoable": false,
+        "likeable": false,
+        "streamable": false,
+        "value": "",
+        "html_template": "${value}",
+        "css_template": "\n.recent-chat-row { display: flex; align-items: center; gap: 4px;\n  width: 100%; min-width: 0; border-radius: 10px; margin: 3px 0; }\n.recent-chat-row:hover, .recent-chat-row.is-selected {\n  background: var(--button-secondary-background-fill-hover, #e8eef9); }\n.recent-chat-row button { border: 0 !important; background: transparent !important;\n  box-shadow: none !important; color: inherit;\n  cursor: pointer; font: inherit; border-radius: 8px; min-height: 36px; }\n.recent-chat-title { flex: 1; min-width: 0; padding: 7px 8px;\n  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }\n.recent-chat-remove { flex: 0 0 30px; padding: 0 !important; font-size: 20px !important;\n  line-height: 1; opacity: .7; }\n.recent-chat-remove:hover { opacity: 1; color: #bc3030; }\n.recent-chat-row button:focus-visible {\n  outline: 2px solid #4263eb; outline-offset: 1px; }\n",
+        "js_on_load": "\nelement.addEventListener('click', (event) => {\n  const target = event.target.closest('button[data-chat-action]');\n  if (!target || !element.contains(target)) return;\n  event.preventDefault();\n  event.stopPropagation();\n  trigger(target.dataset.chatAction === 'remove' ? 'delete' : 'select', {\n    conversation_id: target.dataset.conversationId\n  });\n});\n",
+        "apply_default_css": true,
         "show_label": false,
-        "container": false,
-        "min_width": 160,
         "visible": true,
         "elem_id": "recent-chats",
         "elem_classes": [],
         "preserved_by_key": [
           "value"
         ],
-        "rtl": false,
+        "container": false,
+        "padding": false,
+        "autoscroll": false,
         "buttons": [],
-        "name": "radio",
-        "_selectable": false
+        "props": {},
+        "name": "html",
+        "_selectable": true,
+        "component_class_name": "HTML"
       }
     },
     {
@@ -204,7 +264,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -212,7 +272,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -220,7 +280,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -228,7 +288,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -236,7 +296,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -244,7 +304,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -252,15 +312,7 @@
     {
       "type": "state",
       "props": {
-        "time_to_live": Infinity,
-        "name": "state",
-        "_selectable": false
-      }
-    },
-    {
-      "type": "state",
-      "props": {
-        "time_to_live": Infinity,
+        "time_to_live": null,
         "name": "state",
         "_selectable": false
       }
@@ -486,21 +538,14 @@
           }
         ],
         "rtl": false,
-        "buttons": [
-          "share",
-          "copy",
-          "copy_all"
-        ],
+        "buttons": [],
         "avatar_images": [
           null,
           null
         ],
         "sanitize_html": true,
         "render_markdown": true,
-        "feedback_options": [
-          "Like",
-          "Dislike"
-        ],
+        "feedback_options": [],
         "line_breaks": true,
         "layout": "bubble",
         "placeholder": "<div class=\"materials-welcome\"><span class=\"materials-welcome-mark\" aria-hidden=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 4h10l5 8-5 8H7l-5-8Z\"/><path d=\"m7 4 5 8 5-8M2 12h20m-15 8 5-8 5 8\"/></svg></span><h2>从筛选条件，到候选材料</h2><p>从成分与性质出发，查询候选材料、比较关键指标，<br>再结合文献与数据核对研究依据。</p><div class=\"materials-capabilities\"><span>条件筛选</span><span>性质比较</span><span>文献佐证</span></div></div>",
@@ -1805,7 +1850,7 @@
         "size": "lg",
         "link_target": "_self",
         "visible": true,
-        "interactive": true,
+        "interactive": false,
         "elem_id": "send-button",
         "elem_classes": [],
         "preserved_by_key": [
@@ -1823,8 +1868,8 @@
         "variant": "stop",
         "size": "lg",
         "link_target": "_self",
-        "visible": true,
-        "interactive": true,
+        "visible": false,
+        "interactive": false,
         "elem_id": "stop-button",
         "elem_classes": [],
         "preserved_by_key": [
@@ -1838,8 +1883,8 @@
     {
       "type": "column",
       "props": {
-        "scale": 1,
-        "min_width": 300,
+        "scale": 0,
+        "min_width": 0,
         "variant": "default",
         "visible": false,
         "elem_id": "right-sidebar",
@@ -1911,7 +1956,7 @@
     {
       "type": "markdown",
       "props": {
-        "value": "选择一个示例，补充条件后发送。",
+        "value": "点击填入问题，再次点击切换；填入后手动发送。",
         "show_label": false,
         "rtl": false,
         "latex_delimiters": [
@@ -1967,76 +2012,13 @@
     {
       "type": "button",
       "props": {
-        "value": "条件筛选",
+        "value": "数据库检索",
         "variant": "secondary",
         "size": "sm",
         "link_target": "_self",
         "visible": true,
         "interactive": true,
-        "elem_id": "example-database-filter",
-        "elem_classes": [
-          "quick-chip",
-          "example-question"
-        ],
-        "preserved_by_key": [
-          "value"
-        ],
-        "name": "button",
-        "_selectable": false
-      }
-    },
-    {
-      "type": "button",
-      "props": {
-        "value": "排序与数量",
-        "variant": "secondary",
-        "size": "sm",
-        "link_target": "_self",
-        "visible": true,
-        "interactive": true,
-        "elem_id": "example-database-sort",
-        "elem_classes": [
-          "quick-chip",
-          "example-question"
-        ],
-        "preserved_by_key": [
-          "value"
-        ],
-        "name": "button",
-        "_selectable": false
-      }
-    },
-    {
-      "type": "button",
-      "props": {
-        "value": "材料详情",
-        "variant": "secondary",
-        "size": "sm",
-        "link_target": "_self",
-        "visible": true,
-        "interactive": true,
-        "elem_id": "example-database-detail",
-        "elem_classes": [
-          "quick-chip",
-          "example-question"
-        ],
-        "preserved_by_key": [
-          "value"
-        ],
-        "name": "button",
-        "_selectable": false
-      }
-    },
-    {
-      "type": "button",
-      "props": {
-        "value": "多材料比较",
-        "variant": "secondary",
-        "size": "sm",
-        "link_target": "_self",
-        "visible": true,
-        "interactive": true,
-        "elem_id": "example-database-compare",
+        "elem_id": "example-database-search",
         "elem_classes": [
           "quick-chip",
           "example-question"
@@ -2078,76 +2060,13 @@
     {
       "type": "button",
       "props": {
-        "value": "数据质量",
+        "value": "数据分析",
         "variant": "secondary",
         "size": "sm",
         "link_target": "_self",
         "visible": true,
         "interactive": true,
-        "elem_id": "example-data-quality",
-        "elem_classes": [
-          "quick-chip",
-          "example-question"
-        ],
-        "preserved_by_key": [
-          "value"
-        ],
-        "name": "button",
-        "_selectable": false
-      }
-    },
-    {
-      "type": "button",
-      "props": {
-        "value": "描述统计",
-        "variant": "secondary",
-        "size": "sm",
-        "link_target": "_self",
-        "visible": true,
-        "interactive": true,
-        "elem_id": "example-data-describe",
-        "elem_classes": [
-          "quick-chip",
-          "example-question"
-        ],
-        "preserved_by_key": [
-          "value"
-        ],
-        "name": "button",
-        "_selectable": false
-      }
-    },
-    {
-      "type": "button",
-      "props": {
-        "value": "分组统计",
-        "variant": "secondary",
-        "size": "sm",
-        "link_target": "_self",
-        "visible": true,
-        "interactive": true,
-        "elem_id": "example-data-groups",
-        "elem_classes": [
-          "quick-chip",
-          "example-question"
-        ],
-        "preserved_by_key": [
-          "value"
-        ],
-        "name": "button",
-        "_selectable": false
-      }
-    },
-    {
-      "type": "button",
-      "props": {
-        "value": "相关性分析",
-        "variant": "secondary",
-        "size": "sm",
-        "link_target": "_self",
-        "visible": true,
-        "interactive": true,
-        "elem_id": "example-data-correlation",
+        "elem_id": "example-data-analysis",
         "elem_classes": [
           "quick-chip",
           "example-question"
@@ -2317,6 +2236,15 @@
         "name": "button",
         "_selectable": false
       }
+    },
+    {
+      "type": "form",
+      "props": {
+        "scale": 0,
+        "min_width": 0,
+        "preserved_by_key": [],
+        "name": "form"
+      }
     }
   ],
   "dependencies": [
@@ -2336,44 +2264,50 @@
       },
       "api_visibility": "public",
       "inputs": [
-        12,
-        85,
-        29,
-        88,
-        0,
-        15,
-        16,
         17,
-        18
+        89,
+        33,
+        1,
+        0,
+        20,
+        21,
+        22,
+        23,
+        3,
+        4
       ],
       "outputs": [
-        29,
-        22,
+        33,
+        26,
         0,
-        85,
-        88,
-        23,
+        89,
+        92,
+        27,
+        90,
+        82,
+        83,
         86,
         78,
-        79,
-        82,
-        74,
-        34,
-        35,
-        32,
-        30,
-        37,
+        38,
         39,
-        40,
+        36,
+        34,
         41,
-        51,
-        3,
-        11,
-        28
+        43,
+        44,
+        45,
+        55,
+        8,
+        16,
+        32,
+        1,
+        2,
+        95,
+        96
       ],
       "targets": [
         [
-          91,
+          95,
           "click"
         ]
       ]
@@ -2394,50 +2328,116 @@
       },
       "api_visibility": "public",
       "inputs": [
-        12,
-        85,
-        29,
-        88,
-        0,
-        15,
-        16,
         17,
-        18
+        89,
+        33,
+        1,
+        0,
+        20,
+        21,
+        22,
+        23,
+        3,
+        4
       ],
       "outputs": [
-        29,
-        22,
+        33,
+        26,
         0,
-        85,
-        88,
-        23,
+        89,
+        92,
+        27,
+        90,
+        82,
+        83,
         86,
         78,
-        79,
-        82,
-        74,
-        34,
-        35,
-        32,
-        30,
-        37,
+        38,
         39,
-        40,
+        36,
+        34,
         41,
-        51,
-        3,
-        11,
-        28
+        43,
+        44,
+        45,
+        55,
+        8,
+        16,
+        32,
+        1,
+        2,
+        95,
+        96
       ],
       "targets": [
         [
-          85,
+          89,
           "submit"
         ]
       ]
     },
     {
-      "api_name": "_recent_chat_choices",
+      "api_name": "_composer_send_update",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "always_last",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        89,
+        1,
+        2
+      ],
+      "outputs": [
+        95
+      ],
+      "targets": [
+        [
+          89,
+          "change"
+        ]
+      ]
+    },
+    {
+      "api_name": "_composer_send_update_1",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "always_last",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        89,
+        1,
+        2
+      ],
+      "outputs": [
+        95
+      ],
+      "targets": [
+        [
+          1,
+          "change"
+        ]
+      ]
+    },
+    {
+      "api_name": "recent_after_dispatch",
       "backend_fn": true,
       "queue": true,
       "cancels": [],
@@ -2452,11 +2452,14 @@
       },
       "api_visibility": "public",
       "inputs": [
-        0
+        0,
+        7,
+        4
       ],
       "outputs": [
-        10,
-        9
+        15,
+        14,
+        7
       ],
       "targets": [
         [
@@ -2466,7 +2469,7 @@
       ]
     },
     {
-      "api_name": "_recent_chat_choices_1",
+      "api_name": "recent_after_dispatch_1",
       "backend_fn": true,
       "queue": true,
       "cancels": [],
@@ -2481,11 +2484,14 @@
       },
       "api_visibility": "public",
       "inputs": [
-        0
+        0,
+        7,
+        4
       ],
       "outputs": [
-        10,
-        9
+        15,
+        14,
+        7
       ],
       "targets": [
         [
@@ -2495,7 +2501,71 @@
       ]
     },
     {
-      "api_name": "_stop_feedback",
+      "api_name": "lambda",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": 0,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        89,
+        1,
+        4
+      ],
+      "outputs": [
+        2,
+        95,
+        96
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_1",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": 1,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        89,
+        1,
+        4
+      ],
+      "outputs": [
+        2,
+        95,
+        96
+      ],
+      "targets": [
+        [
+          null,
+          "then"
+        ]
+      ]
+    },
+    {
+      "api_name": "stop_request",
       "backend_fn": true,
       "queue": false,
       "cancels": [],
@@ -2510,42 +2580,54 @@
       },
       "api_visibility": "public",
       "inputs": [
-        29
+        33,
+        89,
+        1,
+        2,
+        4
       ],
       "outputs": [
-        29
+        33,
+        2,
+        95,
+        96,
+        3
       ],
       "targets": [
         [
-          92,
+          96,
           "click"
         ]
       ]
     },
     {
-      "api_name": "unnamed",
-      "backend_fn": false,
+      "api_name": "lambda_2",
+      "backend_fn": true,
       "queue": false,
-      "cancels": [
-        0,
-        1
-      ],
+      "cancels": [],
       "trigger_after": null,
       "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "full",
+      "trigger_mode": "always_last",
+      "show_progress": "hidden",
       "collects_event_data": false,
       "types": {
         "generator": false,
-        "cancel": true
+        "cancel": false
       },
-      "api_visibility": "private",
-      "inputs": [],
-      "outputs": [],
+      "api_visibility": "public",
+      "inputs": [
+        2,
+        89,
+        1
+      ],
+      "outputs": [
+        95,
+        96
+      ],
       "targets": [
         [
-          92,
-          "click"
+          2,
+          "change"
         ]
       ]
     },
@@ -2566,14 +2648,14 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        41
+        45
       ],
       "outputs": [
-        43
+        47
       ],
       "targets": [
         [
-          41,
+          45,
           "change"
         ]
       ]
@@ -2594,16 +2676,16 @@
       },
       "api_visibility": "public",
       "inputs": [
-        29,
+        33,
         0
       ],
       "outputs": [
-        29,
+        33,
         0
       ],
       "targets": [
         [
-          29,
+          33,
           "option_select"
         ]
       ]
@@ -2625,25 +2707,25 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        37,
-        39,
-        40,
         41,
         43,
+        44,
         45,
         47,
-        46,
-        49
+        49,
+        51,
+        50,
+        53
       ],
       "outputs": [
-        63,
+        67,
         0,
-        64,
-        65
+        68,
+        69
       ],
       "targets": [
         [
-          55,
+          59,
           "click"
         ]
       ]
@@ -2665,25 +2747,25 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        37,
-        39,
-        40,
         41,
         43,
+        44,
         45,
         47,
-        46,
-        49
+        49,
+        51,
+        50,
+        53
       ],
       "outputs": [
-        63,
+        67,
         0,
-        64,
-        65
+        68,
+        69
       ],
       "targets": [
         [
-          56,
+          60,
           "click"
         ]
       ]
@@ -2705,25 +2787,25 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        37,
-        39,
-        40,
         41,
         43,
+        44,
         45,
         47,
-        46,
-        49
+        49,
+        51,
+        50,
+        53
       ],
       "outputs": [
-        63,
+        67,
         0,
-        64,
-        65
+        68,
+        69
       ],
       "targets": [
         [
-          57,
+          61,
           "click"
         ]
       ]
@@ -2745,25 +2827,25 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        37,
-        39,
-        40,
         41,
         43,
+        44,
         45,
         47,
-        46,
-        49
+        49,
+        51,
+        50,
+        53
       ],
       "outputs": [
-        63,
+        67,
         0,
-        64,
-        65
+        68,
+        69
       ],
       "targets": [
         [
-          58,
+          62,
           "click"
         ]
       ]
@@ -2785,25 +2867,25 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        37,
-        39,
-        40,
         41,
         43,
+        44,
         45,
         47,
-        46,
-        49
+        49,
+        51,
+        50,
+        53
       ],
       "outputs": [
-        63,
+        67,
         0,
-        64,
-        65
+        68,
+        69
       ],
       "targets": [
         [
-          60,
+          64,
           "click"
         ]
       ]
@@ -2825,25 +2907,25 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        37,
-        39,
-        40,
         41,
         43,
+        44,
         45,
         47,
-        46,
-        49
+        49,
+        51,
+        50,
+        53
       ],
       "outputs": [
-        63,
+        67,
         0,
-        64,
-        65
+        68,
+        69
       ],
       "targets": [
         [
-          61,
+          65,
           "click"
         ]
       ]
@@ -2865,25 +2947,25 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        37,
-        39,
-        40,
         41,
         43,
+        44,
         45,
         47,
-        46,
-        49
+        49,
+        51,
+        50,
+        53
       ],
       "outputs": [
-        63,
+        67,
         0,
-        64,
-        65
+        68,
+        69
       ],
       "targets": [
         [
-          62,
+          66,
           "click"
         ]
       ]
@@ -2905,24 +2987,24 @@
       "api_visibility": "public",
       "inputs": [
         0,
-        51
+        55
       ],
       "outputs": [
-        63,
+        67,
         0,
-        34,
-        35,
-        32,
-        30,
-        37,
+        38,
         39,
-        40,
+        36,
+        34,
         41,
-        51
+        43,
+        44,
+        45,
+        55
       ],
       "targets": [
         [
-          52,
+          56,
           "click"
         ]
       ]
@@ -2943,26 +3025,26 @@
       },
       "api_visibility": "public",
       "inputs": [
-        70,
-        71,
+        74,
+        75,
         0
       ],
       "outputs": [
-        63,
+        67,
         0,
-        34,
-        35,
-        32,
-        30,
-        37,
+        38,
         39,
-        40,
+        36,
+        34,
         41,
-        51
+        43,
+        44,
+        45,
+        55
       ],
       "targets": [
         [
-          72,
+          76,
           "click"
         ]
       ]
@@ -2970,81 +3052,126 @@
     {
       "api_name": "restore_saved",
       "backend_fn": true,
-      "queue": true,
+      "queue": false,
       "cancels": [],
       "trigger_after": null,
       "trigger_only_on_success": false,
       "trigger_mode": "once",
       "show_progress": "hidden",
-      "collects_event_data": false,
+      "collects_event_data": true,
       "types": {
         "generator": false,
         "cancel": false
       },
       "api_visibility": "public",
       "inputs": [
-        10,
-        18
+        0,
+        7,
+        23,
+        4
       ],
       "outputs": [
-        29,
-        22,
+        33,
+        26,
         0,
-        85,
-        88,
-        23,
+        89,
+        92,
+        27,
+        90,
+        82,
+        83,
         86,
         78,
-        79,
-        82,
-        74,
-        34,
-        35,
-        32,
-        30,
-        37,
+        38,
         39,
-        40,
+        36,
+        34,
         41,
-        51,
-        3,
-        11,
-        28,
-        12
+        43,
+        44,
+        45,
+        55,
+        8,
+        16,
+        32,
+        1,
+        2,
+        95,
+        96,
+        17,
+        15,
+        14,
+        7,
+        6,
+        3
       ],
       "targets": [
         [
-          10,
-          "input"
+          15,
+          "select"
         ]
       ]
     },
     {
-      "api_name": "_recent_chat_choices_2",
+      "api_name": "remove_recent",
       "backend_fn": true,
-      "queue": true,
+      "queue": false,
       "cancels": [],
-      "trigger_after": 17,
+      "trigger_after": null,
       "trigger_only_on_success": false,
       "trigger_mode": "once",
       "show_progress": "hidden",
-      "collects_event_data": false,
+      "collects_event_data": true,
       "types": {
         "generator": false,
         "cancel": false
       },
       "api_visibility": "public",
       "inputs": [
-        0
+        0,
+        7,
+        23,
+        4
       ],
       "outputs": [
-        10,
-        9
+        33,
+        26,
+        0,
+        89,
+        92,
+        27,
+        90,
+        82,
+        83,
+        86,
+        78,
+        38,
+        39,
+        36,
+        34,
+        41,
+        43,
+        44,
+        45,
+        55,
+        8,
+        16,
+        32,
+        1,
+        2,
+        95,
+        96,
+        17,
+        15,
+        14,
+        7,
+        6,
+        3
       ],
       "targets": [
         [
-          null,
-          "then"
+          15,
+          "delete"
         ]
       ]
     },
@@ -3064,12 +3191,12 @@
       },
       "api_visibility": "public",
       "inputs": [
-        13,
-        14
+        18,
+        19
       ],
       "outputs": [
-        21,
-        22
+        25,
+        26
       ],
       "targets": [
         [
@@ -3079,196 +3206,10 @@
       ]
     },
     {
-      "api_name": "restore_on_load",
-      "backend_fn": true,
-      "queue": true,
-      "cancels": [],
-      "trigger_after": 19,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        19,
-        18
-      ],
-      "outputs": [
-        29,
-        22,
-        0,
-        85,
-        88,
-        23,
-        86,
-        78,
-        79,
-        82,
-        74,
-        34,
-        35,
-        32,
-        30,
-        37,
-        39,
-        40,
-        41,
-        51,
-        3,
-        11,
-        28,
-        12
-      ],
-      "targets": [
-        [
-          null,
-          "then"
-        ]
-      ]
-    },
-    {
-      "api_name": "_recent_chat_choices_3",
-      "backend_fn": true,
-      "queue": true,
-      "cancels": [],
-      "trigger_after": 20,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        0
-      ],
-      "outputs": [
-        10,
-        9
-      ],
-      "targets": [
-        [
-          null,
-          "then"
-        ]
-      ]
-    },
-    {
-      "api_name": "lambda",
-      "backend_fn": true,
-      "queue": true,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        18
-      ],
-      "outputs": [
-        29,
-        22,
-        0,
-        85,
-        88,
-        23,
-        86,
-        78,
-        79,
-        82,
-        74,
-        34,
-        35,
-        32,
-        30,
-        37,
-        39,
-        40,
-        41,
-        51,
-        3,
-        11,
-        28
-      ],
-      "targets": [
-        [
-          7,
-          "click"
-        ]
-      ]
-    },
-    {
-      "api_name": "_recent_chat_choices_4",
-      "backend_fn": true,
-      "queue": true,
-      "cancels": [],
-      "trigger_after": 22,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        0
-      ],
-      "outputs": [
-        10,
-        9
-      ],
-      "targets": [
-        [
-          null,
-          "then"
-        ]
-      ]
-    },
-    {
-      "api_name": "lambda_1",
+      "api_name": "fresh_navigation",
       "backend_fn": true,
       "queue": false,
       "cancels": [],
-      "trigger_after": 22,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [],
-      "outputs": [
-        2
-      ],
-      "targets": [
-        [
-          null,
-          "then"
-        ]
-      ]
-    },
-    {
-      "api_name": "_attachment_markdown",
-      "backend_fn": true,
-      "queue": true,
-      "cancels": [],
       "trigger_after": null,
       "trigger_only_on_success": false,
       "trigger_mode": "once",
@@ -3280,57 +3221,60 @@
       },
       "api_visibility": "public",
       "inputs": [
-        88,
-        0
+        23,
+        4,
+        7
       ],
       "outputs": [
-        86
-      ],
-      "targets": [
-        [
-          88,
-          "upload"
-        ]
-      ]
-    },
-    {
-      "api_name": "_clear_attachments",
-      "backend_fn": true,
-      "queue": true,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        0
-      ],
-      "outputs": [
-        88,
+        33,
+        26,
         0,
-        86
+        89,
+        92,
+        27,
+        90,
+        82,
+        83,
+        86,
+        78,
+        38,
+        39,
+        36,
+        34,
+        41,
+        43,
+        44,
+        45,
+        55,
+        8,
+        16,
+        32,
+        1,
+        2,
+        95,
+        96,
+        17,
+        15,
+        14,
+        7,
+        6,
+        3
       ],
       "targets": [
         [
-          89,
+          12,
           "click"
         ]
       ]
     },
     {
-      "api_name": "lambda_2",
+      "api_name": "_queue_attachments",
       "backend_fn": true,
       "queue": true,
       "cancels": [],
       "trigger_after": null,
       "trigger_only_on_success": false,
-      "trigger_mode": "once",
+      "trigger_mode": "multiple",
       "show_progress": "hidden",
       "collects_event_data": false,
       "types": {
@@ -3339,18 +3283,18 @@
       },
       "api_visibility": "public",
       "inputs": [
+        92,
+        1,
         0
       ],
       "outputs": [
-        78,
-        79,
-        82,
-        0
+        1,
+        90
       ],
       "targets": [
         [
-          81,
-          "click"
+          92,
+          "upload"
         ]
       ]
     },
@@ -3373,14 +3317,14 @@
         0
       ],
       "outputs": [
-        78,
-        79,
-        82,
-        0
+        92,
+        0,
+        90,
+        1
       ],
       "targets": [
         [
-          83,
+          93,
           "click"
         ]
       ]
@@ -3388,7 +3332,7 @@
     {
       "api_name": "lambda_4",
       "backend_fn": true,
-      "queue": false,
+      "queue": true,
       "cancels": [],
       "trigger_after": null,
       "trigger_only_on_success": false,
@@ -3401,19 +3345,17 @@
       },
       "api_visibility": "public",
       "inputs": [
-        3,
         0
       ],
       "outputs": [
-        3,
-        74,
-        29,
-        11,
-        28
+        82,
+        83,
+        86,
+        0
       ],
       "targets": [
         [
-          11,
+          85,
           "click"
         ]
       ]
@@ -3421,7 +3363,7 @@
     {
       "api_name": "lambda_5",
       "backend_fn": true,
-      "queue": false,
+      "queue": true,
       "cancels": [],
       "trigger_after": null,
       "trigger_only_on_success": false,
@@ -3437,15 +3379,14 @@
         0
       ],
       "outputs": [
-        3,
-        74,
-        29,
-        11,
-        28
+        82,
+        83,
+        86,
+        0
       ],
       "targets": [
         [
-          77,
+          87,
           "click"
         ]
       ]
@@ -3466,16 +3407,19 @@
       },
       "api_visibility": "public",
       "inputs": [
-        1
+        8,
+        0
       ],
       "outputs": [
-        1,
-        93,
-        27
+        8,
+        78,
+        33,
+        16,
+        32
       ],
       "targets": [
         [
-          27,
+          16,
           "click"
         ]
       ]
@@ -3495,15 +3439,77 @@
         "cancel": false
       },
       "api_visibility": "public",
-      "inputs": [],
+      "inputs": [
+        0
+      ],
       "outputs": [
-        1,
-        93,
-        27
+        8,
+        78,
+        33,
+        16,
+        32
       ],
       "targets": [
         [
-          96,
+          81,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_8",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [
+        5
+      ],
+      "outputs": [
+        5,
+        97,
+        31
+      ],
+      "targets": [
+        [
+          31,
+          "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "lambda_9",
+      "backend_fn": true,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "hidden",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "public",
+      "inputs": [],
+      "outputs": [
+        5,
+        97,
+        31
+      ],
+      "targets": [
+        [
+          100,
           "click"
         ]
       ]
@@ -3524,15 +3530,15 @@
       },
       "api_visibility": "public",
       "inputs": [
-        2
+        6
       ],
       "outputs": [
-        85,
-        2
+        89,
+        6
       ],
       "targets": [
         [
-          99,
+          103,
           "click"
         ]
       ]
@@ -3553,15 +3559,15 @@
       },
       "api_visibility": "public",
       "inputs": [
-        2
+        6
       ],
       "outputs": [
-        85,
-        2
+        89,
+        6
       ],
       "targets": [
         [
-          100,
+          105,
           "click"
         ]
       ]
@@ -3582,15 +3588,15 @@
       },
       "api_visibility": "public",
       "inputs": [
-        2
+        6
       ],
       "outputs": [
-        85,
-        2
+        89,
+        6
       ],
       "targets": [
         [
-          101,
+          107,
           "click"
         ]
       ]
@@ -3611,15 +3617,15 @@
       },
       "api_visibility": "public",
       "inputs": [
-        2
+        6
       ],
       "outputs": [
-        85,
-        2
+        89,
+        6
       ],
       "targets": [
         [
-          102,
+          108,
           "click"
         ]
       ]
@@ -3640,15 +3646,15 @@
       },
       "api_visibility": "public",
       "inputs": [
-        2
+        6
       ],
       "outputs": [
-        85,
-        2
+        89,
+        6
       ],
       "targets": [
         [
-          104,
+          110,
           "click"
         ]
       ]
@@ -3669,15 +3675,15 @@
       },
       "api_visibility": "public",
       "inputs": [
-        2
+        6
       ],
       "outputs": [
-        85,
-        2
+        89,
+        6
       ],
       "targets": [
         [
-          105,
+          111,
           "click"
         ]
       ]
@@ -3698,189 +3704,15 @@
       },
       "api_visibility": "public",
       "inputs": [
-        2
+        6
       ],
       "outputs": [
-        85,
-        2
-      ],
-      "targets": [
-        [
-          106,
-          "click"
-        ]
-      ]
-    },
-    {
-      "api_name": "partial_14",
-      "backend_fn": true,
-      "queue": false,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        2
-      ],
-      "outputs": [
-        85,
-        2
-      ],
-      "targets": [
-        [
-          107,
-          "click"
-        ]
-      ]
-    },
-    {
-      "api_name": "partial_15",
-      "backend_fn": true,
-      "queue": false,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        2
-      ],
-      "outputs": [
-        85,
-        2
-      ],
-      "targets": [
-        [
-          109,
-          "click"
-        ]
-      ]
-    },
-    {
-      "api_name": "partial_16",
-      "backend_fn": true,
-      "queue": false,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        2
-      ],
-      "outputs": [
-        85,
-        2
-      ],
-      "targets": [
-        [
-          110,
-          "click"
-        ]
-      ]
-    },
-    {
-      "api_name": "partial_17",
-      "backend_fn": true,
-      "queue": false,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        2
-      ],
-      "outputs": [
-        85,
-        2
+        89,
+        6
       ],
       "targets": [
         [
           112,
-          "click"
-        ]
-      ]
-    },
-    {
-      "api_name": "partial_18",
-      "backend_fn": true,
-      "queue": false,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        2
-      ],
-      "outputs": [
-        85,
-        2
-      ],
-      "targets": [
-        [
-          113,
-          "click"
-        ]
-      ]
-    },
-    {
-      "api_name": "partial_19",
-      "backend_fn": true,
-      "queue": false,
-      "cancels": [],
-      "trigger_after": null,
-      "trigger_only_on_success": false,
-      "trigger_mode": "once",
-      "show_progress": "hidden",
-      "collects_event_data": false,
-      "types": {
-        "generator": false,
-        "cancel": false
-      },
-      "api_visibility": "public",
-      "inputs": [
-        2
-      ],
-      "outputs": [
-        85,
-        2
-      ],
-      "targets": [
-        [
-          114,
           "click"
         ]
       ]

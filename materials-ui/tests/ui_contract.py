@@ -11,6 +11,10 @@ def normalize(config):
     for component in components:
         props = deepcopy(component["props"])
         props.pop("delete_callback", None)
+        if component["type"] == "state":
+            props.pop("value", None)
+            if props.get("time_to_live") == float("inf"):
+                props["time_to_live"] = None
         if props.get("elem_id") == "agent-banner":
             props["value"] = "<shared-banner>"
         result.append({"type": component["type"], "props": props})

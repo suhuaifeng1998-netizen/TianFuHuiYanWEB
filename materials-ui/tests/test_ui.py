@@ -1,4 +1,6 @@
 import json
+import asyncio
+from copy import deepcopy
 import os
 from pathlib import Path
 import sys
@@ -13,7 +15,11 @@ import gradio as gr
 from materials_ui import UiCallbacks, UiDefaults, create_ui
 from materials_ui.examples import EXAMPLE_CATEGORIES, next_example
 from materials_ui.preview_handlers import PreviewHandlers, NOTICE
+from materials_ui.assets import launch_options
 from ui_contract import normalize
+from materials_ui.interaction import _PageRequestGate, _composer_send_update, _request_controls, _cancel_page_request
+from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 
 class UiContractTests(unittest.TestCase):
@@ -31,14 +37,14 @@ class UiContractTests(unittest.TestCase):
         self.assertEqual(expected, normalize(self.demo.get_config_file()))
 
     def test_missing_business_callbacks_are_reported_before_build(self):
-        with self.assertRaisesRegex(ValueError, "_dispatch_ui"):
+        with self.assertRaisesRegex(ValueError, "_dispatch_composer_ui"):
             UiCallbacks({})
 
     def test_registry_preserves_the_original_callable(self):
-        callback = self.preview._dispatch_ui
+        callback = self.preview._dispatch_composer_ui
         handlers = {name: self.preview.callbacks().require(name) for name in self.preview.callbacks()._handlers}
-        handlers["_dispatch_ui"] = callback
-        self.assertIs(UiCallbacks(handlers).require("_dispatch_ui"), callback)
+        handlers["_dispatch_composer_ui"] = callback
+        self.assertIs(UiCallbacks(handlers).require("_dispatch_composer_ui"), callback)
 
     def test_examples_only_fill_input_and_do_not_mutate_cursors(self):
         key = EXAMPLE_CATEGORIES[0].examples[0].key
@@ -82,7 +88,13 @@ class UiContractTests(unittest.TestCase):
         self.assertEqual(2, rows[0][0])
         self.assertEqual(0, state["preview_page"])
         self.assertTrue(self.preview._literature_view_updates(True, current)[0])
+        self.assertFalse(self.preview._literature_view_updates(True, current)[2]["visible"])
         self.assertFalse(self.preview._literature_view_updates(False, current)[0])
+
+    def test_standalone_head_inlines_the_public_banner_stylesheet(self):
+        head = launch_options()["head"]
+        self.assertIn((ROOT / "assets/agent-masthead.css").read_text(encoding="utf-8"), head)
+        self.assertNotIn('href="/agent-masthead.css', head)
 
     def test_analysis_and_download_callbacks_match_original_output_arity(self):
         state = self.preview._initial_state();state["preview_data"] = True
@@ -97,6 +109,77 @@ class UiContractTests(unittest.TestCase):
     def test_preview_error_does_not_silently_succeed(self):
         with self.assertRaises(gr.Error):
             list(self.preview._dispatch_ui("auto", "演示错误", [], None, None, "", 2020, 15, False))
+
+    def test_pending_upload_merges_names_and_clear_removes_them(self):
+        pending, label = self.preview._queue_attachments(["sample.csv", "second.pdf"], ["sample.csv"], None)
+        self.assertEqual(["sample.csv", "second.pdf"], pending)
+        self.assertIn("second.pdf", label)
+        self.assertTrue(_composer_send_update("", pending)["interactive"])
+        self.assertFalse(_composer_send_update("", [] )["interactive"])
+        self.assertFalse(_composer_send_update("question", pending, True)["interactive"])
+        self.assertFalse(_request_controls(False)[2]["visible"])
+
+    def test_recent_list_is_page_scoped_and_removal_does_not_leak(self):
+        gate = _PageRequestGate();other = _PageRequestGate()
+        empty = self.preview._recent_chat_choices(None, [], gate)
+        self.assertEqual([], empty[2])
+        state = self.preview._initial_state();state["master_conversation_id"] = "preview-materials"
+        shown = self.preview._recent_chat_choices(state, [], gate)
+        self.assertEqual(["preview-materials"], shown[2])
+        self.assertIn('data-chat-action="select"', shown[0]["value"])
+        self.assertIn('data-chat-action="remove"', shown[0]["value"])
+        gate.hide("preview-materials")
+        self.assertEqual([], self.preview._recent_chat_choices(state, shown[2], gate)[2])
+        self.assertEqual(["preview-materials"], other.visible(shown[2]))
+
+    def test_new_composer_callback_keeps_21_outputs(self):
+        values = list(self.preview._dispatch_composer_ui("auto", "预览数据", [], [], None, "", 2020, 15, False))
+        self.assertTrue(all(len(value) == 21 for value in values))
+        self.assertEqual([], values[-1][-1])
+        self.assertEqual("preview-materials", values[-1][2]["master_conversation_id"])
+
+    def test_gate_cancels_old_run_without_finishing_new_run(self):
+        gate = _PageRequestGate();first = gate.begin("first")
+        self.assertEqual("first", gate.cancel())
+        self.assertFalse(gate.current(first));self.assertEqual(1, gate.page_version)
+        second = gate.begin("second");gate.finish(first)
+        self.assertTrue(gate.running);self.assertTrue(gate.current(second))
+        independent = deepcopy(gate)
+        self.assertFalse(independent.running);self.assertEqual(0, independent.page_version)
+
+    def test_cancel_cleans_only_the_owned_gradio_event(self):
+        async def run():
+            gate = _PageRequestGate();gate.begin("event-one")
+            pending = asyncio.Queue()
+            queue = SimpleNamespace(clean_events=AsyncMock(), pending_messages_per_session={"preview": pending}, pending_event_ids_session={"preview": {"event-one"}})
+            owned = asyncio.create_task(asyncio.Event().wait(), name="preview_0<gradio-sep>event-one")
+            unrelated = asyncio.create_task(asyncio.Event().wait(), name="other_0<gradio-sep>event-one")
+            await _cancel_page_request(gate, SimpleNamespace(session_hash="preview"), SimpleNamespace(_queue=queue))
+            await asyncio.gather(owned, return_exceptions=True)
+            self.assertTrue(owned.cancelled());self.assertFalse(unrelated.cancelled())
+            queue.clean_events.assert_awaited_once_with(event_id="event-one")
+            self.assertEqual("event-one", pending.get_nowait().event_id)
+            unrelated.cancel();await asyncio.gather(unrelated, return_exceptions=True)
+        asyncio.run(run())
+
+    def test_dispatch_ignores_previous_page_and_drops_late_updates(self):
+        function = next(f.fn for f in self.demo.fns.values() if f.api_name == "dispatch_shell")
+        gate = _PageRequestGate();gate.cancel()
+        args = ["auto", "预览材料", [], [], self.preview._initial_state(), "", 2020, 15, False]
+        self.assertEqual([], list(function(*args, gate.page_version - 1, gate)))
+        stream = function(*args, gate.page_version, gate)
+        next(stream);next(stream)
+        gate.cancel()
+        self.assertEqual([], list(stream))
+        self.assertFalse(gate.running)
+
+    def test_fresh_navigation_returns_the_new_page_generation(self):
+        function = next(f.fn for f in self.demo.fns.values() if f.api_name == "fresh_navigation")
+        gate = _PageRequestGate()
+        result = asyncio.run(function(False, gate, [], None))
+        self.assertEqual(gate.page_version, result[-1])
+        self.assertEqual([], result[0]["value"])
+        self.assertEqual(gate.version, result[2]["_ui_request_version"])
 
 
 if __name__ == "__main__":unittest.main()
