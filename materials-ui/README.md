@@ -67,7 +67,7 @@ docs/                        修改指南、回调签名及业务接入说明
 
 `assets.py` 将 Logo 和样式嵌入预览，复制整个 `materials-ui` 目录即可使用，不依赖仓库外层的 `shared/` 或原网站资源路径。CSS 按线上组合顺序加载；head 保留线上模板，将其中的公共 banner 样式引用替换成相同内容的内联样式。
 
-上传完成确认需要浏览器提供 `window.crypto.subtle`；推荐使用本机 `127.0.0.1` 预览、现有开发代理或 HTTPS。如果页面提示“浏览器无法安全确认附件”，请先核对访问方式。`ui_upload_progress.js` 是必需资源，打包时不能遗漏。
+上传确认已取消对浏览器 WebCrypto 的依赖，支持现有公网 HTTP 页面。脚本先确认文件传输完成，再根据对应 Gradio 队列事件确认附件已加入待发送列表；多批追加和旧页面迟到响应分别处理。`ui_upload_progress.js` 是必需资源，打包时不能遗漏。
 
 ## 快速检查
 
@@ -77,6 +77,8 @@ docs/                        修改指南、回调签名及业务接入说明
 ```
 
 `tests/ui_contract.json` 记录本次提取的组件属性、事件输入输出、初始化链及取消关系，用于避免修改界面时意外丢失功能。22 项回归不需要业务服务。
+
+上传状态脚本另有 15 项 Node.js 回归，可在仓库根目录执行 `npm run test:materials-upload`；单独复制材料包时执行 `node --test tests/upload-progress.test.mjs`。这只用于测试，不增加 Python 预览的运行依赖。
 
 预览操作：输入“预览材料”查看流式回答；输入“预览文献”展开文献详情并翻页；上传 `fixtures/preview-materials.csv` 或输入“预览数据”检查高级面板、图表和下载。输入“演示错误”可查看错误反馈。
 

@@ -103,7 +103,7 @@ WebSocket 路径为 `/ws/sessions/{id}`。浏览器接收的 JSON 消息中，`t
 
 `materials-ui` 提供独立 Gradio 界面开发包，不新增 HTTP 业务网关。界面通过 `UiCallbacks` 接收 16 个原业务处理函数，保留原控件、输入输出顺序、事件链和取消关系。当前基线为 2026-10-28 的 114 个组件、41 处事件绑定，包含附件暂存、页面取消、HTML 最近列表、渐进显示及上传进度确认。详见 [材料回调接入说明](../materials-ui/docs/integration.md)。
 
-新上传脚本使用 Gradio 的 `/gradio_api/upload`、`/gradio_api/upload_progress` 和队列流，接收 `_queue_attachments` 返回的隐藏完成标记后显示“上传完成，待发送”。现有材料开发代理已覆盖这些路径。完成标记确认依赖浏览器的 `window.crypto.subtle`，联调使用本机开发代理或 HTTPS。
+上传脚本使用 Gradio 的 `/gradio_api/upload`、`/gradio_api/upload_progress` 和队列流，通过上传返回路径集合、页面代次及对应队列 `event_id` 确认附件完成。文件传输完成先显示 100%，`_queue_attachments` 执行成功后显示“上传完成，待发送”。确认不依赖 WebCrypto，支持现有公网 HTTP；本地开发仍通过已有代理连接业务接口。来源校验和服务端文件校验保持原样。
 
 `preview.py` 接入固定样例处理函数，可在没有模型、数据库和检索服务时修改界面。真实运行时改由使用方传入原处理函数，不能用预览响应代替业务逻辑。
 

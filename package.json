@@ -15,6 +15,7 @@
     "preview": "node scripts/manage-apps.mjs preview",
     "preview:materials": "python materials-ui/preview.py",
     "check:materials": "python -m unittest discover -s materials-ui/tests -v",
+    "test:materials-upload": "node --test materials-ui/tests/upload-progress.test.mjs",
     "check:source": "node scripts/check-source.mjs"
   }
 }

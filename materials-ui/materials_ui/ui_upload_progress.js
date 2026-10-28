@@ -2,15 +2,18 @@
     "use strict";
 
     class UploadBatch {
-        constructor(identifier, files) {
+        constructor(identifier, files, epoch = 0) {
             this.id = identifier;
+            this.epoch = epoch;
             this.files = files.map(file => ({ name: file.name, size: file.size }));
             this.total = this.files.reduce((sum, file) => sum + file.size, 0);
             this.received = new Map();
             this.observed = false;
             this.state = "uploading";
             this.error = "";
-            this.digest = null;
+            this.paths = null;
+            this.responseSequence = null;
+            this.transferComplete = false;
             this.currentName = "";
         }
         receive(name, count) {
@@ -23,36 +26,151 @@
             this.received.set(name, Math.min(total, (this.received.get(name) || 0) + count));
         }
         get loaded() {
+            if (this.transferComplete) return this.total;
             return [...this.received.values()].reduce((sum, count) => sum + count, 0);
         }
         get percent() {
-            if (this.state === "adding" || this.state === "ready") return 100;
-            return this.observed && this.total ? Math.floor(100 * this.loaded / this.total) : null;
+            if (this.transferComplete) return 100;
+            return this.observed && this.total ? Math.min(99, Math.floor(100 * this.loaded / this.total)) : null;
         }
         get completed() {
-            if (this.state === "adding" || this.state === "ready") return this.files.length;
-            const required = new Map();
-            return this.files.reduce((sum, file) => {
-                const threshold = (required.get(file.name) || 0) + file.size;
-                required.set(file.name, threshold);
-                return sum + (file.size > 0 && (this.received.get(file.name) || 0) >= threshold ? 1 : 0);
-            }, 0);
+            // Progress samples are not per-file acknowledgements, especially
+            // when several selected files share a name.
+            return this.transferComplete ? this.files.length : 0;
         }
-        accepted() {
-            if (this.state !== "uploading") return;
+        accepted(paths) {
+            if (this.state !== "uploading") return false;
+            if (!Array.isArray(paths) || paths.length !== this.files.length ||
+                paths.some(path => typeof path !== "string" || !path)) return false;
+            this.paths = new Set(paths);
+            this.transferComplete = true;
             this.state = "adding";
             this.observed = true;
             this.received.clear();
             this.files.forEach(file => this.received.set(file.name,
                 (this.received.get(file.name) || 0) + file.size));
+            return true;
         }
         ready() {
-            if (this.state === "adding") this.state = "ready";
+            if (this.transferComplete) {
+                this.state = "ready";
+                this.error = "";
+            }
         }
         fail(message) {
             if (this.state !== "ready") {
                 this.state = "failed";
                 this.error = message;
+            }
+        }
+    }
+
+    function filePaths(files) {
+        if (!Array.isArray(files)) return null;
+        const paths = files.map(file => typeof file === "string" ? file : file && file.path);
+        return paths.every(path => typeof path === "string" && path) ? new Set(paths) : null;
+    }
+
+    class UploadTracker {
+        constructor() {
+            this.epoch = 0;
+            this.sequence = 0;
+            this.batches = new Map();
+            this.requests = new Set();
+            this.events = new Map();
+            this.earlyCompletions = new Map();
+        }
+        get pending() {
+            return [...this.requests].some(request => request.result === null);
+        }
+        get active() {
+            return this.pending || [...this.batches.values()]
+                .some(batch => batch.state === "uploading" || batch.state === "adding");
+        }
+        current(batch) {
+            return batch.epoch === this.epoch && this.batches.get(batch.id) === batch;
+        }
+        clear(newPage = true) {
+            for (const batch of this.batches.values()) {
+                batch.progressController?.abort();
+            }
+            this.batches.clear();
+            this.requests.clear();
+            this.events.clear();
+            this.earlyCompletions.clear();
+            if (newPage) this.epoch++;
+        }
+        begin(identifier, files) {
+            // A new transfer replaces settled feedback, not the server's
+            // pending attachments. Existing joins cannot confirm a new batch.
+            if (!this.active) this.clear(false);
+            const batch = new UploadBatch(identifier, files, this.epoch);
+            this.batches.set(identifier, batch);
+            return batch;
+        }
+        received(batch) {
+            if (!this.current(batch)) return;
+            batch.responseSequence = ++this.sequence;
+        }
+        accepted(batch, paths) {
+            if (!this.current(batch)) return false;
+            if (batch.responseSequence === null) this.received(batch);
+            if (!batch.accepted(paths)) return false;
+            this.reconcile();
+            return true;
+        }
+        join(files) {
+            const paths = filePaths(files);
+            if (!paths || !paths.size) return null;
+            const request = { epoch: this.epoch, sequence: ++this.sequence,
+                paths, result: null, error: "附件未能加入待发送列表，请重试" };
+            this.requests.add(request);
+            return request;
+        }
+        register(request, identifier) {
+            if (request.epoch !== this.epoch || !this.requests.has(request)) return;
+            if (typeof identifier !== "string" || !identifier) {
+                this.fail(request, "附件确认响应不完整，请重试");
+                return;
+            }
+            if (!this.events.has(identifier)) this.events.set(identifier, new Set());
+            this.events.get(identifier).add(request);
+            if (this.earlyCompletions.has(identifier)) {
+                this.complete(identifier, this.earlyCompletions.get(identifier));
+            }
+        }
+        fail(request, message) {
+            if (request.epoch !== this.epoch || !this.requests.has(request)) return;
+            request.result = false;
+            request.error = message;
+            this.reconcile();
+        }
+        complete(identifier, success) {
+            const requests = this.events.get(identifier);
+            if (!requests) {
+                this.earlyCompletions.set(identifier, success === true);
+                while (this.earlyCompletions.size > 64) {
+                    this.earlyCompletions.delete(this.earlyCompletions.keys().next().value);
+                }
+                return;
+            }
+            this.earlyCompletions.delete(identifier);
+            for (const request of requests) request.result = success === true;
+            this.reconcile();
+        }
+        covers(request, batch) {
+            return request.epoch === batch.epoch && batch.responseSequence !== null &&
+                request.sequence >= batch.responseSequence && batch.paths &&
+                [...batch.paths].every(path => request.paths.has(path));
+        }
+        reconcile() {
+            for (const batch of this.batches.values()) {
+                if (!batch.transferComplete || batch.state === "ready") continue;
+                const requests = [...this.requests].filter(request => this.covers(request, batch));
+                if (requests.some(request => request.result === true)) batch.ready();
+                else if (requests.length && requests.every(request => request.result === false)) {
+                    batch.fail(requests[requests.length - 1].error);
+                }
             }
         }
     }
@@ -74,16 +192,16 @@
         if (window.__matagentUploadFeedbackInstalled) return;
         window.__matagentUploadFeedbackInstalled = true;
         const originalFetch = window.fetch.bind(window);
-        const batches = new Map();
-        const readyDigests = new Set();
-        const queueEvents = new Map();
-        const completedQueueEvents = new Map();
+        const tracker = new UploadTracker();
+        const batches = tracker.batches;
         let selected = null;
         let selectionPending = false;
+        let pendingSelection = [];
+        let selectionVersion = 0;
         let selectionTimer;
         let stopWasRevealing = false;
-        const active = batch => batch.state === "uploading" || batch.state === "adding";
-        const blocked = () => selectionPending || [...batches.values()].some(active);
+        const blocked = () => selectionPending || tracker.active;
+        const sendBlocked = () => blocked() || [...batches.values()].some(batch => batch.state === "failed");
 
         const style = document.createElement("style");
         style.textContent = `
@@ -96,6 +214,7 @@
             #matagent-upload-feedback[data-error="true"] {background:#fff7f5; border-color:#efcfc6; color:#9c4431;}
             .matagent-uploading #send-button,.matagent-uploading #clear-upload,
             .matagent-uploading #new-chat {opacity:.45!important; cursor:wait!important;}
+            .matagent-upload-failed #send-button {opacity:.45!important; cursor:not-allowed!important;}
         `;
         document.head.appendChild(style);
 
@@ -141,21 +260,22 @@
             const element = mount();
             const list = [...batches.values()];
             document.documentElement.classList.toggle("matagent-uploading", blocked());
+            document.documentElement.classList.toggle("matagent-upload-failed", list.some(batch => batch.state === "failed"));
             document.querySelectorAll("#send-button,#clear-upload,#new-chat").forEach(control => {
-                if (blocked()) control.setAttribute("aria-disabled", "true");
+                if (control.id === "send-button" ? sendBlocked() : blocked()) control.setAttribute("aria-disabled", "true");
                 else control.removeAttribute("aria-disabled");
             });
             if (!element) return;
             element.hidden = !list.length && !selectionPending;
             const failed = list.filter(batch => batch.state === "failed");
-            const adding = list.some(batch => batch.state === "adding");
+            const adding = tracker.pending || list.some(batch => batch.state === "adding");
             const transferring = list.some(batch => batch.state === "uploading");
             const total = list.reduce((sum, batch) => sum + batch.total, 0);
             const loaded = list.reduce((sum, batch) => sum + Math.min(batch.total, batch.loaded), 0);
             const files = list.reduce((sum, batch) => sum + batch.files.length, 0);
             const completed = list.reduce((sum, batch) => sum + batch.completed, 0);
             const allObserved = list.length > 0 && list.every(batch => batch.observed);
-            const allAccepted = list.length > 0 && list.every(batch => batch.state === "adding" || batch.state === "ready");
+            const allAccepted = list.length > 0 && list.every(batch => batch.transferComplete);
             const percentage = allAccepted ? 100 : allObserved && total ? Math.min(100, Math.floor(100 * loaded / total)) : null;
             const title = element.querySelector('[data-part="title"]');
             let message;
@@ -180,33 +300,7 @@
         }
 
         function settle() {
-            let changed = false;
-            document.querySelectorAll('[class*="matagent-upload-ready-"]').forEach(element => {
-                element.classList.forEach(name => {
-                    if (/^matagent-upload-ready-[a-f0-9]{64}$/.test(name)) readyDigests.add(name.slice(22));
-                });
-            });
-            while (readyDigests.size > 128) readyDigests.delete(readyDigests.values().next().value);
-            batches.forEach(batch => {
-                if (batch.state === "adding" && batch.digest && readyDigests.has(batch.digest)) {
-                    batch.ready();
-                    changed = true;
-                }
-            });
-            const attachments = document.querySelector(".attachment-status");
-            if (batches.size && [...batches.values()].every(batch => batch.state === "ready")
-                && !selectionPending && attachments && attachments.textContent.includes("暂无待发送附件")) {
-                batches.clear();
-                changed = true;
-            }
-            if (changed) render();
             syncStop();
-        }
-
-        async function pathDigest(paths) {
-            if (!window.crypto || !window.crypto.subtle) return null;
-            const buffer = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(paths)));
-            return [...new Uint8Array(buffer)].map(value => value.toString(16).padStart(2, "0")).join("");
         }
 
         function uploadFunction(index) {
@@ -218,18 +312,24 @@
                 && dependency.targets.some(target => ids.has(target[0]) && target[1] === "upload"));
         }
 
-        function completeQueueEvent(identifier, success) {
-            if (!queueEvents.has(identifier)) {
-                completedQueueEvents.set(identifier, success);
-                while (completedQueueEvents.size > 64) completedQueueEvents.delete(completedQueueEvents.keys().next().value);
-                return;
+        function resetFeedback() {
+            tracker.clear();
+            selected = null;
+            pendingSelection = [];
+            selectionPending = false;
+            selectionVersion++;
+            clearTimeout(selectionTimer);
+            render();
+        }
+
+        function transferStarted(files) {
+            for (const file of files) {
+                const index = pendingSelection.findIndex(item => item.name === file.name && item.size === file.size);
+                if (index >= 0) pendingSelection.splice(index, 1);
             }
-            const digest = queueEvents.get(identifier);
-            queueEvents.delete(identifier);
-            completedQueueEvents.delete(identifier);
-            if (success === false) {
-                batches.forEach(item => { if (item.digest === digest) item.fail("附件未能加入待发送列表，请重试"); });
-                render();
+            if (!pendingSelection.length) {
+                selectionPending = false;
+                clearTimeout(selectionTimer);
             }
         }
 
@@ -260,29 +360,27 @@
             const uploading = /\/gradio_api\/upload\/?$/.test(url.pathname)
                 && options && String(options.method).toUpperCase() === "POST" && options.body instanceof FormData;
             let batch = null;
-            let queueDigest = null;
+            let queueRequest = null;
             let ownProgress = false;
             if (uploading) {
                 const files = [...options.body.values()].filter(file => file && typeof file.name === "string" && Number.isFinite(file.size));
                 if (files.length) {
-                    if (![...batches.values()].some(active)) batches.clear();
                     const identifier = url.searchParams.get("upload_id") || `batch-${Date.now()}-${Math.random().toString(36).slice(2)}`;
                     if (!url.searchParams.has("upload_id")) {
                         url.searchParams.set("upload_id", identifier);
                         input = url.toString();
                         ownProgress = true;
                     }
-                    batch = new UploadBatch(identifier, files);
-                    batches.set(identifier, batch);
-                    selectionPending = false;
-                    clearTimeout(selectionTimer);
+                    batch = tracker.begin(identifier, files);
+                    transferStarted(files);
                     render();
                 }
             } else if (/\/gradio_api\/queue\/join\/?$/.test(url.pathname) && options && typeof options.body === "string") {
                 try {
                     const request = JSON.parse(options.body);
                     if (uploadFunction(request.fn_index) && request.data && Array.isArray(request.data[0])) {
-                        queueDigest = pathDigest(request.data[0].map(file => typeof file === "string" ? file : file.path));
+                        queueRequest = tracker.join(request.data[0]);
+                        render();
                     }
                 } catch {}
             }
@@ -298,83 +396,79 @@
                 }).then(response => {
                     if (!response.ok) return;
                     return observeStream(response, event => {
-                        if (event.msg === "update") {
+                        if (tracker.current(current) && event.msg === "update") {
                             current.receive(event.orig_name, event.chunk_size);
                             render();
                         }
                     });
                 }).catch(() => {});
             }
-            return pendingResponse.then(response => {
+            return pendingResponse.then(async response => {
                 if (batch) {
                     const current = batch;
                     if (!response.ok) {
                         if (current.progressController) current.progressController.abort();
-                        current.fail(`上传失败（HTTP ${response.status}），请重试`);
+                        if (tracker.current(current)) current.fail(`上传失败（HTTP ${response.status}），请重试`);
                         render();
                     } else {
-                        response.clone().json().then(async paths => {
-                            if (!Array.isArray(paths) || paths.length !== current.files.length) {
-                                current.fail("服务器未确认全部附件，请重新选择文件");
-                            } else {
-                                current.digest = await pathDigest(paths);
-                                if (current.digest) current.accepted();
-                                else current.fail("浏览器无法安全确认附件，请通过本地映射或 HTTPS 访问");
+                        tracker.received(current);
+                        try {
+                            // Register the small path response before Gradio can
+                            // consume it and enqueue its upload callback.
+                            const paths = await response.clone().json();
+                            if (tracker.current(current)) {
+                                if (!tracker.accepted(current, paths)) {
+                                    current.fail("服务器未确认全部附件，请重新选择文件");
+                                }
                             }
+                        } catch {
+                            if (tracker.current(current)) current.fail("未能确认上传结果，请重试");
+                        } finally {
+                            if (current.progressController) current.progressController.abort();
                             render();
-                            settle();
-                            if (current.progressController) current.progressController.abort();
-                        }).catch(() => {
-                            if (current.progressController) current.progressController.abort();
-                            current.fail("未能确认上传结果，请重试"); render();
-                        });
+                        }
                     }
                 }
-                if (queueDigest) {
-                    const expected = queueDigest;
-                    response.clone().json().then(async result => {
-                        const digest = await expected;
-                        if (!digest) return;
-                        if (response.ok && result.event_id) {
-                            queueEvents.set(result.event_id, digest);
-                            if (completedQueueEvents.has(result.event_id)) {
-                                completeQueueEvent(result.event_id, completedQueueEvents.get(result.event_id));
-                            }
-                        }
-                        else {
-                            batches.forEach(item => { if (item.digest === digest) item.fail("附件未能加入待发送列表，请重试"); });
-                            render();
-                        }
-                    }).catch(async () => {
-                        const digest = await expected;
-                        batches.forEach(item => { if (digest && item.digest === digest) item.fail("附件确认失败，请检查连接后重试"); });
-                        render();
-                    });
+                if (queueRequest) {
+                    try {
+                        const result = await response.clone().json();
+                        if (response.ok && result.event_id) tracker.register(queueRequest, result.event_id);
+                        else tracker.fail(queueRequest, "文件已传输，但未能加入待发送附件，请重试");
+                    } catch {
+                        tracker.fail(queueRequest, "文件已传输，但附件确认失败，请检查连接后重试");
+                    }
+                    render();
                 }
                 if (/\/gradio_api\/upload_progress\/?$/.test(url.pathname) && response.ok) {
                     const identifier = url.searchParams.get("upload_id");
+                    let current = batches.get(identifier);
                     void observeStream(response.clone(), event => {
-                        const item = batches.get(identifier);
-                        if (item && event.msg === "update") {
-                            item.receive(event.orig_name, event.chunk_size);
+                        // Gradio may open progress SSE before its POST starts.
+                        if (!current) current = batches.get(identifier);
+                        if (current && tracker.current(current) && event.msg === "update") {
+                            current.receive(event.orig_name, event.chunk_size);
                             render();
                         }
                     });
                 } else if (/\/gradio_api\/queue\/data\/?$/.test(url.pathname) && response.ok) {
                     void observeStream(response.clone(), event => {
-                        if (event.msg === "process_completed" && event.event_id) completeQueueEvent(event.event_id, event.success);
+                        if (event.msg === "process_completed" && event.event_id) {
+                            tracker.complete(event.event_id, event.success);
+                            render();
+                        }
                     });
                 }
                 return response;
             }, error => {
                 if (batch) {
                     if (batch.progressController) batch.progressController.abort();
-                    batch.fail("上传连接中断，请检查网络后重试"); render();
-                }
-                if (queueDigest) queueDigest.then(digest => {
-                    batches.forEach(item => { if (item.digest === digest) item.fail("附件确认连接中断，请重试"); });
+                    if (tracker.current(batch)) batch.fail("上传连接中断，请检查网络后重试");
                     render();
-                });
+                }
+                if (queueRequest) {
+                    tracker.fail(queueRequest, "文件已传输，但附件确认连接中断，请重试");
+                    render();
+                }
                 throw error;
             });
         };
@@ -382,14 +476,17 @@
         document.addEventListener("change", event => {
             if (!event.target.matches('input[type="file"]') || !event.target.closest("#pdf-upload") || !event.target.files.length) return;
             selected = [...event.target.files];
+            pendingSelection = [...selected];
             selectionPending = true;
+            const version = ++selectionVersion;
             clearTimeout(selectionTimer);
             selectionTimer = setTimeout(() => {
-                if (!selectionPending) return;
+                if (!selectionPending || version !== selectionVersion) return;
                 selectionPending = false;
-                const item = new UploadBatch(`selection-${Date.now()}`, selected);
-                item.fail("文件尚未开始上传，请重新选择或检查文件格式");
+                const item = new UploadBatch(`selection-${version}`, pendingSelection, tracker.epoch);
+                item.fail("部分文件尚未开始上传，请重新选择或检查文件格式");
                 batches.set(item.id, item);
+                pendingSelection = [];
                 render();
             }, 15000);
             render();
@@ -397,28 +494,26 @@
         document.addEventListener("click", event => {
             const target = event.target.closest("#send-button,#clear-upload,#new-chat");
             if (!target) return;
-            if (blocked()) {
+            if (target.id === "send-button" ? sendBlocked() : blocked()) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
-            } else if (target.id !== "send-button") {
-                batches.clear();
-                selected = null;
-                render();
-            }
+            } else resetFeedback();
         }, true);
         document.addEventListener("keydown", event => {
-            if (blocked() && event.key === "Enter" && !event.shiftKey && !event.isComposing
-                && event.keyCode !== 229 && event.target.closest("#composer")) {
+            if (event.key !== "Enter" || event.shiftKey || event.isComposing || event.keyCode === 229
+                || !event.target.closest("#composer")) return;
+            if (sendBlocked()) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
-            }
+            } else if (event.target.matches("textarea")) resetFeedback();
         }, true);
+
         new MutationObserver(settle).observe(document.documentElement, {
             childList: true, subtree: true, attributes: true, attributeFilter: ["aria-label"],
         });
         mount();
     }
 
-    if (typeof module === "object" && module.exports) module.exports = { UploadBatch, parseEvents };
+    if (typeof module === "object" && module.exports) module.exports = { UploadBatch, UploadTracker, filePaths, parseEvents, install };
     else install();
 })();

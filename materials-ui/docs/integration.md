@@ -69,7 +69,9 @@ demo.queue().launch(**launch_options())
 
 ## 新增显示与上传反馈
 
-`experience.py` 和相邻的 `ui_upload_progress.js` 必须一起交付。页面新增一条仅运行浏览器 JavaScript 的 load 事件，发送流刷新间隔为 0.04 秒；事件数从 40 增至 41。上传中暂时拦截发送、新建和清除，附件真正加入待发送列表后恢复。完成确认需要浏览器提供 `window.crypto.subtle`，请使用 localhost 开发代理或 HTTPS。
+`experience.py` 和相邻的 `ui_upload_progress.js` 必须一起交付。页面包含一条仅运行浏览器 JavaScript 的 load 事件，发送流刷新间隔为 0.04 秒，当前共 41 条事件绑定。上传中暂时拦截发送、新建和清除，附件真正加入待发送列表后恢复。
+
+上传反馈不依赖 `window.crypto.subtle`，公网 HTTP 可正常确认。脚本通过上传响应中的完整文件路径集合、页面代次和 Gradio `event_id` 关联本批上传；传输完成显示 100%，对应附件回调成功后才显示“上传完成，待发送”。累计附件按集合覆盖关系匹配本批路径，完成事件早到时暂存后核对。隐藏的旧 digest 标记不再作为确认依据；清除、新建或发送后，旧事件不能恢复旧反馈。真实传输失败与附件加入失败分别显示，并保留清除重试入口。
 
 ## 预览与生产
 
