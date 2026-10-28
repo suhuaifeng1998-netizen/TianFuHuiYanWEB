@@ -1,6 +1,6 @@
 # 接入当前业务回调
 
-本包同步 2026-10-27 当前线上 Gradio 界面，包含 114 个组件、40 处事件绑定。16 个业务回调的签名见 [callback-signatures.json](callback-signatures.json)。
+本包同步 2026-10-28 重启后的线上 Gradio 界面，包含 114 个组件、41 处事件绑定。16 个业务回调的签名见 [callback-signatures.json](callback-signatures.json)。
 
 ## 入口
 
@@ -18,6 +18,10 @@ demo.queue().launch(**launch_options())
 `launch_options()` 保留线上 CSS 顺序和 head 模板，将依赖原网站根路径的公共 banner 样式内联为相同内容，Logo 也使用本地嵌入资源；无需额外创建公共资源路由。
 
 `UiDefaults.restore_id` 保留为旧调用方的构造参数，但新版界面不再自动恢复指定历史。首次打开页面从空列表开始，当前页产生的对话通过最近列表选择。不要用该参数重新引入跨页面历史。
+
+`create_ui` 会按线上版本为发送、停止和上传回调增加纯显示包装，并安装上传进度脚本。`UiCallbacks.from_namespace(existing_ui)` 识别原模块的 `_ui_experience_enabled` 标记，避免对已增强的生产回调再次包装。手工传入的回调若已经应用同样的增强，可使用 `UiCallbacks(handlers, presentation_enhanced=True)`；普通业务函数保持默认值即可。
+
+显示包装保持业务参数、最终结果和输出数量，增加中间文本显示及附件确认标记，不加入模型、数据库或检索处理。
 
 ## 业务回调
 
@@ -62,6 +66,10 @@ demo.queue().launch(**launch_options())
 `fresh_navigation` 返回的最后一项是页面代次。调用 `dispatch_shell` 时要按当前公开契约传入问题、聊天记录、该代次；不能始终使用配置中的初始值 0，否则请求会被当作旧页面请求忽略。发送后再执行 `recent_after_dispatch` 才会更新最近列表。
 
 恢复/移除使用 HTML 组件的 select/delete 事件数据，不再使用旧 Radio 的字符串输入。接入与调试以本版本 `events.py` 和 Gradio 6.17.3 为准。
+
+## 新增显示与上传反馈
+
+`experience.py` 和相邻的 `ui_upload_progress.js` 必须一起交付。页面新增一条仅运行浏览器 JavaScript 的 load 事件，发送流刷新间隔为 0.04 秒；事件数从 40 增至 41。上传中暂时拦截发送、新建和清除，附件真正加入待发送列表后恢复。完成确认需要浏览器提供 `window.crypto.subtle`，请使用 localhost 开发代理或 HTTPS。
 
 ## 预览与生产
 

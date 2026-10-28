@@ -22,7 +22,7 @@ def normalize(config):
     for dependency in config["dependencies"]:
         row = {key: deepcopy(dependency.get(key)) for key in (
             "api_name", "backend_fn", "queue", "cancels", "trigger_after", "trigger_only_on_success",
-            "trigger_mode", "show_progress", "collects_event_data", "types", "api_visibility",
+            "trigger_mode", "show_progress", "collects_event_data", "types", "api_visibility", "js", "stream_every",
         )}
         for key in ["inputs", "outputs"]:row[key] = [ids[value] for value in dependency[key]]
         row["targets"] = [[ids.get(target, target), event] for target, event in dependency["targets"]]

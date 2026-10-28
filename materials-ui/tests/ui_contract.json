@@ -2263,6 +2263,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.04,
       "inputs": [
         17,
         89,
@@ -2327,6 +2329,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.04,
       "inputs": [
         17,
         89,
@@ -2391,6 +2395,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         89,
         1,
@@ -2421,6 +2427,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         89,
         1,
@@ -2451,6 +2459,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         7,
@@ -2483,6 +2493,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         7,
@@ -2515,6 +2527,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         89,
         1,
@@ -2547,6 +2561,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         89,
         1,
@@ -2579,6 +2595,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         33,
         89,
@@ -2615,6 +2633,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         2,
         89,
@@ -2646,6 +2666,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         45
@@ -2675,6 +2697,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         33,
         0
@@ -2705,6 +2729,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         41,
@@ -2745,6 +2771,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         41,
@@ -2785,6 +2813,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         41,
@@ -2825,6 +2855,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         41,
@@ -2865,6 +2897,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         41,
@@ -2905,6 +2939,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         41,
@@ -2945,6 +2981,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         41,
@@ -2985,6 +3023,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         55
@@ -3024,6 +3064,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         74,
         75,
@@ -3064,6 +3106,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         7,
@@ -3127,6 +3171,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0,
         7,
@@ -3190,6 +3236,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         18,
         19
@@ -3220,6 +3268,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         23,
         4,
@@ -3282,6 +3332,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         92,
         1,
@@ -3313,6 +3365,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0
       ],
@@ -3344,6 +3398,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0
       ],
@@ -3375,6 +3431,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0
       ],
@@ -3406,6 +3464,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         8,
         0
@@ -3439,6 +3499,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         0
       ],
@@ -3471,6 +3533,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         5
       ],
@@ -3501,6 +3565,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [],
       "outputs": [
         5,
@@ -3529,6 +3595,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         6
       ],
@@ -3558,6 +3626,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         6
       ],
@@ -3587,6 +3657,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         6
       ],
@@ -3616,6 +3688,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         6
       ],
@@ -3645,6 +3719,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         6
       ],
@@ -3674,6 +3750,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         6
       ],
@@ -3703,6 +3781,8 @@
         "cancel": false
       },
       "api_visibility": "public",
+      "js": null,
+      "stream_every": 0.5,
       "inputs": [
         6
       ],
@@ -3714,6 +3794,32 @@
         [
           112,
           "click"
+        ]
+      ]
+    },
+    {
+      "api_name": "js_fn",
+      "backend_fn": false,
+      "queue": false,
+      "cancels": [],
+      "trigger_after": null,
+      "trigger_only_on_success": false,
+      "trigger_mode": "once",
+      "show_progress": "full",
+      "collects_event_data": false,
+      "types": {
+        "generator": false,
+        "cancel": false
+      },
+      "api_visibility": "private",
+      "js": "() => {\n(() => {\n    \"use strict\";\n\n    class UploadBatch {\n        constructor(identifier, files) {\n            this.id = identifier;\n            this.files = files.map(file => ({ name: file.name, size: file.size }));\n            this.total = this.files.reduce((sum, file) => sum + file.size, 0);\n            this.received = new Map();\n            this.observed = false;\n            this.state = \"uploading\";\n            this.error = \"\";\n            this.digest = null;\n            this.currentName = \"\";\n        }\n        receive(name, count) {\n            if (this.state !== \"uploading\" || !Number.isFinite(count) || count <= 0) return;\n            const total = this.files.filter(file => file.name === name)\n                .reduce((sum, file) => sum + file.size, 0);\n            if (!total) return;\n            this.observed = true;\n            this.currentName = name;\n            this.received.set(name, Math.min(total, (this.received.get(name) || 0) + count));\n        }\n        get loaded() {\n            return [...this.received.values()].reduce((sum, count) => sum + count, 0);\n        }\n        get percent() {\n            if (this.state === \"adding\" || this.state === \"ready\") return 100;\n            return this.observed && this.total ? Math.floor(100 * this.loaded / this.total) : null;\n        }\n        get completed() {\n            if (this.state === \"adding\" || this.state === \"ready\") return this.files.length;\n            const required = new Map();\n            return this.files.reduce((sum, file) => {\n                const threshold = (required.get(file.name) || 0) + file.size;\n                required.set(file.name, threshold);\n                return sum + (file.size > 0 && (this.received.get(file.name) || 0) >= threshold ? 1 : 0);\n            }, 0);\n        }\n        accepted() {\n            if (this.state !== \"uploading\") return;\n            this.state = \"adding\";\n            this.observed = true;\n            this.received.clear();\n            this.files.forEach(file => this.received.set(file.name,\n                (this.received.get(file.name) || 0) + file.size));\n        }\n        ready() {\n            if (this.state === \"adding\") this.state = \"ready\";\n        }\n        fail(message) {\n            if (this.state !== \"ready\") {\n                this.state = \"failed\";\n                this.error = message;\n            }\n        }\n    }\n\n    function parseEvents(buffer) {\n        const frames = buffer.split(/\\r?\\n\\r?\\n/);\n        const rest = frames.pop();\n        const events = [];\n        for (const frame of frames) {\n            const data = frame.split(/\\r?\\n/).filter(line => line.startsWith(\"data:\"))\n                .map(line => line.slice(5).trimStart()).join(\"\\n\");\n            if (!data) continue;\n            try { events.push(JSON.parse(data)); } catch {}\n        }\n        return { events, rest: rest.length <= 262144 ? rest : \"\" };\n    }\n\n    function install() {\n        if (window.__matagentUploadFeedbackInstalled) return;\n        window.__matagentUploadFeedbackInstalled = true;\n        const originalFetch = window.fetch.bind(window);\n        const batches = new Map();\n        const readyDigests = new Set();\n        const queueEvents = new Map();\n        const completedQueueEvents = new Map();\n        let selected = null;\n        let selectionPending = false;\n        let selectionTimer;\n        let stopWasRevealing = false;\n        const active = batch => batch.state === \"uploading\" || batch.state === \"adding\";\n        const blocked = () => selectionPending || [...batches.values()].some(active);\n\n        const style = document.createElement(\"style\");\n        style.textContent = `\n            #matagent-upload-feedback {flex:0 0 auto; margin:2px 8px; padding:8px 12px;\n                border:1px solid #dce7f3; border-radius:12px; background:#f7faff;\n                color:#42536b; font-size:12px; line-height:1.6;}\n            #matagent-upload-feedback[hidden] {display:none!important;}\n            #matagent-upload-feedback progress {display:block; width:100%; height:7px;\n                margin:6px 0; accent-color:#3765e8; border-radius:8px;}\n            #matagent-upload-feedback[data-error=\"true\"] {background:#fff7f5; border-color:#efcfc6; color:#9c4431;}\n            .matagent-uploading #send-button,.matagent-uploading #clear-upload,\n            .matagent-uploading #new-chat {opacity:.45!important; cursor:wait!important;}\n        `;\n        document.head.appendChild(style);\n\n        function mount() {\n            let element = document.getElementById(\"matagent-upload-feedback\");\n            if (element) return element;\n            const attachments = document.querySelector(\".attachment-status\");\n            if (!attachments) return null;\n            element = document.createElement(\"section\");\n            element.id = \"matagent-upload-feedback\";\n            element.hidden = true;\n            const title = document.createElement(\"div\");\n            title.dataset.part = \"title\";\n            title.setAttribute(\"role\", \"status\");\n            title.setAttribute(\"aria-live\", \"polite\");\n            const progress = document.createElement(\"progress\");\n            progress.max = 100;\n            progress.setAttribute(\"aria-label\", \"文件上传进度\");\n            const details = document.createElement(\"div\");\n            details.dataset.part = \"details\";\n            element.append(title, progress, details);\n            attachments.before(element);\n            return element;\n        }\n\n        function syncStop() {\n            document.querySelectorAll('[aria-label*=\"matagent-reveal\"]').forEach(element => {\n                const label = element.getAttribute(\"aria-label\") || \"\";\n                const cleaned = label.replace(/<span hidden class=\"matagent-reveal marker-[A-Za-z0-9-]+\"><\\/span>/g, \"\");\n                if (cleaned !== label) element.setAttribute(\"aria-label\", cleaned);\n            });\n            const showing = !!document.querySelector(\".matagent-reveal\");\n            const stop = document.querySelector(\"#stop-button button,button#stop-button\");\n            if (stop && showing) {\n                if (stop.disabled) stop.disabled = false;\n            } else if (stop && stopWasRevealing) {\n                stop.disabled = true;\n            }\n            stopWasRevealing = showing;\n        }\n\n        function render() {\n            const element = mount();\n            const list = [...batches.values()];\n            document.documentElement.classList.toggle(\"matagent-uploading\", blocked());\n            document.querySelectorAll(\"#send-button,#clear-upload,#new-chat\").forEach(control => {\n                if (blocked()) control.setAttribute(\"aria-disabled\", \"true\");\n                else control.removeAttribute(\"aria-disabled\");\n            });\n            if (!element) return;\n            element.hidden = !list.length && !selectionPending;\n            const failed = list.filter(batch => batch.state === \"failed\");\n            const adding = list.some(batch => batch.state === \"adding\");\n            const transferring = list.some(batch => batch.state === \"uploading\");\n            const total = list.reduce((sum, batch) => sum + batch.total, 0);\n            const loaded = list.reduce((sum, batch) => sum + Math.min(batch.total, batch.loaded), 0);\n            const files = list.reduce((sum, batch) => sum + batch.files.length, 0);\n            const completed = list.reduce((sum, batch) => sum + batch.completed, 0);\n            const allObserved = list.length > 0 && list.every(batch => batch.observed);\n            const allAccepted = list.length > 0 && list.every(batch => batch.state === \"adding\" || batch.state === \"ready\");\n            const percentage = allAccepted ? 100 : allObserved && total ? Math.min(100, Math.floor(100 * loaded / total)) : null;\n            const title = element.querySelector('[data-part=\"title\"]');\n            let message;\n            if (failed.length) message = failed[0].error + (transferring || adding ? \"；其余附件继续上传\" : \"\");\n            else if (selectionPending) message = \"正在准备上传…\";\n            else if (transferring) {\n                const current = list.find(batch => batch.state === \"uploading\");\n                message = current.currentName ? `正在上传：${current.currentName}` : \"正在上传文件…\";\n            }\n            else if (adding) message = \"传输完成，正在加入待发送附件…\";\n            else message = \"上传完成，待发送\";\n            if (title.textContent !== message) title.textContent = message;\n            element.dataset.error = String(failed.length > 0);\n            const progress = element.querySelector(\"progress\");\n            if (percentage === null) progress.removeAttribute(\"value\");\n            else progress.value = percentage;\n            const size = count => `${(count / (1024 * 1024)).toFixed(2)} MB`;\n            const details = element.querySelector('[data-part=\"details\"]');\n            details.textContent = list.length\n                ? `${percentage === null ? \"等待服务器进度\" : `${percentage}% · 已传 ${size(loaded)} / ${size(total)}`} · 本批已接收 ${completed}/${files} 个文件`\n                : `已选择 ${selected ? selected.length : 0} 个文件`;\n        }\n\n        function settle() {\n            let changed = false;\n            document.querySelectorAll('[class*=\"matagent-upload-ready-\"]').forEach(element => {\n                element.classList.forEach(name => {\n                    if (/^matagent-upload-ready-[a-f0-9]{64}$/.test(name)) readyDigests.add(name.slice(22));\n                });\n            });\n            while (readyDigests.size > 128) readyDigests.delete(readyDigests.values().next().value);\n            batches.forEach(batch => {\n                if (batch.state === \"adding\" && batch.digest && readyDigests.has(batch.digest)) {\n                    batch.ready();\n                    changed = true;\n                }\n            });\n            const attachments = document.querySelector(\".attachment-status\");\n            if (batches.size && [...batches.values()].every(batch => batch.state === \"ready\")\n                && !selectionPending && attachments && attachments.textContent.includes(\"暂无待发送附件\")) {\n                batches.clear();\n                changed = true;\n            }\n            if (changed) render();\n            syncStop();\n        }\n\n        async function pathDigest(paths) {\n            if (!window.crypto || !window.crypto.subtle) return null;\n            const buffer = await window.crypto.subtle.digest(\"SHA-256\", new TextEncoder().encode(JSON.stringify(paths)));\n            return [...new Uint8Array(buffer)].map(value => value.toString(16).padStart(2, \"0\")).join(\"\");\n        }\n\n        function uploadFunction(index) {\n            const config = window.gradio_config;\n            if (!config) return false;\n            const ids = new Set(config.components.filter(component => component.props.elem_id === \"pdf-upload\")\n                .map(component => component.id));\n            return config.dependencies.some(dependency => dependency.id === index\n                && dependency.targets.some(target => ids.has(target[0]) && target[1] === \"upload\"));\n        }\n\n        function completeQueueEvent(identifier, success) {\n            if (!queueEvents.has(identifier)) {\n                completedQueueEvents.set(identifier, success);\n                while (completedQueueEvents.size > 64) completedQueueEvents.delete(completedQueueEvents.keys().next().value);\n                return;\n            }\n            const digest = queueEvents.get(identifier);\n            queueEvents.delete(identifier);\n            completedQueueEvents.delete(identifier);\n            if (success === false) {\n                batches.forEach(item => { if (item.digest === digest) item.fail(\"附件未能加入待发送列表，请重试\"); });\n                render();\n            }\n        }\n\n        async function observeStream(response, handler) {\n            let reader;\n            try {\n                reader = response.body.getReader();\n                const decoder = new TextDecoder();\n                let buffer = \"\";\n                while (true) {\n                    const next = await reader.read();\n                    if (next.done) break;\n                    buffer += decoder.decode(next.value, { stream: true });\n                    const parsed = parseEvents(buffer);\n                    buffer = parsed.rest;\n                    parsed.events.forEach(handler);\n                }\n            } catch {} finally {\n                if (reader) reader.releaseLock();\n            }\n        }\n\n        window.fetch = function(input, options) {\n            let url;\n            try { url = new URL(typeof input === \"string\" || input instanceof URL ? input : input.url, location.href); }\n            catch { return originalFetch(input, options); }\n            if (url.origin !== location.origin) return originalFetch(input, options);\n            const uploading = /\\/gradio_api\\/upload\\/?$/.test(url.pathname)\n                && options && String(options.method).toUpperCase() === \"POST\" && options.body instanceof FormData;\n            let batch = null;\n            let queueDigest = null;\n            let ownProgress = false;\n            if (uploading) {\n                const files = [...options.body.values()].filter(file => file && typeof file.name === \"string\" && Number.isFinite(file.size));\n                if (files.length) {\n                    if (![...batches.values()].some(active)) batches.clear();\n                    const identifier = url.searchParams.get(\"upload_id\") || `batch-${Date.now()}-${Math.random().toString(36).slice(2)}`;\n                    if (!url.searchParams.has(\"upload_id\")) {\n                        url.searchParams.set(\"upload_id\", identifier);\n                        input = url.toString();\n                        ownProgress = true;\n                    }\n                    batch = new UploadBatch(identifier, files);\n                    batches.set(identifier, batch);\n                    selectionPending = false;\n                    clearTimeout(selectionTimer);\n                    render();\n                }\n            } else if (/\\/gradio_api\\/queue\\/join\\/?$/.test(url.pathname) && options && typeof options.body === \"string\") {\n                try {\n                    const request = JSON.parse(options.body);\n                    if (uploadFunction(request.fn_index) && request.data && Array.isArray(request.data[0])) {\n                        queueDigest = pathDigest(request.data[0].map(file => typeof file === \"string\" ? file : file.path));\n                    }\n                } catch {}\n            }\n            const pendingResponse = originalFetch(input, options);\n            if (batch && ownProgress) {\n                const current = batch;\n                const progressUrl = new URL(url);\n                progressUrl.pathname = progressUrl.pathname.replace(/\\/upload\\/?$/, \"/upload_progress\");\n                const signal = new AbortController();\n                current.progressController = signal;\n                void originalFetch(progressUrl.toString(), {\n                    credentials: options.credentials, headers: options.headers, signal: signal.signal,\n                }).then(response => {\n                    if (!response.ok) return;\n                    return observeStream(response, event => {\n                        if (event.msg === \"update\") {\n                            current.receive(event.orig_name, event.chunk_size);\n                            render();\n                        }\n                    });\n                }).catch(() => {});\n            }\n            return pendingResponse.then(response => {\n                if (batch) {\n                    const current = batch;\n                    if (!response.ok) {\n                        if (current.progressController) current.progressController.abort();\n                        current.fail(`上传失败（HTTP ${response.status}），请重试`);\n                        render();\n                    } else {\n                        response.clone().json().then(async paths => {\n                            if (!Array.isArray(paths) || paths.length !== current.files.length) {\n                                current.fail(\"服务器未确认全部附件，请重新选择文件\");\n                            } else {\n                                current.digest = await pathDigest(paths);\n                                if (current.digest) current.accepted();\n                                else current.fail(\"浏览器无法安全确认附件，请通过本地映射或 HTTPS 访问\");\n                            }\n                            render();\n                            settle();\n                            if (current.progressController) current.progressController.abort();\n                        }).catch(() => {\n                            if (current.progressController) current.progressController.abort();\n                            current.fail(\"未能确认上传结果，请重试\"); render();\n                        });\n                    }\n                }\n                if (queueDigest) {\n                    const expected = queueDigest;\n                    response.clone().json().then(async result => {\n                        const digest = await expected;\n                        if (!digest) return;\n                        if (response.ok && result.event_id) {\n                            queueEvents.set(result.event_id, digest);\n                            if (completedQueueEvents.has(result.event_id)) {\n                                completeQueueEvent(result.event_id, completedQueueEvents.get(result.event_id));\n                            }\n                        }\n                        else {\n                            batches.forEach(item => { if (item.digest === digest) item.fail(\"附件未能加入待发送列表，请重试\"); });\n                            render();\n                        }\n                    }).catch(async () => {\n                        const digest = await expected;\n                        batches.forEach(item => { if (digest && item.digest === digest) item.fail(\"附件确认失败，请检查连接后重试\"); });\n                        render();\n                    });\n                }\n                if (/\\/gradio_api\\/upload_progress\\/?$/.test(url.pathname) && response.ok) {\n                    const identifier = url.searchParams.get(\"upload_id\");\n                    void observeStream(response.clone(), event => {\n                        const item = batches.get(identifier);\n                        if (item && event.msg === \"update\") {\n                            item.receive(event.orig_name, event.chunk_size);\n                            render();\n                        }\n                    });\n                } else if (/\\/gradio_api\\/queue\\/data\\/?$/.test(url.pathname) && response.ok) {\n                    void observeStream(response.clone(), event => {\n                        if (event.msg === \"process_completed\" && event.event_id) completeQueueEvent(event.event_id, event.success);\n                    });\n                }\n                return response;\n            }, error => {\n                if (batch) {\n                    if (batch.progressController) batch.progressController.abort();\n                    batch.fail(\"上传连接中断，请检查网络后重试\"); render();\n                }\n                if (queueDigest) queueDigest.then(digest => {\n                    batches.forEach(item => { if (item.digest === digest) item.fail(\"附件确认连接中断，请重试\"); });\n                    render();\n                });\n                throw error;\n            });\n        };\n\n        document.addEventListener(\"change\", event => {\n            if (!event.target.matches('input[type=\"file\"]') || !event.target.closest(\"#pdf-upload\") || !event.target.files.length) return;\n            selected = [...event.target.files];\n            selectionPending = true;\n            clearTimeout(selectionTimer);\n            selectionTimer = setTimeout(() => {\n                if (!selectionPending) return;\n                selectionPending = false;\n                const item = new UploadBatch(`selection-${Date.now()}`, selected);\n                item.fail(\"文件尚未开始上传，请重新选择或检查文件格式\");\n                batches.set(item.id, item);\n                render();\n            }, 15000);\n            render();\n        }, true);\n        document.addEventListener(\"click\", event => {\n            const target = event.target.closest(\"#send-button,#clear-upload,#new-chat\");\n            if (!target) return;\n            if (blocked()) {\n                event.preventDefault();\n                event.stopImmediatePropagation();\n            } else if (target.id !== \"send-button\") {\n                batches.clear();\n                selected = null;\n                render();\n            }\n        }, true);\n        document.addEventListener(\"keydown\", event => {\n            if (blocked() && event.key === \"Enter\" && !event.shiftKey && !event.isComposing\n                && event.keyCode !== 229 && event.target.closest(\"#composer\")) {\n                event.preventDefault();\n                event.stopImmediatePropagation();\n            }\n        }, true);\n        new MutationObserver(settle).observe(document.documentElement, {\n            childList: true, subtree: true, attributes: true, attributeFilter: [\"aria-label\"],\n        });\n        mount();\n    }\n\n    if (typeof module === \"object\" && module.exports) module.exports = { UploadBatch, parseEvents };\n    else install();\n})();\n\n}",
+      "stream_every": 0.5,
+      "inputs": [],
+      "outputs": [],
+      "targets": [
+        [
+          -1,
+          "load"
         ]
       ]
     }

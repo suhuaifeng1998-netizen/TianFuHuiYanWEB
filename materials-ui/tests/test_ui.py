@@ -20,6 +20,7 @@ from ui_contract import normalize
 from materials_ui.interaction import _PageRequestGate, _composer_send_update, _request_controls, _cancel_page_request
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
+from materials_ui.experience import reveal_payloads, reveal_marker, _stop_reveal, upload_digest, enhance_ui
 
 
 class UiContractTests(unittest.TestCase):
@@ -180,6 +181,56 @@ class UiContractTests(unittest.TestCase):
         self.assertEqual(gate.page_version, result[-1])
         self.assertEqual([], result[0]["value"])
         self.assertEqual(gate.version, result[2]["_ui_request_version"])
+
+    def test_progressive_display_preserves_final_text_and_closes_source(self):
+        closed = []
+        text = "说明文字。" * 35 + "\n\n| 材料 | 数值 |\n|---|---|\n| A | 1 |\n\n```python\nprint('sample')\n```"
+        payload = ([{"role": "assistant", "content": text}], "status")
+        def source():
+            try:
+                yield payload
+            finally:
+                closed.append(True)
+        values = list(reveal_payloads(source(), [], pause=lambda _: None))
+        self.assertGreater(len(values), 1)
+        self.assertEqual(payload, values[-1])
+        self.assertTrue(all(value[1] == "status" for value in values))
+        self.assertEqual([True], closed)
+        self.assertIn("matagent-reveal", values[0][0][0]["content"])
+
+    def test_stop_removes_only_incomplete_reveal_markers(self):
+        history = [{"role": "assistant", "content": "部分解答" + reveal_marker("preview-1")}]
+        stopped = _stop_reveal(history)
+        self.assertNotIn("matagent-reveal", stopped[0]["content"])
+        self.assertIn("已停止显示", stopped[0]["content"])
+        self.assertIn("matagent-reveal", history[0]["content"])
+        self.assertEqual("完成的解答", _stop_reveal({"role": "assistant", "content": "完成的解答"})["content"])
+
+    def test_upload_acknowledgement_and_page_script_are_installed_once(self):
+        upload = next(f.fn for f in self.demo.fns.values() if f.api_name == "_queue_attachments")
+        result = upload(["sample.csv"], [], None)
+        self.assertEqual(["sample.csv"], result[0])
+        self.assertEqual(1, result[1].count("matagent-upload-ready-"))
+        self.assertIn(upload_digest(["sample.csv"]), result[1])
+        scripts = [d for d in self.demo.get_config_file()["dependencies"] if "matagent-upload-feedback" in str(d.get("js", ""))]
+        self.assertEqual(1, len(scripts))
+        streams = [f for f in self.demo.fns.values() if f.api_name.startswith("dispatch_shell")]
+        self.assertTrue(streams)
+        self.assertTrue(all(f.stream_every == 0.04 for f in streams))
+
+    def test_production_callbacks_are_not_wrapped_twice(self):
+        namespace = {name: self.preview.callbacks().require(name) for name in self.preview.callbacks()._handlers}
+        namespace["_create_ui"] = lambda: None
+        enhance_ui(namespace)
+        registered = UiCallbacks.from_namespace(SimpleNamespace(**namespace))
+        self.assertTrue(registered.presentation_enhanced)
+        demo = create_ui(registered)
+        try:
+            upload = next(f.fn for f in demo.fns.values() if f.api_name == "_queue_attachments")
+            result = upload(["sample.csv"], [], None)
+            self.assertEqual(1, result[1].count("matagent-upload-ready-"))
+        finally:
+            demo.close(verbose=False)
 
 
 if __name__ == "__main__":unittest.main()

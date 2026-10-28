@@ -12,15 +12,19 @@ class UiDefaults:
     restore_id: str = ""
 
 class UiCallbacks:
-    def __init__(self, handlers: Mapping[str, Callable]):
+    def __init__(self, handlers: Mapping[str, Callable], *, presentation_enhanced: bool = False):
         missing = [name for name in REQUIRED_CALLBACKS if not callable(handlers.get(name))]
         if missing:
             raise ValueError("Missing UI callbacks: " + ", ".join(missing))
         self._handlers = MappingProxyType({name: handlers[name] for name in REQUIRED_CALLBACKS})
+        self.presentation_enhanced = presentation_enhanced
 
     def require(self, name: str) -> Callable:
         return self._handlers[name]
 
     @classmethod
     def from_namespace(cls, namespace: object):
-        return cls({name: getattr(namespace, name, None) for name in REQUIRED_CALLBACKS})
+        return cls(
+            {name: getattr(namespace, name, None) for name in REQUIRED_CALLBACKS},
+            presentation_enhanced=bool(getattr(namespace, "_ui_experience_enabled", False)),
+        )
